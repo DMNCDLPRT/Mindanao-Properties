@@ -19,11 +19,11 @@
                 </div>
 
                 {{-- properties navlink --}}
-                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('properties') }}" :active="request()->routeIs('properties')">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('properties') }}" :active="request()->routeIs('properties', 'property-details')">
                         {{ __('Properties') }}
                     </x-nav-link>
-                </div> --}}
+                </div>
                 
             </div>
 
