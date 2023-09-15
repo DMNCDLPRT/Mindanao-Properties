@@ -1,5 +1,5 @@
  <!-- footer -->
- <footer class="px-4 pt-12 pb-32 mt-12 bg-gray-200 border-t lg:0">
+ <footer class="px-4 pt-12 pb-32 bg-gray-200 border-t lg:0">
     <div class="lg:flex lg:justify-evenly">
         <div class="max-w-sm mt-6 text-center lg:mt-0">
             <h6 class="mb-4 text-4xl font-semibold text-gray-700">Real Estate</h6>
