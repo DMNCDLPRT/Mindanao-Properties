@@ -30,6 +30,14 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    
+    Route::get('/properties', function () {
+        return view('properties');
+    })->name('properties');
+
+    Route::get('/properties/property-details', function () {
+        return view('property-details');
+    })->name('property-details');
 });
 
 
