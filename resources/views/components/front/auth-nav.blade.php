@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 sticky top-0 w-full">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -7,18 +7,24 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <x-application-mark class="block h-9 w-auto" />
+                        {{-- <img src="{{ asset('assets/images/logo.svg') }}" alt="logo" class="block h-20 w-auto"> --}}
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Home') }}
                     </x-nav-link>
+                </div>
+
+                {{-- properties navlink --}}
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('properties') }}" :active="request()->routeIs('properties')">
                         {{ __('Properties') }}
                     </x-nav-link>
-                </div>
+                </div> --}}
+                
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -95,6 +101,8 @@
                             @endif
                         </x-slot>
 
+                        
+
                         <x-slot name="content">
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
@@ -112,6 +120,7 @@
                             @endif
 
                             <div class="border-t border-gray-200"></div>
+                            
 
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}" x-data>
@@ -143,7 +152,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('Home') }}
             </x-responsive-nav-link>
         </div>
 
@@ -168,4 +177,55 @@
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 
-@endif
+                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
+                    <x-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
+                        {{ __('API Tokens') }}
+                    </x-responsive-nav-link>
+                @endif
+
+                <!-- Authentication -->
+                <form method="POST" action="{{ route('logout') }}" x-data>
+                    @csrf
+
+                    <x-responsive-nav-link href="{{ route('logout') }}"
+                                   @click.prevent="$root.submit();">
+                        {{ __('Log Out') }}
+                    </x-responsive-nav-link>
+                </form>
+
+                <!-- Team Management -->
+                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+                    <div class="border-t border-gray-200"></div>
+
+                    <div class="block px-4 py-2 text-xs text-gray-400">
+                        {{ __('Manage Team') }}
+                    </div>
+
+                    <!-- Team Settings -->
+                    <x-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}" :active="request()->routeIs('teams.show')">
+                        {{ __('Team Settings') }}
+                    </x-responsive-nav-link>
+
+                    @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
+                        <x-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">
+                            {{ __('Create New Team') }}
+                        </x-responsive-nav-link>
+                    @endcan
+
+                    <!-- Team Switcher -->
+                    @if (Auth::user()->allTeams()->count() > 1)
+                        <div class="border-t border-gray-200"></div>
+
+                        <div class="block px-4 py-2 text-xs text-gray-400">
+                            {{ __('Switch Teams') }}
+                        </div>
+
+                        @foreach (Auth::user()->allTeams() as $team)
+                            <x-switchable-team :team="$team" component="responsive-nav-link" />
+                        @endforeach
+                    @endif
+                @endif
+            </div>
+        </div>
+    </div>
+</nav>

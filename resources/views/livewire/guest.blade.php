@@ -1,6 +1,6 @@
 <div>
-  <h1>authenticated user</h1>
-  
+ <h1>Unaunthenticated User</h1>
+
     @livewire('components.banner')
     @livewire('components.search')
     @livewire('components.feature-property')

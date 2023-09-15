@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+// config a route to Unauthenticated route, accessible to all users 
+// and route to Authenticated route, accessible to authenticated users only
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,3 +38,7 @@ Route::middleware(['auth:sanctum',
         });
 
 });
+
+
+
+
