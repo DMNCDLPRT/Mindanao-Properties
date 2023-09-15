@@ -22,21 +22,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 
-    config('jetstream.auth_session'), 'verified', ])
-    ->group(function () {
-        Route::get('/dashboard', function () {
-            return view('dashboard');
-        })->name('dashboard');
-        Route::get('/properties', function () {
-            return view('properties.properties');
-        })->name('properties');
-        
-    Route::controller(App\Http\Controllers\UserVerifiedController::class)
-        ->group(function () {
-            Route::get('/properties/add-property', 'addproperty')->name('add.property');
-        });
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+    
+    Route::get('/properties', function () {
+        return view('properties');
+    })->name('properties');
 
+    Route::get('/properties/property-details', function () {
+        return view('property-details');
+    })->name('property-details');
 });
 
 

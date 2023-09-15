@@ -7,3 +7,5 @@
     @livewire('components.services')
     @livewire('components.footer')
 </div>
+
+{{-- unused code --}}
