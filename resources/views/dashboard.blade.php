@@ -5,18 +5,18 @@
         </h2>
     </x-slot> --}}
 
-    <div >
+    <div>
         @if (Route::has('login'))
-        @auth
-           @livewire('home')
-        @else
-           <welcome />
-            @if (Route::has('register'))
+            @auth
                 @livewire('home')
-            @endif
-        @endauth
-   
-@endif
-      
+            @else
+                @livewire('guest')
+                @if (Route::has('register'))
+                    @livewire('home')
+                @endif
+            @endauth
+
+        @endif
+
     </div>
 </x-app-layout>

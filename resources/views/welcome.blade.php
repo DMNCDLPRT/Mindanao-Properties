@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -28,4 +28,24 @@
     </div>
 </body>
 
-</html>
+</html> --}}
+<x-guest-layout>
+    <div>
+        <h1>Unaunthenticated</h1>
+       {{-- <x-front.guest-nav /> --}}
+        @livewire('components.banner')
+        @livewire('components.search')
+        @livewire('components.feature-property')
+        @livewire('components.services')
+        @livewire('components.footer')
+
+        {{-- <div>
+            <input type="text" name="longitude" id="longitude" placeholder="Enter longitude">
+            <button id="getLongitude">get longitude</button>
+
+            <p id="result"></p>
+        </div> --}}
+     
+    </div>
+    {{-- <script src="/js/test.js"></script> --}}
+</x-guest-layout>

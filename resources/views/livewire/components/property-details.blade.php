@@ -132,11 +132,25 @@
         </div>
 
         {{-- Inquire section --}}
-        <div class="lg:w-1/3 lg:mt-4 mx-auto sm:w-full">
-            <div class="bg-white flex flex-col min-h-302 top-20 mt-20 shadow-md rounded-md px-20">
+        <div class="lg:w-1/3 lg:mt-4 lg:mb-10 mx-auto sm:w-full">
+            <div class="bg-white flex flex-col min-h-302 top-20 shadow-md rounded-md px-20 sticky">
                 <div class="h-auto">
-                    <div class="mb-4 flex justify-center">
-                        <img src="/assets/images/logo.svg" alt="" class="" style="height:150px">
+                    <div class="flex justify-center mt-10 mb-8 text-lg font-bold">
+                        {{-- <img src="/assets/images/logo.svg" alt="" class="" style="height:150px"> --}}
+                        <h5>Ask About the Property?</h5>
+                    </div>
+
+                    {{-- property listor div --}}
+                    <div class="flex justify-center gap-10 mb-6">
+                        {{-- listor img --}}
+                        <div class="flex items-center justify-center">
+                            <img src="/assets/images/logo.svg" alt="" class="border-2 border-white w-20 h-20 rounded-full shadow-md" >
+                        </div>
+                        {{-- listor details --}}
+                        <div class="">
+                            <h5 class="pt-4 mb-2 text-lg font-normal">Listor Name</h5>
+                            <p class="font-light text-base">Contact Person</p>
+                        </div>
                     </div>
                     <div class="flex items-ceneter justify-center mb-10">
                         <span class="mr-12 text-lg font-medium text-transparent bg-clip-text bg-gradient-to-r from-gray-700 to-white">+63975</span>

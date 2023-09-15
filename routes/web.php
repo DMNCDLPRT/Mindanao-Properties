@@ -18,9 +18,11 @@ use Illuminate\Support\Facades\Route;
 // config a route to Unauthenticated route, accessible to all users 
 // and route to Authenticated route, accessible to authenticated users only
 
+
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('authcheck')->name('welcome');
+
 
 Route::middleware([
     'auth:sanctum',

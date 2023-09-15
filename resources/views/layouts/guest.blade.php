@@ -19,6 +19,7 @@
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
+            <x-front.guest-nav />
             {{ $slot }}
         </div>
 
