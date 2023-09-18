@@ -52,4 +52,8 @@ class Property extends Model
         return $this->belongsTo(PropertySubType::class, 'property_subtype_id');
     }
 
+    public function multimedia()
+    {
+        return $this->hasOne(Multimedia::class);
+    }
 }

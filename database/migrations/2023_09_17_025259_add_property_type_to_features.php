@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->boolean('verified')->nullable();
+        Schema::table('features', function (Blueprint $table) {
+            $table->enum('property_type', ['Condominium', 'Commercial', 'Apartment', 'House', 'Land'])
+            ->nullable()
+            ->default(null)
+            ->after('type'); 
         });
     }
 
@@ -21,8 +24,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
+        Schema::table('features', function (Blueprint $table) {
+            $table->dropColumn('property_type');
         });
     }
 };

@@ -13,23 +13,11 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <script src="https://cdn.tiny.cloud/1/7taqft20xekbbt0bdqt7qhm26xze34gjtwl80qdlhcpd831p/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
         
-        <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
-        <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
-        <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js" type="text/javascript" charset="utf-8"></script>
-        <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js" type="text/javascript" charset="utf-8"></script>
-        
-        <script type="text/javascript">
-            var platform = new H.service.Platform({
-                apikey: '{{ env('HERE_API_KEY') }}'
-            });
-        </script>
-
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased dark:bg-slate-800">
         <x-banner />
 
         <div class="min-h-screen bg-gray-100">

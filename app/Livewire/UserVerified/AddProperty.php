@@ -3,6 +3,8 @@
 namespace App\Livewire\UserVerified;
 
 use App\Http\Requests\StorePropertyRequest;
+use App\Models\Features;
+use App\Models\PropertyType;
 use App\Models\SubTypes;
 use Livewire\Component;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -16,22 +18,33 @@ class AddProperty extends Component
     use WithFileUploads;
 
     /**
-     * Report Type
-     *
-     * @var unsignedInteger
-     */
+    * Report Type
+    *
+    * @var unsignedInteger
+    */
     public $offer_type_id;
-
-    public $report_id;
     public $property_type_id;
     public $subtype_id;
     public $title;
-
+    public $description;
+    public $show_price_online;
+    public $price_php;
+    public $price_usd;
+    public $available_from;
+    public $object_id;
     public $region;
     public $province;
     public $city;
     public $barangay;
     public $address;
+
+    public $youtube;
+    public $virtual_tour;
+
+    public $images;
+    public $media;
+
+    
 
     public $latitude = 52.5;
     public $longitude = 13.4;
@@ -45,10 +58,24 @@ class AddProperty extends Component
     public function rules(): array
     {
         return [
-            'offer_type_id' => 'required' ,
-            'property_type_id' => '',
-            'subtype_id' => '',
-            'title' => '',
+            'offer_type_id'     => 'required',
+            'property_type_id'  => 'required',
+            'subtype_id'        => 'required',
+            'title'             => 'required',
+            'description'       => 'required',
+            'show_price_online' => '',
+            'price_php'         => '',
+            'price_usd'         => '',
+            'available_from'    => '',
+            'object_id'         => '',
+            'region'            => '',
+            'province'          => '',
+            'city'              => '',
+            'barangay'          => '',
+            'address'           => '',
+            'latitude'          => '',           
+            'longitude'         => '', 
+            
         ];
     }
 
@@ -61,6 +88,7 @@ class AddProperty extends Component
     public $offer_type;
     public $property_type;
     public $subtypes;
+    public $features;
 
     public function mount($offer_type, $property_type, $subtypes)
     {
@@ -78,6 +106,13 @@ class AddProperty extends Component
             $subtypesArray[] = $subType;
         }
 
+        $type = PropertyType::where('id', $id)->get(); // get property type where id is $id
+
+        $featuresArray = [];
+        $featuresArray = Features::where('property_type', $type[0]->name)->get();
+
+
+        $this->features = $featuresArray;
         $this->subtypes = $subtypesArray;
     }
 

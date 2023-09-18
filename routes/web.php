@@ -35,13 +35,17 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',
         Route::get('/properties/property-details', function () {
             return view('property-details');
         })->name('property-details');
+        
+        Route::controller(App\Http\Controllers\UserVerifiedController::class)->group(function () {
+            Route::get('/properties/add-property', 'addproperty')->name('add.property');
+        });
 
-        Route::middleware(['user.verified'])
+        /* Route::middleware(['user.verified'])
             ->controller([App\Http\Controllers\UserVerifiedController::class])
             ->group(function () {
             Route::get('properties/add-property', 'addproperty')
                 ->name('add.property');
-        });
+        }); */
 });
 
 

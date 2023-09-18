@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(OfferTypeSeeder::class);
         $this->call(PropertyTypeSeeder::class);
         $this->call(SubTypeSeeder::class);
+        $this->call(FeaturesSeeder::class);
     }
 }

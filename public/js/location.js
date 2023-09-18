@@ -57,5 +57,6 @@ var my_handlers = {
           var selected_caption = $("#barangay option:selected").text();
           // the hidden field will contain the name of the region, not the code
           $('input[name=barangay]').val(selected_caption);
+          
       }).ph_locations('fetch_list');
   });

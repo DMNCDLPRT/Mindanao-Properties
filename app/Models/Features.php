@@ -5,19 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Media extends Model
+class Features extends Model
 {
     use HasFactory;
-
-    protected $table = 'media';
+    protected $table = 'features';
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'media_path'
+        'name',
     ];
 
-    protected function media ()
+    public function properties()
     {
-        return $this->belongsTo(Property::class);
+        return $this->belongsToMany(Property::class, 'property_feature', 'feature_id', 'property_id');
     }
 }

@@ -11,13 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('images', function (Blueprint $table) {
+        Schema::create('multimedia', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBigInteger('property_id');
-            $table->string('image_path'); // Store the image file path
-            $table->timestamps();
-    
             $table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade');
+            $table->string('images')->nullable(); 
+            $table->string('media')->nullable(); 
+            $table->string('youtube')->nullable(); 
+            $table->string('virtual_tour')->nullable(); 
+            $table->timestamps();
+
         });
     }
 
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('multimedia');
     }
 };
