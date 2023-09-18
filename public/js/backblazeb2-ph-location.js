@@ -1,13 +1,14 @@
 /*
- *  jquery-ph-locations - v1.0.1
- *  jQuery Plugin for displaying dropdown list of Philippines' Region, Province, City and Barangay in your webpage.
- *  https://github.com/buonzz/jquery-ph-locations
- *
- *  Made by Buonzz Systems
- *  Under MIT License
- */
-;( function( $, window, document, undefined ) {
 
+jquery-ph-locations - v1.0.1
+jQuery Plugin for displaying dropdown list of Philippines' Region, Province, City and Barangay in your webpage.
+https://github.com/buonzz/jquery-ph-locations
+Made by Buonzz Systems
+Under MIT License
+*/
+;( function( $, window, document, undefined ) {
+	var filterfieldname = "";
+	
 	"use strict";
 
 		// defaults
@@ -35,18 +36,34 @@
             },
             
 			fetch_list: function (filter) {
-
+				
 				this.settings.filter = filter;
-
+					
 				$.ajax({
                     type: "GET",
                     url: this.settings.api_base_url + 'v1/' +  this.settings.location_type,
 					success: this.onDataArrived.bind(this),
 					data: $.param(this.map_parameters())
                 });
+				
+
+				if (this.settings.location_type == "regions") {
+					filterfieldname="Select Region";
+				} 
+				else if (this.settings.location_type == "provinces") {
+					filterfieldname="Select Province";
+				} 
+				else if (this.settings.location_type == "cities") {
+					filterfieldname="Select City/Minicipality";
+				}
+				else {
+					filterfieldname="Select Location";
+				};
+				
 
             }, // fetch list
             onDataArrived(data){
+				var shtml = "";
 				$(this.element).html(this.build_options(data));
 			},
 
@@ -66,7 +83,7 @@
 
 			build_options(params){
 				var shtml = "";
-
+				shtml += '<option value="">'+ filterfieldname + '</option>';
 				for(var i=0; i<params.data.length;i++){
 					shtml += '<option value="' + params.data[i].id + '">';
 					shtml +=  params.data[i].name ;

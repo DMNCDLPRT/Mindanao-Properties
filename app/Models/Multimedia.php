@@ -5,20 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\Property;
-
-class Image extends Model
+class Multimedia extends Model
 {
     use HasFactory;
 
-    protected $table = 'images';
+    protected $table = 'multimedia';
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'image_path'
+        'property_id',
+        'images', 
+        'media',
+        'youtube',
+        'virtual_tour',
     ];
 
-    public function image ()
+    public function property()
     {
         return $this->belongsTo(Property::class);
     }
