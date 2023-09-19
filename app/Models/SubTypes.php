@@ -11,10 +11,16 @@ class SubTypes extends Model
 
     protected $table = 'subtype';
     protected $primaryKey = 'id';
+    protected $keyType = 'string'; // This specifies the data type of the primary key.
+    public $incrementing = false; // This tells Laravel that the primary key is not auto-incrementing.
 
     protected $fillable = [
         'subtype',
         'property_type',
     ];
+
+    public function propertyType () {
+        return $this->hasOne(PropertyType::class, 'property_type_id');
+    }
 
 }

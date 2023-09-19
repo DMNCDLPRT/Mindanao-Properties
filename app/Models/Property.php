@@ -15,45 +15,42 @@ class Property extends Model
 
     protected $table = 'properties';
     protected $primaryKey = 'id';
-
+    protected $keyType = 'string'; // This specifies the data type of the primary key.
+    public $incrementing = false; // This tells Laravel that the primary key is not auto-incrementing.
+    
     protected $fillable = [
         'title',
         'description',
-        'show_price_online',
-        'price_php',
-        'price_usd',
-        'available_from',
-        'object_id',
-        'province',
-        'city',
-        'barangay',
-        'address',
-        'latitude',
-        'longitude',
-        'offer_type_id',
-        'property_type_id',
     ];
 
-    public function offerType() {
-        return $this->belongsTo(OfferType::class);
-    }
-
-    public function propertyType() {
-        return $this->belongsTo(PropertyType::class);
-    }
-
-    public function propertySubTypes()
+    public function user()
     {
-        return $this->hasMany(PropertySubType::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function propertySubtype()
+    public function offerType()
     {
-        return $this->belongsTo(PropertySubType::class, 'property_subtype_id');
+        return $this->belongsTo(OfferType::class, 'offer_type_id', 'id');
     }
 
-    public function multimedia()
+    public function propertyClassification()
     {
-        return $this->hasOne(Multimedia::class);
+        return $this->belongsTo(PropertyClassification::class, 'property_classification_id', 'id');
     }
+
+    public function propertyLocation()
+    {
+        return $this->belongsTo(PropertyLocation::class, 'property_location_id', 'id');
+    }
+
+    public function propertyInfo()
+    {
+        return $this->belongsTo(PropertyInfo::class, 'property_info_id', 'id');
+    }
+
+    public function multimediaAssets()
+    {
+        return $this->belongsTo(MultimediaAssets::class, 'property_multimedia_assets_id', 'id');
+    }
+
 }

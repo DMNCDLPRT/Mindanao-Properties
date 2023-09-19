@@ -48,7 +48,7 @@
         <div class="flex gap-2">
           @foreach ($property_type as $type)
           <div class="flex items-center pl-4 border-2 border-gray-400 rounded-md dark:border-gray-700 grow">
-            <x-radio name="property_type" id="{{ $type->name }}" value="{{ $type->id }}" wire:model="property_type_id" wire:click="wirePropertyClick({{ $type->id }})" />
+            <x-radio name="property_type" id="{{ $type->name }}" value="{{ $type->id }}" wire:model="property_type_id" wire:click="wirePropertyClick('{{ $type->id }}')" />
             <x-label value="{{ $type->name }}"  for="{{ $type->name }}"  class="w-full py-3 ml-2 text-sm font-medium dark:text-gray-300 rounded-md" />         
           </div>
           @endforeach

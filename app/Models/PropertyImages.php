@@ -5,20 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Features extends Model
+class PropertyImages extends Model
 {
     use HasFactory;
-    protected $table = 'features';
+
+    protected $table = 'property_images';
     protected $primaryKey = 'id';
     protected $keyType = 'string'; // This specifies the data type of the primary key.
     public $incrementing = false; // This tells Laravel that the primary key is not auto-incrementing.
 
     protected $fillable = [
-        'name',
+        'img_file_name',
     ];
 
-    public function properties()
-    {
-        return $this->belongsToMany(Property::class, 'property_feature', 'feature_id', 'property_id');
+    public function multimedia_assets () {
+        return $this->belongsTo(MultimediaAssets::class, 'property_images_id');
     }
 }

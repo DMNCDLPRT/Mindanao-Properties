@@ -11,6 +11,8 @@ class OfferType extends Model
 
     protected $table = 'offer_type';
     protected $primaryKey = 'id';
+    protected $keyType = 'string'; // This specifies the data type of the primary key.
+    public $incrementing = false; // This tells Laravel that the primary key is not auto-incrementing.
 
     protected $fillable = ['name'];
 

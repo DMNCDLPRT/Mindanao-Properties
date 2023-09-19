@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Features;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -62,7 +63,15 @@ class FeaturesSeeder extends Seeder
 
            
         ];
-        
-        DB::table('features')->insert($additionalFeatures);
+        foreach ($additionalFeatures as $features) {
+            Features::create([
+                'name' => $features['name'],
+                'type' => $features['type'],
+                'property_type' => $features['property_type'],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
     }
 }

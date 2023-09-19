@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('properties', function (Blueprint $table) {
-            $table->string('region');
+        Schema::table('multimedia_assets', function (Blueprint $table) {
+            $table->string('yt_link')->nullable(); // youtube link
+            $table->string('vt_link')->nullable(); // vitual tour link
         });
     }
 
@@ -21,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('properties', function (Blueprint $table) {
+        Schema::table('multimedia_assets', function (Blueprint $table) {
             //
         });
     }

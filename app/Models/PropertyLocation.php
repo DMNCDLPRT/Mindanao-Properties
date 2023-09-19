@@ -5,20 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Features extends Model
+class PropertyLocation extends Model
 {
     use HasFactory;
-    protected $table = 'features';
+
+    protected $table = 'property_location';
     protected $primaryKey = 'id';
     protected $keyType = 'string'; // This specifies the data type of the primary key.
     public $incrementing = false; // This tells Laravel that the primary key is not auto-incrementing.
-
+    
     protected $fillable = [
-        'name',
+        'region',
+        'province',
+        'city',
+        'barangay',
+        'address',
+        'longitude',
+        'latitude',
     ];
 
-    public function properties()
+    public function property()
     {
-        return $this->belongsToMany(Property::class, 'property_feature', 'feature_id', 'property_id');
+        return $this->belongsTo(Property::class, 'property_id');
     }
 }

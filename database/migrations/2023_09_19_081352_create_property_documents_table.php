@@ -12,13 +12,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subtype', function (Blueprint $table) {
+        Schema::create('property_documents', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
 
-            $table->string('subtype');
-
-            $table->uuid('property_type_id');
-            $table->foreign('property_type_id')->references('id')->on('property_types')->onDelete('cascade');
+            $table->string('docs_file_name', 255)->nullable(false);
 
             $table->timestamps();
         });
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subtype');
+        Schema::dropIfExists('property_documents');
     }
 };
