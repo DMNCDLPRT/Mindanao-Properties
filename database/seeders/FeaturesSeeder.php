@@ -60,35 +60,7 @@ class FeaturesSeeder extends Seeder
             ['name' => 'Roof Deck', 'type' => 'outdoor', 'property_type' => 'Commercial'],
             ['name' => 'Kitchenette', 'type' => 'indoor', 'property_type' => 'Commercial'],
 
-            ['name' => 'Swimming Pool', 'property_type' => 'Condominium'],
-            ['name' => 'Tennis Court', 'property_type' => 'Condominium'],
-            ['name' => 'Playground', 'property_type' => 'Condominium'],
-            ['name' => 'BBQ Area', 'property_type' => 'Condominium'],
-            ['name' => 'Picnic Area', 'property_type' => 'Condominium'],
-            
-            ['name' => 'Parking Lot', 'property_type' => 'Commercial'],
-            ['name' => 'Outdoor Seating', 'property_type' => 'Commercial'],
-            ['name' => 'Covered Patio', 'property_type' => 'Commercial'],
-            ['name' => 'Roof Deck', 'property_type' => 'Commercial'],
-            ['name' => 'Central Courtyard', 'property_type' => 'Commercial'],
-            
-            ['name' => 'Balcony', 'property_type' => 'Apartment'],
-            ['name' => 'Rooftop Garden', 'property_type' => 'Apartment'],
-            ['name' => 'Pet Park', 'property_type' => 'Apartment'],
-            ['name' => 'Bike Storage', 'property_type' => 'Apartment'],
-            ['name' => 'Outdoor Kitchen', 'property_type' => 'Apartment'],
-            
-            ['name' => 'Swimming Pool', 'property_type' => 'House'],
-            ['name' => 'Fenced Yard', 'property_type' => 'House'],
-            ['name' => 'Wooden Deck', 'property_type' => 'House'],
-            ['name' => 'Patio', 'property_type' => 'House'],
-            ['name' => 'Garden', 'property_type' => 'House'],
-            
-            ['name' => 'Landscaped Grounds', 'property_type' => 'Land'],
-            ['name' => 'Nature Trails', 'property_type' => 'Land'],
-            ['name' => 'Fishing Pond', 'property_type' => 'Land'],
-            ['name' => 'Horse Stables', 'property_type' => 'Land'],
-            ['name' => 'Golf Course', 'property_type' => 'Land'],
+           
         ];
         
         DB::table('features')->insert($additionalFeatures);

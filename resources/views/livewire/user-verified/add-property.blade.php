@@ -84,7 +84,7 @@
         </span>
         @enderror
         <x-label for="title" value="{{ __('Title') }}"  class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
-        <x-input id="title" wire:mode="title" name="title" class="block mt-1 w-full" autofocus placeholder="e.g. 2 Bedroom apartment with seaside" /> 
+        <x-input id="title" wire:mode="title" name="title" class="block mt-1 w-full" placeholder="e.g. 2 Bedroom apartment with seaside" /> 
       </div>
   
       {{-- Property Description -Input- --}}
