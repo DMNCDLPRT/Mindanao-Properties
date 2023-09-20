@@ -31,7 +31,6 @@
           <div class="flex items-center pl-4 border-2 border-gray-400 rounded-md dark:border-gray-700 grow">
             <x-radio id="{{ $type->name }}" wire:model="offer_type_id" value="{{ $type->id }}" name="offer_type" />
             <x-label value="{{ $type->name }}" for="{{ $type->name }}" class="w-full py-3 ml-2 text-sm font-medium dark:text-gray-300 rounded-md" />
-           
           </div>
           @endforeach
         </div>
@@ -84,7 +83,7 @@
         </span>
         @enderror
         <x-label for="title" value="{{ __('Title') }}"  class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
-        <x-input id="title" wire:mode="title" name="title" class="block mt-1 w-full" placeholder="e.g. 2 Bedroom apartment with seaside" /> 
+        <x-input id="title" wire:model="title" name="title" class="block mt-1 w-full" placeholder="e.g. 2 Bedroom apartment with seaside" /> 
       </div>
   
       {{-- Property Description -Input- --}}
@@ -94,29 +93,9 @@
         </span>
       @enderror
       <div wire:ignore class="pb-4">
-          <x-label 
-          for="text_area" 
-          value="{{ __('Description') }}"
-          class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" 
-          />
-          <textarea wire:model="description" id="text_area"></textarea> 
-      </div>
-
-
-      {{-- <script>
-        
-        $(document).ready(function () {
-            // Use an event listener to detect changes in the input field
-            $('#text_area').on('input', function () {
-                var inputValue = $(this).val();
-                
-                // Use Livewire's JavaScript methods to update the Livewire property
-                @this.set('description', inputValue);
-                console.log('Script is running');
-            });
-        });
-      </script> --}}
-    
+        <x-label for="text_area" value="{{ __('Description') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+        <textarea wire:model="description" value="" id="text_area"></textarea>
+    </div>
     </section>
   
     
@@ -256,36 +235,14 @@
 
       {{-- YouTube Link --}}
       <div class="pb-4 grow">
-        <x-label 
-          for="youtube"
-          value="{{ __('Paste your YouTube video URL and submit') }}"
-          class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" 
-        />
-        <x-input 
-          type="text" 
-          name="youtube" 
-          id="youtube"
-          wire:model="youtube"
-          class="block mt-1 w-full"
-          placeholder="e.g. https://youtube.com/example-link" 
-        />
+        <x-label for="youtube"value="{{ __('Paste your YouTube video URL and submit') }}"class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+        <x-input type="text"  name="youtube"  id="youtube" wire:model="youtube" class="block mt-1 w-full" placeholder="e.g. https://youtube.com/example-link" />
       </div>
 
       {{-- Vitual Tour Link --}}
       <div class="pb-4 grow">
-        <x-label 
-          for="virtual_tour"
-          value="{{ __('Paste your Virtual Tour URL and submit') }}"
-          class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" 
-        />
-        <x-input 
-          type="text" 
-          name="virtual_tour" 
-          id="virtual_tour"
-          wire:model="virtual_tour"
-          class="block mt-1 w-full" 
-          placeholder="e.g. https://virtualtour.com/example-link"
-        />
+        <x-label  for="virtual_tour"  value="{{ __('Paste your Virtual Tour URL and submit') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+        <x-input  type="text"  name="virtual_tour"  id="virtual_tour" wire:model="virtual_tour" class="block mt-1 w-full" placeholder="e.g. https://virtualtour.com/example-link" />
       </div>
       </section>
      
@@ -355,13 +312,18 @@
         </div>
 
         <div class="pb-4 grow">
+          @error('available_from')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
           <x-label 
             for="available_from"
             value="{{ __('Available from') }}"
             class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" 
           />
           <x-input 
-            type="text" 
+            type="date" 
             name="available_from" 
             id="available_from"
             wire:model="available_from"
@@ -370,6 +332,11 @@
         </div>
 
         <div class="pb-4 grow">
+          @error('object_id')
+          <span class="m" role="alert">
+            <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+          </span>
+          @enderror
           <x-label 
             for="object_id"
             value="{{ __('Object ID') }}"
@@ -396,76 +363,29 @@
 
       {{-- Key Infomation --}}
       <div wire:ignore class="pb-4">
-        @error('region')
-        <span class="m" role="alert">
-          <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
-        </span>
-        @enderror
+        <div class="mt-4">
+          <x-label for="region" value="{{ __('Region') }}" />
+          <input  type="hidden"  name="region" wire:model="region" />
+          <x-select  id="region" autocomplete="region" />
+        </div>
 
         <div class="mt-4">
-          <x-label 
-            for="region" 
-            value="{{ __('Region') }}"
-          />
-          <input 
-            type="hidden" 
-            name="region" 
-            wire:model="region" 
-          />
-          <select 
-            id="region" 
-            class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" 
-            autocomplete="region"
-            >
+          <x-label for="province"  value="{{ __('Province') }}" />
+          <input type="hidden" name="province" wire:model="province" />
+          <x-select id="province" autofocus />
           </select>
         </div>
 
         <div class="mt-4">
-          <x-label 
-            for="province" 
-            value="{{ __('Province') }}" 
-          />
-          <input 
-            type="hidden" 
-            name="province" 
-            wire:model="province" 
-          />
-          <select  
-            id="province" 
-            class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" 
-            autofocus 
-          >
-          </select>
+          <x-label  for="city" value="{{ __('City') }}" />
+          <input type="hidden" name="city" wire:model="city"/>
+          <x-select id="city" autofocus />
         </div>
 
         <div class="mt-4">
-          <x-label 
-            for="city" value="{{ __('City') }}" />
-          <input 
-            type="hidden" name="city" 
-            wire:model="city"/>
-          <select 
-            id="city" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" 
-            autofocus 
-          >
-          </select>
-        </div>
-
-        <div class="mt-4">
-          <x-label 
-            for="barangay" 
-            value="{{ __('Barangay') }}" 
-          />
-          <input 
-            type="hidden" 
-            name="barangay"
-            wire:model="barangay"
-          />
-          <select 
-            id="barangay" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" 
-            autofocus 
-          >
-          </select>
+          <x-label  for="barangay" value="{{ __('Barangay') }}" />
+          <input  type="hidden"  name="barangay" wire:model="barangay"/>
+          <x-select id="barangay" autofocus />
         </div>
         
         <div class="mt-4">
@@ -478,7 +398,7 @@
             name="address" 
             id="address" 
             wire:model="address" 
-            class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+            class="block mt-1 w-full" 
             placeholder="Enter street name and number" 
             autocomplete="address"
           />
@@ -495,8 +415,8 @@
                 name="latitude"
                 id="latitude"
                 wire:model="latitude" 
-                class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-              />
+                class="block mt-1 w-full" 
+                />
           </div>
           <div class="mt-4 grow">
               <x-label 
@@ -508,7 +428,7 @@
                 name="longitude" 
                 id="longitude"
                 wire:model="longitude" 
-                class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                class="block mt-1 w-full" 
              />
           </div>
         </div>
@@ -521,41 +441,51 @@
     {{-- Location -End Section- --}}
 
     {{-- Amenities -Section- --}}
-    @if ($property_type_id && $features)    
+    @if ($hasIndoorOrOutdoorFeature)    
     <section class="pb-5">
       <x-header-description 
-        header="Please review your contact details" 
-        description="Make sure your details are updated so our users can easily contact you at the right channel." 
+        header="Tell users more about your property" 
+        description="Why is your property so great? Tell us more about your property so that property seekers can learn even more about your offer." 
       />
 
+      
+      @if ($hasIndoor = true)
       <div class="py-4">
         <h4 class="font-bold text-base">Indoor Features</h4>
         <div class="flex flex-wrap gap-2">
           @foreach ($features as $feat)
-              @if ($feat->type == 'indoor')
-                  <x-button>{{ $feat->name }}</x-button>
-              @endif
+          @if ($feat->type == 'indoor')
+          <x-button>{{ $feat->name }}</x-button>
+          @endif
           @endforeach
         </div>
       </div>
+      @endif
 
+      @if ($hasOutdoor = true)
       <div class="py-4 font-bold  text-base">
         <h4>Outdoor Features</h4>
         <div class="flex flex-wrap gap-2">
           @foreach ($features as $feat)
-              @if ($feat->type == 'outdoor')
-                  <x-button>{{ $feat->name }}</x-button>
-              @endif
+          @if ($feat->type == 'outdoor')
+          <x-button>{{ $feat->name }}</x-button>
+          @endif
           @endforeach
         </div>
       </div>
+      @endif
 
     </section>
     @endif
     {{-- Amenities -End Section- --}}
 
     {{-- Contact Details -Section- --}}
-      {{-- Key Infomation --}}
+    {{-- Key Infomation --}}
+    <section class="pb-5">
+        <x-header-description 
+          header="Please review your contact details" 
+          description="Make sure your details are updated so our users can easily contact you at the right channel." 
+        />
       <div class="p-4 border rounded">
         <div class="pb-4 flex items-center border-b">
           <div class="shrink-0  mr-3">
@@ -619,11 +549,31 @@
       <script type="text/javascript" src="{{ asset('js/here-map.js') }}"> </script>
 
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+      <script>
+        // Initialize TinyMCE
+        tinymce.init({
+            selector: 'textarea#text_area',
+            // Add TinyMCE configuration options as needed
+            setup: function (editor) {
+                // Listen for changes in the editor content
+                editor.on('input', function () {
+                    // Get the content from TinyMCE
+                    var content = editor.getContent();
+                    // Update the Livewire component property
+                    @this.set('description', content);
+                });
+            }
+        });
+      </script>
+
       {{-- <script>
         $( "#onclickFile" ).click(function() {
           $( "#output" ).slideUp();
         });
       </script> --}}
+
+
     </div>
     {{-- HERE map API -script- -End- --}}
 

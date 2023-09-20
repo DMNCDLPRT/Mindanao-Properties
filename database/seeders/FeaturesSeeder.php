@@ -30,14 +30,14 @@ class FeaturesSeeder extends Seeder
             ['name' => 'Central Heating', 'type' => 'indoor', 'property_type' => 'House'],
             ['name' => 'Air Conditioning', 'type' => 'indoor', 'property_type' => 'House'],
             ['name' => 'Solar Panels', 'type' => 'outdoor', 'property_type' => 'House'],
-            ['name' => 'Pet Park', 'type' => 'outdoor', 'property_type' => 'Apartment'],
             ['name' => 'Tennis Court', 'type' => 'outdoor', 'property_type' => 'House'],
             ['name' => 'Movie Theater', 'type' => 'indoor', 'property_type' => 'House'],
             ['name' => 'Art Studio', 'type' => 'indoor', 'property_type' => 'House'],
             ['name' => 'Wine Cellar', 'type' => 'indoor', 'property_type' => 'House'],
             ['name' => 'Community Garden', 'type' => 'outdoor', 'property_type' => 'House'],
             ['name' => 'Security System', 'type' => 'indoor', 'property_type' => 'House'],
-
+            
+            ['name' => 'Pet Park', 'type' => 'outdoor', 'property_type' => 'Apartment'],
             ['name' => 'Balcony', 'type' => 'outdoor', 'property_type' => 'Apartment'],
             ['name' => 'High-Speed Internet', 'type' => 'indoor', 'property_type' => 'Apartment'],
             ['name' => 'Elevator', 'type' => 'indoor', 'property_type' => 'Apartment'],

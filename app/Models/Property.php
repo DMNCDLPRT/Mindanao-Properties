@@ -53,4 +53,8 @@ class Property extends Model
         return $this->belongsTo(MultimediaAssets::class, 'property_multimedia_assets_id', 'id');
     }
 
+    public function features () {
+        return $this->hasMany(PropertyFeature::class);
+    }
+
 }

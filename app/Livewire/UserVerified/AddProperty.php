@@ -17,11 +17,7 @@ class AddProperty extends Component
 
     use WithFileUploads;
 
-    /**
-    * Report Type
-    *
-    * @var unsignedInteger
-    */
+    
     public $offer_type_id;
     public $property_type_id;
     public $subtype_id;
@@ -66,7 +62,7 @@ class AddProperty extends Component
             'show_price_online' => '',
             'price_php'         => '',
             'price_usd'         => '',
-            'available_from'    => '',
+            'available_from'    => 'date',
             'object_id'         => '',
             'region'            => '',
             'province'          => '',
@@ -75,7 +71,6 @@ class AddProperty extends Component
             'address'           => '',
             'latitude'          => '',           
             'longitude'         => '', 
-            
         ];
     }
 
@@ -87,8 +82,7 @@ class AddProperty extends Component
 
     public $offer_type;
     public $property_type;
-    public $subtypes;
-    public $features;
+    
 
     public function mount($offer_type, $property_type, $subtypes)
     {
@@ -97,9 +91,22 @@ class AddProperty extends Component
         $this->subtypes = $subtypes;
     }
 
+
+    public $hasIndoorOrOutdoorFeature;
+    public $hasOutdoor;
+    public $hasIndoor;
+
+    public $subtypes;
+    public $features;
+
     public function wirePropertyClick($id)
     {
+        $hasIndoorOrOutdoorFeature = false;
+        $hasIndoor = false;
+        $hasOutdoor = false;
+
         $this->reset('subtype_id'); 
+
         $subtypes = SubTypes::where('property_type_id', $id)->get();
 
         foreach ($subtypes as $subType) {
@@ -110,7 +117,24 @@ class AddProperty extends Component
 
         $featuresArray = [];
         $featuresArray = Features::where('property_type', $type[0]->name)->get();
+        
+        // dd($featuresArray);
+        
+        foreach ($featuresArray as $feature){
+            if ($feature->type === 'outdoor') {
+                $hasOutdoor = true;
+            } 
+            if ($feature->type === 'indoor') {
+                $hasIndoor = true;
+            }
+        }
+        if ($hasOutdoor = true || $hasIndoor = true) {
+            $hasIndoorOrOutdoorFeature = true;
+        }
 
+        $this->hasIndoor = $hasIndoor;
+        $this->hasOutdoor = $hasOutdoor;
+        $this->hasIndoorOrOutdoorFeature = $hasIndoorOrOutdoorFeature;
 
         $this->features = $featuresArray;
         $this->subtypes = $subtypesArray;
