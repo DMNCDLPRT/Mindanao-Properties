@@ -8,9 +8,6 @@
   </x-slot>
   <x-slot name="form">
 
-    {{-- Property Offer -Section- --}}
-    {{-- @livewire('components.property-offer', ['offer_type' => $offer_type, 'property_type' => $property_type, 'property_type_id' => $property_type_id]) --}}
-    
     <section class="pb-5">
       <x-header-description 
         header="What type of property do you want to offer?" 
@@ -31,7 +28,6 @@
           <div class="flex items-center pl-4 border-2 border-gray-400 rounded-md dark:border-gray-700 grow">
             <x-radio id="{{ $type->name }}" wire:model="offer_type_id" value="{{ $type->id }}" name="offer_type" />
             <x-label value="{{ $type->name }}" for="{{ $type->name }}" class="w-full py-3 ml-2 text-sm font-medium dark:text-gray-300 rounded-md" />
-           
           </div>
           @endforeach
         </div>
@@ -48,7 +44,7 @@
         <div class="flex gap-2">
           @foreach ($property_type as $type)
           <div class="flex items-center pl-4 border-2 border-gray-400 rounded-md dark:border-gray-700 grow">
-            <x-radio name="property_type" id="{{ $type->name }}" value="{{ $type->id }}" wire:model="property_type_id" wire:click="wirePropertyClick({{ $type->id }})" />
+            <x-radio name="property_type" id="{{ $type->name }}" value="{{ $type->id }}" wire:model="property_type_id" wire:click="wirePropertyClick('{{ $type->id }}')" />
             <x-label value="{{ $type->name }}"  for="{{ $type->name }}"  class="w-full py-3 ml-2 text-sm font-medium dark:text-gray-300 rounded-md" />         
           </div>
           @endforeach
@@ -75,6 +71,7 @@
         </div>
       </div>
       @endif
+      
   
       {{-- Title -Input- --}}
       <div class="pb-4">
@@ -84,7 +81,7 @@
         </span>
         @enderror
         <x-label for="title" value="{{ __('Title') }}"  class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
-        <x-input id="title" wire:mode="title" name="title" class="block mt-1 w-full" autofocus placeholder="e.g. 2 Bedroom apartment with seaside" /> 
+        <x-input id="title" wire:model="title" name="title" class="block mt-1 w-full" placeholder="e.g. 2 Bedroom apartment with seaside" /> 
       </div>
   
       {{-- Property Description -Input- --}}
@@ -94,29 +91,9 @@
         </span>
       @enderror
       <div wire:ignore class="pb-4">
-          <x-label 
-          for="text_area" 
-          value="{{ __('Description') }}"
-          class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" 
-          />
-          <textarea wire:model="description" id="text_area"></textarea> 
-      </div>
-
-
-      {{-- <script>
-        
-        $(document).ready(function () {
-            // Use an event listener to detect changes in the input field
-            $('#text_area').on('input', function () {
-                var inputValue = $(this).val();
-                
-                // Use Livewire's JavaScript methods to update the Livewire property
-                @this.set('description', inputValue);
-                console.log('Script is running');
-            });
-        });
-      </script> --}}
-    
+        <x-label for="text_area" value="{{ __('Description') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+        <textarea wire:model="description" value="" id="text_area"></textarea>
+    </div>
     </section>
   
     
@@ -124,91 +101,83 @@
 
     {{-- Photos, videos and other media -Section- --}}
     <section class="pb-5">
-
       <x-header-description 
-        header="Upload photos, videos and other media" 
-        description="Users looking for property ignore properties without photos. Make your property stand out by uploading photos or, even better, a video!" 
+          header="Upload photos, videos and other media" 
+          description="Users looking for property ignore properties without photos. Make your property stand out by uploading photos or, even better, a video!" 
       />
-
-     {{-- Images --}}
-     <div class="pb-4">
-      @error('images')
-      <div class="mt-4 ">
-        <span class="text-red-100 mt-5" role="alert">
-          <strong class="text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
-        </span>
-      </div>
-      @enderror
-      <div class="mb-6 pt-4">
-        <h3 class="mb-5 block text-m font-semibold text-[#07074D]">
-          Upload other media
-        </h3>
-      
-        <div class="mb-8">
-          <input type="file" name="images" wire:model="images" id="images" class="sr-only" >
-            <label for="images" class="relative flex min-h-[100px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-5 text-center">
-              <div>
-                <span class="mb-1 block text-m font-semibold text-[#07074D]">
-                  Drop your images here
-                </span>
-                <span class="mb-1 block text-m font-medium text-[#6B7280]">
-                  or
-                </span>
-                <span class="mb-2 inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D]">
-                  Browse files
-                </span>
-                <span class="mb-1 block text-sm font-medium text-[#6B7280]">
-                  Upload photos as jpg or png.
-                </span>
-              </div>
-            </label>
+  
+      {{-- Images --}}
+      <div class="pb-4">
+        @error('img_file_name')
+        <div class="mt-4">
+            <span class="text-red-600 mt-5" role="alert">
+                <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+            </span>
         </div>
-        
-        @if ($images)
-        <div class="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8">
-          @foreach ($images as $imge)
-          <div class="flex items-center justify-between">
-              <img src="{{ $imge->temporaryUrl() }}" alt="" height="70" class="p-2 rounded-sm">
-            </div>
-            <div class="flex items-center justify-between bg-[#e7e8ea] p-3 rounded-md">
-              <span class="truncate pr-3 text-base font-medium text-[#07074D]">
-              {{ $imge->getClientOriginalName() }}
+        @enderror
+        <div class="mb-6 pt-4">
+          <h3 class="mb-5 block text-m font-semibold text-[#07074D]">
+            Upload other media
+          </h3>
+          <input type="file" name="images" wire:model="img_file_name" id="img_file_name" class="sr-only">
+          <label for="images" class="relative flex min-h-[100px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-5 text-center">
+            <div>
+              <span class="mb-1 block text-m font-semibold text-[#07074D]">
+                Drop your images here
               </span>
-              <button class="text-[#07074D]" id="onclickFile" onclick="this.parentNode.parentNode.remove(); return false;">
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.279337 0.279338C0.651787 -0.0931121 1.25565 -0.0931121 1.6281 0.279338L9.72066 8.3719C10.0931 8.74435 10.0931 9.34821 9.72066 9.72066C9.34821 10.0931 8.74435 10.0931 8.3719 9.72066L0.279337 1.6281C-0.0931125 1.25565 -0.0931125 0.651788 0.279337 0.279338Z" fill="currentColor"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.279337 9.72066C-0.0931125 9.34821 -0.0931125 8.74435 0.279337 8.3719L8.3719 0.279338C8.74435 -0.0931127 9.34821 -0.0931123 9.72066 0.279338C10.0931 0.651787 10.0931 1.25565 9.72066 1.6281L1.6281 9.72066C1.25565 10.0931 0.651787 10.0931 0.279337 9.72066Z" fill="currentColor"/>
-                </svg>
-              </button> 
+              <span class="mb-1 block text-m font-medium text-[#6B7280]">
+                or
+              </span>
+              <span class="mb-2 inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D]">
+                Browse files
+              </span>
+              <span class="mb-1 block text-sm font-medium text-[#6B7280]">
+                Upload photos as jpg or png.
+              </span>
             </div>
-          @endforeach
+          </label>
+          @if ($img_file_name)
+          <div class="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8">
+              @foreach ($img_file_name as $image)
+              <div class="flex items-center justify-between">
+                <img src="{{ $image->temporaryUrl() }}" alt="" height="70" class="p-2 rounded-sm">
+              </div>
+              <div class="flex items-center justify-between bg-[#e7e8ea] p-3 rounded-md">
+                  <span class="truncate pr-3 text-base font-medium text-[#07074D]">
+                    {{ $image->getClientOriginalName() }}
+                  </span>
+                  <button class="text-[#07074D]" wire:click="removeImage('{{ $image->getFilename() }}')">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M0.279337 0.279338C0.651787 -0.0931121 1.25565 -0.0931121 1.6281 0.279338L9.72066 8.3719C10.0931 8.74435 10.0931 9.34821 9.72066 9.72066C9.34821 10.0931 8.74435 10.0931 8.37190 9.72066L0.279337 1.6281C-0.0931125 1.25565 -0.0931125 0.651788 0.279337 0.279338Z"
+                          fill="currentColor" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M0.279337 9.72066C-0.0931125 9.34821 -0.0931125 8.74435 0.279337 8.3719L8.3719 0.279338C8.74435 -0.0931127 9.34821 -0.0931123 9.72066 0.279338C10.0931 0.651787 10.0931 1.25565 9.72066 1.6281L1.6281 9.72066C1.25565 10.0931 0.651787 10.0931 0.279337 9.72066Z"
+                          fill="currentColor" />
+                      </svg>
+                  </button>
+              </div>
+              @endforeach
+          </div>
+          @endif
         </div>
-        @endif{{-- 
-        <script>
-          $( "#onclickFile" ).click(function() {
-            $images = [''];
-          });
-        </script> --}}
       </div>
-     </div>
-      {{-- Image Upload -End Imput- --}}
-
+      {{-- Image Upload - End Input - --}}
+  
       {{-- Media --}}
-     <div class="pb-4">
-      @error('media')
-      <div class="mt-4 ">
-        <span class="text-red-100 mt-5" role="alert">
-          <strong class="text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
-        </span>
-      </div>
-      @enderror
-      <div class="mb-6">
-        <h3 class="mb-5 block text-m font-semibold text-[#07074D]">
-          Upload other media
-        </h3>
-      
-        <div class="mb-8">
-          <input type="file" name="media" wire:model="media" id="media" class="sr-only" >
+      <div class="pb-4">
+          @error('docs_file_namemedia')
+          <div class="mt-4">
+              <span class="text-red-600 mt-5" role="alert">
+                  <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+              </span>
+          </div>
+          @enderror
+          <div class="mb-6">
+            <h3 class="mb-5 block text-m font-semibold text-[#07074D]">
+                Upload other media
+            </h3>
+            <input type="file" name="docs_file_name" wire:model="docs_file_name" id="docs_file_name" class="sr-only">
             <label for="media" class="relative flex min-h-[100px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-5 text-center">
               <div>
                 <span class="mb-1 block text-m font-semibold text-[#07074D]">
@@ -225,74 +194,53 @@
                 </span>
               </div>
             </label>
-        </div>
-        
-        @if ($media)
-        <div class="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8">
-          <div class="flex items-center justify-between">
-            <img src="{{ $media->temporaryUrl() }}" alt="" height="70" class="p-2 rounded-sm">
-          </div>
-          <div class="flex items-center justify-between bg-[#e7e8ea] p-3 rounded-md">
-            <span class="truncate pr-3 text-base font-medium text-[#07074D]">
-              {{ $media->getClientOriginalName() }}
-            </span>
-            <button class="text-[#07074D]" id="onclickFile" onclick="this.parentNode.parentNode.remove(); return false;">
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.279337 0.279338C0.651787 -0.0931121 1.25565 -0.0931121 1.6281 0.279338L9.72066 8.3719C10.0931 8.74435 10.0931 9.34821 9.72066 9.72066C9.34821 10.0931 8.74435 10.0931 8.3719 9.72066L0.279337 1.6281C-0.0931125 1.25565 -0.0931125 0.651788 0.279337 0.279338Z" fill="currentColor"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.279337 9.72066C-0.0931125 9.34821 -0.0931125 8.74435 0.279337 8.3719L8.3719 0.279338C8.74435 -0.0931127 9.34821 -0.0931123 9.72066 0.279338C10.0931 0.651787 10.0931 1.25565 9.72066 1.6281L1.6281 9.72066C1.25565 10.0931 0.651787 10.0931 0.279337 9.72066Z" fill="currentColor"/>
-              </svg>
-            </button> 
-          </div>
-        </div>
-        @endif{{-- 
-        <script>
-          $( "#onclickFile" ).click(function() {
-            $media = [''];
-          });
-        </script> --}}
-      </div>
-      </div>
-      {{-- Media Upload -End Imput- --}}
 
+            @if ($docs_file_name)
+            <div class="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8">
+              <div class="flex items-center justify-between">
+                <img src="{{ $docs_file_name->temporaryUrl() }}" alt="" height="70" class="p-2 rounded-sm">
+              </div>
+              <div class="flex items-center justify-between bg-[#e7e8ea] p-3 rounded-md">
+                  <span class="truncate pr-3 text-base font-medium text-[#07074D]">
+                    {{ $docs_file_name->getClientOriginalName() }}
+                  </span>
+                  <button class="text-[#07074D]" wire:click="removeMedia">
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M0.279337 0.279338C0.651787 -0.0931121 1.25565 -0.0931121 1.6281 0.279338L9.72066 8.3719C10.0931 8.74435 10.0931 9.34821 9.72066 9.72066C9.34821 10.0931 8.74435 10.0931 8.3719 9.72066L0.279337 1.6281C-0.0931125 1.25565 -0.0931125 0.651788 0.279337 0.279338Z"
+                        fill="currentColor" />
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M0.279337 9.72066C-0.0931125 9.34821 -0.0931125 8.74435 0.279337 8.3719L8.3719 0.279338C8.74435 -0.0931127 9.34821 -0.0931123 9.72066 0.279338C10.0931 0.651787 10.0931 1.25565 9.72066 1.6281L1.6281 9.72066C1.25565 10.0931 0.651787 10.0931 0.279337 9.72066Z"
+                        fill="currentColor" />
+                    </svg>
+                 </button>
+              </div>
+            </div>
+            @endif
+          </div>
+      </div>
+      {{-- Media Upload - End Input - --}}
+  
       {{-- YouTube Link --}}
       <div class="pb-4 grow">
-        <x-label 
-          for="youtube"
-          value="{{ __('Paste your YouTube video URL and submit') }}"
-          class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" 
-        />
-        <x-input 
-          type="text" 
-          name="youtube" 
-          id="youtube"
-          wire:model="youtube"
-          class="block mt-1 w-full"
-          placeholder="e.g. https://youtube.com/example-link" 
-        />
+        <x-label for="yt_link" value="{{ __('Paste your YouTube video URL and submit') }}"
+          class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+        <x-input type="text" name="yt_link" id="yt_link" wire:model="yt_link"
+          class="block mt-1 w-full" placeholder="e.g. https://youtube.com/example-link" />
       </div>
-
-      {{-- Vitual Tour Link --}}
+  
+      {{-- Virtual Tour Link --}}
       <div class="pb-4 grow">
-        <x-label 
-          for="virtual_tour"
-          value="{{ __('Paste your Virtual Tour URL and submit') }}"
-          class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" 
-        />
-        <x-input 
-          type="text" 
-          name="virtual_tour" 
-          id="virtual_tour"
-          wire:model="virtual_tour"
-          class="block mt-1 w-full" 
-          placeholder="e.g. https://virtualtour.com/example-link"
-        />
+        <x-label for="vt_link" value="{{ __('Paste your Virtual Tour URL and submit') }}"
+          class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+        <x-input type="text" name="vt_link" id="vt_link" wire:model="vt_link"
+           class="block mt-1 w-full" placeholder="e.g. https://virtualtour.com/example-link" />
       </div>
-      </section>
-     
+    </section>
 
     {{-- Key Information -Section- --}}
     <section class="pb-5">
-
       <x-header-description 
         header="Add key information" 
         description="Please provide further key information such as the price, number of rooms or availability. Remember, more precise the information - more qualified leads!" 
@@ -300,8 +248,58 @@
       
       {{-- Key Infomation --}}
       <div class="pb-4">
-        {{-- price_availble_ online --}}
 
+        <div class="flex flex-wrap gap-2">
+          {{-- Bedroom --}}
+          <div class="pb-4 grow">
+            @error('bedrooms')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label  for="bedrooms" value="{{ __('Bedrooms') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="bedrooms"  id="bedrooms" wire:model="bedrooms" class="block mt-1 w-full" />
+          </div>
+
+          {{-- Bathroom --}}
+          <div class="pb-4 grow">
+            @error('bathrooms')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label  for="bathrooms" value="{{ __('Bathrooms') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="bathrooms"  id="bathrooms" wire:model="bathrooms" class="block mt-1 w-full" />
+          </div>
+
+          {{-- Floor Area --}}
+          <div class="pb-4 grow">
+            @error('floor_area')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label  for="floor_area" value="{{ __('Floor Area (m²)') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="floor_area"  id="floor_area" wire:model="floor_area" class="block mt-1 w-full" />
+          </div>
+          
+          {{-- Unit/Floor Number --}}
+          <div class="pb-4 grow">
+            @error('unit_floor_number')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label  for="unit_floor_number" value="{{ __('Unit/Floor Number') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="unit_floor_number"  id="unit_floor_number" wire:model="unit_floor_number" class="block mt-1 w-full" />
+          </div>
+
+          
+          
+        </div>
+
+
+        {{-- price_availble_ online --}}
         <div class="flex items-middle">
           <div class="flex items-center">
             <x-checkbox id="show_price_online" aria-describedby="show_price_online" wire:model="show_price_online" type="checkbox" value="1" />
@@ -311,8 +309,7 @@
           </div>
         </div>
 
-        {{-- prive_availble_ online --}}
-
+        {{-- price php --}}
         <div class="pt-4 flex gap-2">
           <div class="pb-4 grow">
             @error('price_php')
@@ -355,13 +352,18 @@
         </div>
 
         <div class="pb-4 grow">
+          @error('available_from')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
           <x-label 
             for="available_from"
             value="{{ __('Available from') }}"
             class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" 
           />
           <x-input 
-            type="text" 
+            type="date" 
             name="available_from" 
             id="available_from"
             wire:model="available_from"
@@ -370,6 +372,11 @@
         </div>
 
         <div class="pb-4 grow">
+          @error('object_id')
+          <span class="m" role="alert">
+            <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+          </span>
+          @enderror
           <x-label 
             for="object_id"
             value="{{ __('Object ID') }}"
@@ -396,76 +403,29 @@
 
       {{-- Key Infomation --}}
       <div wire:ignore class="pb-4">
-        @error('region')
-        <span class="m" role="alert">
-          <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
-        </span>
-        @enderror
+        <div class="mt-4">
+          <x-label for="region" value="{{ __('Region') }}" />
+          <input  type="hidden"  name="region" wire:model="region" />
+          <x-select  id="region" autocomplete="region" />
+        </div>
 
         <div class="mt-4">
-          <x-label 
-            for="region" 
-            value="{{ __('Region') }}"
-          />
-          <input 
-            type="hidden" 
-            name="region" 
-            wire:model="region" 
-          />
-          <select 
-            id="region" 
-            class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" 
-            autocomplete="region"
-            >
+          <x-label for="province"  value="{{ __('Province') }}" />
+          <input type="hidden" name="province" wire:model="province" />
+          <x-select id="province" autofocus />
           </select>
         </div>
 
         <div class="mt-4">
-          <x-label 
-            for="province" 
-            value="{{ __('Province') }}" 
-          />
-          <input 
-            type="hidden" 
-            name="province" 
-            wire:model="province" 
-          />
-          <select  
-            id="province" 
-            class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" 
-            autofocus 
-          >
-          </select>
+          <x-label  for="city" value="{{ __('City') }}" />
+          <input type="hidden" name="city" wire:model="city"/>
+          <x-select id="city" autofocus />
         </div>
 
         <div class="mt-4">
-          <x-label 
-            for="city" value="{{ __('City') }}" />
-          <input 
-            type="hidden" name="city" 
-            wire:model="city"/>
-          <select 
-            id="city" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" 
-            autofocus 
-          >
-          </select>
-        </div>
-
-        <div class="mt-4">
-          <x-label 
-            for="barangay" 
-            value="{{ __('Barangay') }}" 
-          />
-          <input 
-            type="hidden" 
-            name="barangay"
-            wire:model="barangay"
-          />
-          <select 
-            id="barangay" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" 
-            autofocus 
-          >
-          </select>
+          <x-label  for="barangay" value="{{ __('Barangay') }}" />
+          <input  type="hidden"  name="barangay" wire:model="barangay"/>
+          <x-select id="barangay" autofocus />
         </div>
         
         <div class="mt-4">
@@ -478,7 +438,7 @@
             name="address" 
             id="address" 
             wire:model="address" 
-            class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+            class="block mt-1 w-full" 
             placeholder="Enter street name and number" 
             autocomplete="address"
           />
@@ -495,8 +455,8 @@
                 name="latitude"
                 id="latitude"
                 wire:model="latitude" 
-                class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-              />
+                class="block mt-1 w-full" 
+                />
           </div>
           <div class="mt-4 grow">
               <x-label 
@@ -508,7 +468,7 @@
                 name="longitude" 
                 id="longitude"
                 wire:model="longitude" 
-                class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                class="block mt-1 w-full" 
              />
           </div>
         </div>
@@ -521,41 +481,56 @@
     {{-- Location -End Section- --}}
 
     {{-- Amenities -Section- --}}
-    @if ($property_type_id && $features)    
+    @if ($hasIndoorOrOutdoorFeature)    
     <section class="pb-5">
       <x-header-description 
-        header="Please review your contact details" 
-        description="Make sure your details are updated so our users can easily contact you at the right channel." 
+        header="Tell users more about your property" 
+        description="Why is your property so great? Tell us more about your property so that property seekers can learn even more about your offer." 
       />
-
+      
+      @if ($hasIndoor = true)
       <div class="py-4">
         <h4 class="font-bold text-base">Indoor Features</h4>
         <div class="flex flex-wrap gap-2">
           @foreach ($features as $feat)
-              @if ($feat->type == 'indoor')
-                  <x-button>{{ $feat->name }}</x-button>
-              @endif
+          @if ($feat->type == 'indoor')
+          <div class="flex items-center pl-4 border-2 bg-slate-800 border-gray-800 rounded-md dark:border-gray-700 grow max-w-[180px]">
+            <x-checkbox id="{{ $feat->name }}" wire:model="features_id" value="{{ $feat->id }}" name="offer_type" />
+            <x-label value="{{ $feat->name }}" for="{{ $feat->name }}" class="w-full py-2 mx-2 text-sm text-white font-medium dark:text-gray-300 rounded-md" />
+          </div>
+          @endif
           @endforeach
         </div>
       </div>
+      @endif
 
+      @if ($hasOutdoor = true)
       <div class="py-4 font-bold  text-base">
         <h4>Outdoor Features</h4>
         <div class="flex flex-wrap gap-2">
           @foreach ($features as $feat)
-              @if ($feat->type == 'outdoor')
-                  <x-button>{{ $feat->name }}</x-button>
-              @endif
+          @if ($feat->type == 'outdoor')
+          <div class="flex items-center pl-4 border-2 bg-slate-800 border-gray-800 rounded-md dark:border-gray-700 grow max-w-[180px]">
+            <x-checkbox id="{{ $feat->name }}" wire:model="features_id" value="{{ $feat->id }}" name="offer_type" />
+            <x-label value="{{ $feat->name }}" for="{{ $feat->name }}" class="w-full py-2 mx-2 text-sm text-white font-medium dark:text-gray-300 rounded-md" />
+          </div>
+          @endif
           @endforeach
         </div>
       </div>
+      @endif
 
     </section>
     @endif
     {{-- Amenities -End Section- --}}
 
     {{-- Contact Details -Section- --}}
-      {{-- Key Infomation --}}
+    {{-- Key Infomation --}}
+    <section class="pb-5">
+        <x-header-description 
+          header="Please review your contact details" 
+          description="Make sure your details are updated so our users can easily contact you at the right channel." 
+        />
       <div class="p-4 border rounded">
         <div class="pb-4 flex items-center border-b">
           <div class="shrink-0  mr-3">
@@ -619,11 +594,31 @@
       <script type="text/javascript" src="{{ asset('js/here-map.js') }}"> </script>
 
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+      <script>
+        // Initialize TinyMCE
+        tinymce.init({
+            selector: 'textarea#text_area',
+            // Add TinyMCE configuration options as needed
+            setup: function (editor) {
+                // Listen for changes in the editor content
+                editor.on('input', function () {
+                    // Get the content from TinyMCE
+                    var content = editor.getContent();
+                    // Update the Livewire component property
+                    @this.set('description', content);
+                });
+            }
+        });
+      </script>
+
       {{-- <script>
         $( "#onclickFile" ).click(function() {
           $( "#output" ).slideUp();
         });
       </script> --}}
+
+
     </div>
     {{-- HERE map API -script- -End- --}}
 

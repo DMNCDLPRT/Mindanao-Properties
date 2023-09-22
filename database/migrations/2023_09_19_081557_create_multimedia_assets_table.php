@@ -12,15 +12,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('multimedia_assets', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->foreignId('current_team_id')->nullable();
-            $table->string('profile_photo_path', 2048)->nullable();
+
+            $table->uuid('property_images_id', 36);
+            $table->foreign('property_images_id')->references('id')->on('property_images')->onDelete('cascade');
+
+            $table->uuid('property_documents_id', 36);
+            $table->foreign('property_documents_id')->references('id')->on('property_documents')->onDelete('cascade');
+
+            
+
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('multimedia_assets');
     }
 };

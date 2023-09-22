@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Features;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Ramsey\Uuid\Uuid;
 
 class FeaturesSeeder extends Seeder
 {
@@ -29,14 +31,14 @@ class FeaturesSeeder extends Seeder
             ['name' => 'Central Heating', 'type' => 'indoor', 'property_type' => 'House'],
             ['name' => 'Air Conditioning', 'type' => 'indoor', 'property_type' => 'House'],
             ['name' => 'Solar Panels', 'type' => 'outdoor', 'property_type' => 'House'],
-            ['name' => 'Pet Park', 'type' => 'outdoor', 'property_type' => 'Apartment'],
             ['name' => 'Tennis Court', 'type' => 'outdoor', 'property_type' => 'House'],
             ['name' => 'Movie Theater', 'type' => 'indoor', 'property_type' => 'House'],
             ['name' => 'Art Studio', 'type' => 'indoor', 'property_type' => 'House'],
             ['name' => 'Wine Cellar', 'type' => 'indoor', 'property_type' => 'House'],
             ['name' => 'Community Garden', 'type' => 'outdoor', 'property_type' => 'House'],
             ['name' => 'Security System', 'type' => 'indoor', 'property_type' => 'House'],
-
+            
+            ['name' => 'Pet Park', 'type' => 'outdoor', 'property_type' => 'Apartment'],
             ['name' => 'Balcony', 'type' => 'outdoor', 'property_type' => 'Apartment'],
             ['name' => 'High-Speed Internet', 'type' => 'indoor', 'property_type' => 'Apartment'],
             ['name' => 'Elevator', 'type' => 'indoor', 'property_type' => 'Apartment'],
@@ -60,37 +62,18 @@ class FeaturesSeeder extends Seeder
             ['name' => 'Roof Deck', 'type' => 'outdoor', 'property_type' => 'Commercial'],
             ['name' => 'Kitchenette', 'type' => 'indoor', 'property_type' => 'Commercial'],
 
-            // ['name' => 'Swimming Pool', 'property_type' => 'Condominium'],
-            // ['name' => 'Tennis Court', 'property_type' => 'Condominium'],
-            // ['name' => 'Playground', 'property_type' => 'Condominium'],
-            // ['name' => 'BBQ Area', 'property_type' => 'Condominium'],
-            // ['name' => 'Picnic Area', 'property_type' => 'Condominium'],
-            
-            // ['name' => 'Parking Lot', 'property_type' => 'Commercial'],
-            // ['name' => 'Outdoor Seating', 'property_type' => 'Commercial'],
-            // ['name' => 'Covered Patio', 'property_type' => 'Commercial'],
-            // ['name' => 'Roof Deck', 'property_type' => 'Commercial'],
-            // ['name' => 'Central Courtyard', 'property_type' => 'Commercial'],
-            
-            // ['name' => 'Balcony', 'property_type' => 'Apartment'],
-            // ['name' => 'Rooftop Garden', 'property_type' => 'Apartment'],
-            // ['name' => 'Pet Park', 'property_type' => 'Apartment'],
-            // ['name' => 'Bike Storage', 'property_type' => 'Apartment'],
-            // ['name' => 'Outdoor Kitchen', 'property_type' => 'Apartment'],
-            
-            // ['name' => 'Swimming Pool', 'property_type' => 'House'],
-            // ['name' => 'Fenced Yard', 'property_type' => 'House'],
-            // ['name' => 'Wooden Deck', 'property_type' => 'House'],
-            // ['name' => 'Patio', 'property_type' => 'House'],
-            // ['name' => 'Garden', 'property_type' => 'House'],
-            
-            // ['name' => 'Landscaped Grounds', 'property_type' => 'Land'],
-            // ['name' => 'Nature Trails', 'property_type' => 'Land'],
-            // ['name' => 'Fishing Pond', 'property_type' => 'Land'],
-            // ['name' => 'Horse Stables', 'property_type' => 'Land'],
-            // ['name' => 'Golf Course', 'property_type' => 'Land'],
+           
         ];
-        
-        DB::table('features')->insert($additionalFeatures);
+        foreach ($additionalFeatures as $features) {
+            Features::create([
+                'id' => Uuid::uuid4(),
+                'name' => $features['name'],
+                'type' => $features['type'],
+                'property_type' => $features['property_type'],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
     }
 }
