@@ -14,6 +14,16 @@ class PropertyClassification extends Model
     protected $keyType = 'string'; // This specifies the data type of the primary key.
     public $incrementing = false; // This tells Laravel that the primary key is not auto-incrementing.
 
+    protected $fillable = [
+        'id',
+        'property_type_id',
+        'property_sub_type_id',
+    ];
+
+    public function property () {
+        return $this->belongsTo(Property::class);
+    }
+
     public function type () {
         return $this->hasOne(PropertyType::class, 'property_type_id');
     }

@@ -4,14 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-use App\Models\SubType;
 use App\Models\OfferType;
-use App\Models\PropertyType;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Property extends Model
 {
     use HasFactory;
+    use HasUuids;
 
     protected $table = 'properties';
     protected $primaryKey = 'id';

@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('property_documents', function (Blueprint $table) {
-            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
+            $table->uuid('id')->primary()->unique();
 
             $table->string('docs_file_name', 255)->nullable(false);
 

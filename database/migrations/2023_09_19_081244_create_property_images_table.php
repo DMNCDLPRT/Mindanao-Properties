@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('property_images', function (Blueprint $table) {
-            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
+            $table->uuid('id')->primary()->unique();
             $table->string('img_file_name', 255)->nullable(false);
             $table->timestamps();
         });

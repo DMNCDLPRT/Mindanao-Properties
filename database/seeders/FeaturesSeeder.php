@@ -6,6 +6,7 @@ use App\Models\Features;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Ramsey\Uuid\Uuid;
 
 class FeaturesSeeder extends Seeder
 {
@@ -65,6 +66,7 @@ class FeaturesSeeder extends Seeder
         ];
         foreach ($additionalFeatures as $features) {
             Features::create([
+                'id' => Uuid::uuid4(),
                 'name' => $features['name'],
                 'type' => $features['type'],
                 'property_type' => $features['property_type'],

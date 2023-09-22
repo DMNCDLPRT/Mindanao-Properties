@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('multimedia_assets', function (Blueprint $table) {
-            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
+            $table->uuid('id')->primary()->unique();
 
             $table->uuid('property_images_id', 36);
             $table->foreign('property_images_id')->references('id')->on('property_images')->onDelete('cascade');

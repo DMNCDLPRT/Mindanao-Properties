@@ -8,9 +8,6 @@
   </x-slot>
   <x-slot name="form">
 
-    {{-- Property Offer -Section- --}}
-    {{-- @livewire('components.property-offer', ['offer_type' => $offer_type, 'property_type' => $property_type, 'property_type_id' => $property_type_id]) --}}
-    
     <section class="pb-5">
       <x-header-description 
         header="What type of property do you want to offer?" 
@@ -74,6 +71,7 @@
         </div>
       </div>
       @endif
+      
   
       {{-- Title -Input- --}}
       <div class="pb-4">
@@ -103,91 +101,83 @@
 
     {{-- Photos, videos and other media -Section- --}}
     <section class="pb-5">
-
       <x-header-description 
-        header="Upload photos, videos and other media" 
-        description="Users looking for property ignore properties without photos. Make your property stand out by uploading photos or, even better, a video!" 
+          header="Upload photos, videos and other media" 
+          description="Users looking for property ignore properties without photos. Make your property stand out by uploading photos or, even better, a video!" 
       />
-
-     {{-- Images --}}
-     <div class="pb-4">
-      @error('images')
-      <div class="mt-4 ">
-        <span class="text-red-100 mt-5" role="alert">
-          <strong class="text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
-        </span>
-      </div>
-      @enderror
-      <div class="mb-6 pt-4">
-        <h3 class="mb-5 block text-m font-semibold text-[#07074D]">
-          Upload other media
-        </h3>
-      
-        <div class="mb-8">
-          <input type="file" name="images" wire:model="images" id="images" class="sr-only" >
-            <label for="images" class="relative flex min-h-[100px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-5 text-center">
-              <div>
-                <span class="mb-1 block text-m font-semibold text-[#07074D]">
-                  Drop your images here
-                </span>
-                <span class="mb-1 block text-m font-medium text-[#6B7280]">
-                  or
-                </span>
-                <span class="mb-2 inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D]">
-                  Browse files
-                </span>
-                <span class="mb-1 block text-sm font-medium text-[#6B7280]">
-                  Upload photos as jpg or png.
-                </span>
-              </div>
-            </label>
+  
+      {{-- Images --}}
+      <div class="pb-4">
+        @error('img_file_name')
+        <div class="mt-4">
+            <span class="text-red-600 mt-5" role="alert">
+                <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+            </span>
         </div>
-        
-        @if ($images)
-        <div class="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8">
-          @foreach ($images as $imge)
-          <div class="flex items-center justify-between">
-              <img src="{{ $imge->temporaryUrl() }}" alt="" height="70" class="p-2 rounded-sm">
-            </div>
-            <div class="flex items-center justify-between bg-[#e7e8ea] p-3 rounded-md">
-              <span class="truncate pr-3 text-base font-medium text-[#07074D]">
-              {{ $imge->getClientOriginalName() }}
+        @enderror
+        <div class="mb-6 pt-4">
+          <h3 class="mb-5 block text-m font-semibold text-[#07074D]">
+            Upload other media
+          </h3>
+          <input type="file" name="images" wire:model="img_file_name" id="img_file_name" class="sr-only">
+          <label for="images" class="relative flex min-h-[100px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-5 text-center">
+            <div>
+              <span class="mb-1 block text-m font-semibold text-[#07074D]">
+                Drop your images here
               </span>
-              <button class="text-[#07074D]" id="onclickFile" onclick="this.parentNode.parentNode.remove(); return false;">
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.279337 0.279338C0.651787 -0.0931121 1.25565 -0.0931121 1.6281 0.279338L9.72066 8.3719C10.0931 8.74435 10.0931 9.34821 9.72066 9.72066C9.34821 10.0931 8.74435 10.0931 8.3719 9.72066L0.279337 1.6281C-0.0931125 1.25565 -0.0931125 0.651788 0.279337 0.279338Z" fill="currentColor"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.279337 9.72066C-0.0931125 9.34821 -0.0931125 8.74435 0.279337 8.3719L8.3719 0.279338C8.74435 -0.0931127 9.34821 -0.0931123 9.72066 0.279338C10.0931 0.651787 10.0931 1.25565 9.72066 1.6281L1.6281 9.72066C1.25565 10.0931 0.651787 10.0931 0.279337 9.72066Z" fill="currentColor"/>
-                </svg>
-              </button> 
+              <span class="mb-1 block text-m font-medium text-[#6B7280]">
+                or
+              </span>
+              <span class="mb-2 inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D]">
+                Browse files
+              </span>
+              <span class="mb-1 block text-sm font-medium text-[#6B7280]">
+                Upload photos as jpg or png.
+              </span>
             </div>
-          @endforeach
+          </label>
+          @if ($img_file_name)
+          <div class="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8">
+              @foreach ($img_file_name as $image)
+              <div class="flex items-center justify-between">
+                <img src="{{ $image->temporaryUrl() }}" alt="" height="70" class="p-2 rounded-sm">
+              </div>
+              <div class="flex items-center justify-between bg-[#e7e8ea] p-3 rounded-md">
+                  <span class="truncate pr-3 text-base font-medium text-[#07074D]">
+                    {{ $image->getClientOriginalName() }}
+                  </span>
+                  <button class="text-[#07074D]" wire:click="removeImage('{{ $image->getFilename() }}')">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M0.279337 0.279338C0.651787 -0.0931121 1.25565 -0.0931121 1.6281 0.279338L9.72066 8.3719C10.0931 8.74435 10.0931 9.34821 9.72066 9.72066C9.34821 10.0931 8.74435 10.0931 8.37190 9.72066L0.279337 1.6281C-0.0931125 1.25565 -0.0931125 0.651788 0.279337 0.279338Z"
+                          fill="currentColor" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M0.279337 9.72066C-0.0931125 9.34821 -0.0931125 8.74435 0.279337 8.3719L8.3719 0.279338C8.74435 -0.0931127 9.34821 -0.0931123 9.72066 0.279338C10.0931 0.651787 10.0931 1.25565 9.72066 1.6281L1.6281 9.72066C1.25565 10.0931 0.651787 10.0931 0.279337 9.72066Z"
+                          fill="currentColor" />
+                      </svg>
+                  </button>
+              </div>
+              @endforeach
+          </div>
+          @endif
         </div>
-        @endif{{-- 
-        <script>
-          $( "#onclickFile" ).click(function() {
-            $images = [''];
-          });
-        </script> --}}
       </div>
-     </div>
-      {{-- Image Upload -End Imput- --}}
-
+      {{-- Image Upload - End Input - --}}
+  
       {{-- Media --}}
-     <div class="pb-4">
-      @error('media')
-      <div class="mt-4 ">
-        <span class="text-red-100 mt-5" role="alert">
-          <strong class="text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
-        </span>
-      </div>
-      @enderror
-      <div class="mb-6">
-        <h3 class="mb-5 block text-m font-semibold text-[#07074D]">
-          Upload other media
-        </h3>
-      
-        <div class="mb-8">
-          <input type="file" name="media" wire:model="media" id="media" class="sr-only" >
+      <div class="pb-4">
+          @error('docs_file_namemedia')
+          <div class="mt-4">
+              <span class="text-red-600 mt-5" role="alert">
+                  <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+              </span>
+          </div>
+          @enderror
+          <div class="mb-6">
+            <h3 class="mb-5 block text-m font-semibold text-[#07074D]">
+                Upload other media
+            </h3>
+            <input type="file" name="docs_file_name" wire:model="docs_file_name" id="docs_file_name" class="sr-only">
             <label for="media" class="relative flex min-h-[100px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-5 text-center">
               <div>
                 <span class="mb-1 block text-m font-semibold text-[#07074D]">
@@ -204,52 +194,53 @@
                 </span>
               </div>
             </label>
-        </div>
-        
-        @if ($media)
-        <div class="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8">
-          <div class="flex items-center justify-between">
-            <img src="{{ $media->temporaryUrl() }}" alt="" height="70" class="p-2 rounded-sm">
-          </div>
-          <div class="flex items-center justify-between bg-[#e7e8ea] p-3 rounded-md">
-            <span class="truncate pr-3 text-base font-medium text-[#07074D]">
-              {{ $media->getClientOriginalName() }}
-            </span>
-            <button class="text-[#07074D]" id="onclickFile" onclick="this.parentNode.parentNode.remove(); return false;">
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.279337 0.279338C0.651787 -0.0931121 1.25565 -0.0931121 1.6281 0.279338L9.72066 8.3719C10.0931 8.74435 10.0931 9.34821 9.72066 9.72066C9.34821 10.0931 8.74435 10.0931 8.3719 9.72066L0.279337 1.6281C-0.0931125 1.25565 -0.0931125 0.651788 0.279337 0.279338Z" fill="currentColor"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.279337 9.72066C-0.0931125 9.34821 -0.0931125 8.74435 0.279337 8.3719L8.3719 0.279338C8.74435 -0.0931127 9.34821 -0.0931123 9.72066 0.279338C10.0931 0.651787 10.0931 1.25565 9.72066 1.6281L1.6281 9.72066C1.25565 10.0931 0.651787 10.0931 0.279337 9.72066Z" fill="currentColor"/>
-              </svg>
-            </button> 
-          </div>
-        </div>
-        @endif{{-- 
-        <script>
-          $( "#onclickFile" ).click(function() {
-            $media = [''];
-          });
-        </script> --}}
-      </div>
-      </div>
-      {{-- Media Upload -End Imput- --}}
 
+            @if ($docs_file_name)
+            <div class="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8">
+              <div class="flex items-center justify-between">
+                <img src="{{ $docs_file_name->temporaryUrl() }}" alt="" height="70" class="p-2 rounded-sm">
+              </div>
+              <div class="flex items-center justify-between bg-[#e7e8ea] p-3 rounded-md">
+                  <span class="truncate pr-3 text-base font-medium text-[#07074D]">
+                    {{ $docs_file_name->getClientOriginalName() }}
+                  </span>
+                  <button class="text-[#07074D]" wire:click="removeMedia">
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M0.279337 0.279338C0.651787 -0.0931121 1.25565 -0.0931121 1.6281 0.279338L9.72066 8.3719C10.0931 8.74435 10.0931 9.34821 9.72066 9.72066C9.34821 10.0931 8.74435 10.0931 8.3719 9.72066L0.279337 1.6281C-0.0931125 1.25565 -0.0931125 0.651788 0.279337 0.279338Z"
+                        fill="currentColor" />
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M0.279337 9.72066C-0.0931125 9.34821 -0.0931125 8.74435 0.279337 8.3719L8.3719 0.279338C8.74435 -0.0931127 9.34821 -0.0931123 9.72066 0.279338C10.0931 0.651787 10.0931 1.25565 9.72066 1.6281L1.6281 9.72066C1.25565 10.0931 0.651787 10.0931 0.279337 9.72066Z"
+                        fill="currentColor" />
+                    </svg>
+                 </button>
+              </div>
+            </div>
+            @endif
+          </div>
+      </div>
+      {{-- Media Upload - End Input - --}}
+  
       {{-- YouTube Link --}}
       <div class="pb-4 grow">
-        <x-label for="youtube"value="{{ __('Paste your YouTube video URL and submit') }}"class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
-        <x-input type="text"  name="youtube"  id="youtube" wire:model="youtube" class="block mt-1 w-full" placeholder="e.g. https://youtube.com/example-link" />
+        <x-label for="yt_link" value="{{ __('Paste your YouTube video URL and submit') }}"
+          class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+        <x-input type="text" name="yt_link" id="yt_link" wire:model="yt_link"
+          class="block mt-1 w-full" placeholder="e.g. https://youtube.com/example-link" />
       </div>
-
-      {{-- Vitual Tour Link --}}
+  
+      {{-- Virtual Tour Link --}}
       <div class="pb-4 grow">
-        <x-label  for="virtual_tour"  value="{{ __('Paste your Virtual Tour URL and submit') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
-        <x-input  type="text"  name="virtual_tour"  id="virtual_tour" wire:model="virtual_tour" class="block mt-1 w-full" placeholder="e.g. https://virtualtour.com/example-link" />
+        <x-label for="vt_link" value="{{ __('Paste your Virtual Tour URL and submit') }}"
+          class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+        <x-input type="text" name="vt_link" id="vt_link" wire:model="vt_link"
+           class="block mt-1 w-full" placeholder="e.g. https://virtualtour.com/example-link" />
       </div>
-      </section>
-     
+    </section>
 
     {{-- Key Information -Section- --}}
     <section class="pb-5">
-
       <x-header-description 
         header="Add key information" 
         description="Please provide further key information such as the price, number of rooms or availability. Remember, more precise the information - more qualified leads!" 
@@ -257,8 +248,58 @@
       
       {{-- Key Infomation --}}
       <div class="pb-4">
-        {{-- price_availble_ online --}}
 
+        <div class="flex flex-wrap gap-2">
+          {{-- Bedroom --}}
+          <div class="pb-4 grow">
+            @error('bedrooms')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label  for="bedrooms" value="{{ __('Bedrooms') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="bedrooms"  id="bedrooms" wire:model="bedrooms" class="block mt-1 w-full" />
+          </div>
+
+          {{-- Bathroom --}}
+          <div class="pb-4 grow">
+            @error('bathrooms')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label  for="bathrooms" value="{{ __('Bathrooms') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="bathrooms"  id="bathrooms" wire:model="bathrooms" class="block mt-1 w-full" />
+          </div>
+
+          {{-- Floor Area --}}
+          <div class="pb-4 grow">
+            @error('floor_area')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label  for="floor_area" value="{{ __('Floor Area (m²)') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="floor_area"  id="floor_area" wire:model="floor_area" class="block mt-1 w-full" />
+          </div>
+          
+          {{-- Unit/Floor Number --}}
+          <div class="pb-4 grow">
+            @error('unit_floor_number')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label  for="unit_floor_number" value="{{ __('Unit/Floor Number') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="unit_floor_number"  id="unit_floor_number" wire:model="unit_floor_number" class="block mt-1 w-full" />
+          </div>
+
+          
+          
+        </div>
+
+
+        {{-- price_availble_ online --}}
         <div class="flex items-middle">
           <div class="flex items-center">
             <x-checkbox id="show_price_online" aria-describedby="show_price_online" wire:model="show_price_online" type="checkbox" value="1" />
@@ -268,8 +309,7 @@
           </div>
         </div>
 
-        {{-- prive_availble_ online --}}
-
+        {{-- price php --}}
         <div class="pt-4 flex gap-2">
           <div class="pb-4 grow">
             @error('price_php')
@@ -447,7 +487,6 @@
         header="Tell users more about your property" 
         description="Why is your property so great? Tell us more about your property so that property seekers can learn even more about your offer." 
       />
-
       
       @if ($hasIndoor = true)
       <div class="py-4">
@@ -455,7 +494,10 @@
         <div class="flex flex-wrap gap-2">
           @foreach ($features as $feat)
           @if ($feat->type == 'indoor')
-          <x-button>{{ $feat->name }}</x-button>
+          <div class="flex items-center pl-4 border-2 bg-slate-800 border-gray-800 rounded-md dark:border-gray-700 grow max-w-[180px]">
+            <x-checkbox id="{{ $feat->name }}" wire:model="features_id" value="{{ $feat->id }}" name="offer_type" />
+            <x-label value="{{ $feat->name }}" for="{{ $feat->name }}" class="w-full py-2 mx-2 text-sm text-white font-medium dark:text-gray-300 rounded-md" />
+          </div>
           @endif
           @endforeach
         </div>
@@ -468,7 +510,10 @@
         <div class="flex flex-wrap gap-2">
           @foreach ($features as $feat)
           @if ($feat->type == 'outdoor')
-          <x-button>{{ $feat->name }}</x-button>
+          <div class="flex items-center pl-4 border-2 bg-slate-800 border-gray-800 rounded-md dark:border-gray-700 grow max-w-[180px]">
+            <x-checkbox id="{{ $feat->name }}" wire:model="features_id" value="{{ $feat->id }}" name="offer_type" />
+            <x-label value="{{ $feat->name }}" for="{{ $feat->name }}" class="w-full py-2 mx-2 text-sm text-white font-medium dark:text-gray-300 rounded-md" />
+          </div>
           @endif
           @endforeach
         </div>

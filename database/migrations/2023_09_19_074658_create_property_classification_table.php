@@ -13,7 +13,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('property_classification', function (Blueprint $table) {
-            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
+            
+            $table->uuid('id')->primary()->unique();
 
             //$table->foreignId('property_type_id')->constrained('property_types');
             $table->uuid('property_type_id', 36);

@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('property_features', function (Blueprint $table) {
-            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
+            $table->uuid('id')->primary()->unique();
 
             $table->uuid('properties_id', 36);
             $table->foreign('properties_id')->references('id')->on('properties')->onDelete('cascade');

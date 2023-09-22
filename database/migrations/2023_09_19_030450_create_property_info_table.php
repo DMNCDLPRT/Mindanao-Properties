@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('property_info', function (Blueprint $table) {
-            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
+            $table->uuid('id')->primary()->unique();
             
             $table->integer('bedrooms')->nullable();
             $table->integer('bathrooms')->nullable();
