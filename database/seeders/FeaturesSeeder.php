@@ -7,6 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
+use Database\Factories\FeaturesFactory;
 
 class FeaturesSeeder extends Seeder
 {
@@ -15,6 +16,7 @@ class FeaturesSeeder extends Seeder
      */
     public function run(): void
     {
+
         $additionalFeatures = [
             ['name' => 'Fireplace', 'type' => 'indoor', 'property_type' => 'House'],
             ['name' => 'Fenced Yard', 'type' => 'outdoor', 'property_type' => 'House'],

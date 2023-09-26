@@ -7,6 +7,7 @@ use App\Models\PropertySubType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Database\Factories\PropertySubTypeFactory;
 
 class SubTypeSeeder extends Seeder
 {
@@ -15,6 +16,9 @@ class SubTypeSeeder extends Seeder
      */
     public function run()
     {
+
+       
+
         $propertySubTypes = [
             'Condominium' => ['condotel', 'other', 'penthouse', 'studio', 'loft'],
             'Commercial' => ['warehouse', 'building', 'offices', 'retail', 'coworking Space'],

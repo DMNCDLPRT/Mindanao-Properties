@@ -6,6 +6,7 @@ use Ramsey\Uuid\Uuid;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\OfferType;
+use Database\Factories\OfferTypeFactory;
 
 class OfferTypeSeeder extends Seeder
 {
@@ -14,6 +15,9 @@ class OfferTypeSeeder extends Seeder
      */
     public function run(): void
     {
+
+      
+
         $offerTypes = [
             ['name' => 'sell'],
             ['name' => 'rent'],
