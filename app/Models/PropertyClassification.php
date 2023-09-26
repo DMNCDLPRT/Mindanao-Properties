@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class PropertyClassification extends Model
 {
     use HasFactory;
+    use HasUuids;
 
     protected $table = 'property_classification';
     protected $primaryKey = 'id';
@@ -15,7 +17,6 @@ class PropertyClassification extends Model
     public $incrementing = false; // This tells Laravel that the primary key is not auto-incrementing.
 
     protected $fillable = [
-        'id',
         'property_type_id',
         'property_sub_type_id',
     ];

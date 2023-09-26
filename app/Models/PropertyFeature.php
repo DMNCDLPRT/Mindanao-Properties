@@ -16,6 +16,12 @@ class PropertyFeature extends Model
     protected $keyType = 'string'; // This specifies the data type of the primary key.
     public $incrementing = false; // This tells Laravel that the primary key is not auto-incrementing.
 
+    protected $fillable = [
+        'id',
+        'properties_id',
+        'feature_id',
+    ];
+
     public function property () {
         return $this->belongsTo(Property::class);
     }

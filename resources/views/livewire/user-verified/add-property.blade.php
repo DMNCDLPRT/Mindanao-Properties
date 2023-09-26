@@ -41,7 +41,7 @@
           </span>
         @enderror
         <x-header-label value=" {{ __('Property Type') }} " />
-        <div class="flex gap-2">
+        <div class="flex flex-wrap gap-2">
           @foreach ($property_type as $type)
           <div class="flex items-center pl-4 border-2 border-gray-400 rounded-md dark:border-gray-700 grow">
             <x-radio name="property_type" id="{{ $type->name }}" value="{{ $type->id }}" wire:model="property_type_id" wire:click="wirePropertyClick('{{ $type->id }}')" />
@@ -66,12 +66,11 @@
           <div class="flex items-center pl-4 border-2 border-gray-400 rounded-md dark:border-gray-700 grow max-w-[200px]">
             <x-radio id="{{ $type->subtype }}" wire:model="subtype_id" value="{{ $type->id }}" name="subtype_id" />
               <x-label value="{{ $type->subtype }}"  for="{{ $type->subtype }}"  class="w-full py-3 ml-2 text-sm font-medium dark:text-gray-300 rounded-md" />
-            </div>
+          </div>
            @endforeach
         </div>
       </div>
       @endif
-      
   
       {{-- Title -Input- --}}
       <div class="pb-4">
@@ -92,7 +91,7 @@
       @enderror
       <div wire:ignore class="pb-4">
         <x-label for="text_area" value="{{ __('Description') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
-        <textarea wire:model="description" value="" id="text_area"></textarea>
+        <textarea wire:model="description" id="text_area"></textarea>
     </div>
     </section>
   
@@ -119,7 +118,7 @@
           <h3 class="mb-5 block text-m font-semibold text-[#07074D]">
             Upload other media
           </h3>
-          <input type="file" name="images" wire:model="img_file_name" id="img_file_name" class="sr-only">
+          <input id="images" type="file" name="images" wire:model="img_file_name" id="img_file_name" class="sr-only" multiple>
           <label for="images" class="relative flex min-h-[100px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-5 text-center">
             <div>
               <span class="mb-1 block text-m font-semibold text-[#07074D]">
@@ -138,26 +137,31 @@
           </label>
           @if ($img_file_name)
           <div class="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8">
+            <div class="flex flex-wrap gap-2">
+              
               @foreach ($img_file_name as $image)
-              <div class="flex items-center justify-between">
-                <img src="{{ $image->temporaryUrl() }}" alt="" height="70" class="p-2 rounded-sm">
-              </div>
-              <div class="flex items-center justify-between bg-[#e7e8ea] p-3 rounded-md">
+              <div class="p-1 max-w-[350px]">
+                <div class="flex items-center justify-between">
+                  <img src="{{ $image->temporaryUrl() }}" alt="" height="70" class="p-2 max-h-[270px] rounded-md">
+                </div>
+                <div class="flex items-center justify-between bg-[#e7e8ea] p-3 rounded-md">
                   <span class="truncate pr-3 text-base font-medium text-[#07074D]">
                     {{ $image->getClientOriginalName() }}
                   </span>
                   <button class="text-[#07074D]" wire:click="removeImage('{{ $image->getFilename() }}')">
-                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M0.279337 0.279338C0.651787 -0.0931121 1.25565 -0.0931121 1.6281 0.279338L9.72066 8.3719C10.0931 8.74435 10.0931 9.34821 9.72066 9.72066C9.34821 10.0931 8.74435 10.0931 8.37190 9.72066L0.279337 1.6281C-0.0931125 1.25565 -0.0931125 0.651788 0.279337 0.279338Z"
-                          fill="currentColor" />
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M0.279337 9.72066C-0.0931125 9.34821 -0.0931125 8.74435 0.279337 8.3719L8.3719 0.279338C8.74435 -0.0931127 9.34821 -0.0931123 9.72066 0.279338C10.0931 0.651787 10.0931 1.25565 9.72066 1.6281L1.6281 9.72066C1.25565 10.0931 0.651787 10.0931 0.279337 9.72066Z"
-                          fill="currentColor" />
-                      </svg>
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M0.279337 0.279338C0.651787 -0.0931121 1.25565 -0.0931121 1.6281 0.279338L9.72066 8.3719C10.0931 8.74435 10.0931 9.34821 9.72066 9.72066C9.34821 10.0931 8.74435 10.0931 8.37190 9.72066L0.279337 1.6281C-0.0931125 1.25565 -0.0931125 0.651788 0.279337 0.279338Z"
+                      fill="currentColor" />
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M0.279337 9.72066C-0.0931125 9.34821 -0.0931125 8.74435 0.279337 8.3719L8.3719 0.279338C8.74435 -0.0931127 9.34821 -0.0931123 9.72066 0.279338C10.0931 0.651787 10.0931 1.25565 9.72066 1.6281L1.6281 9.72066C1.25565 10.0931 0.651787 10.0931 0.279337 9.72066Z"
+                      fill="currentColor" />
+                    </svg>
                   </button>
+                </div>
               </div>
               @endforeach
+            </div>
           </div>
           @endif
         </div>
@@ -166,7 +170,7 @@
   
       {{-- Media --}}
       <div class="pb-4">
-          @error('docs_file_namemedia')
+          @error('docs_file_name')
           <div class="mt-4">
               <span class="text-red-600 mt-5" role="alert">
                   <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
@@ -177,7 +181,7 @@
             <h3 class="mb-5 block text-m font-semibold text-[#07074D]">
                 Upload other media
             </h3>
-            <input type="file" name="docs_file_name" wire:model="docs_file_name" id="docs_file_name" class="sr-only">
+            <input id="media" type="file" name="docs_file_name" wire:model="docs_file_name" id="docs_file_name" class="sr-only" multiple>
             <label for="media" class="relative flex min-h-[100px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-5 text-center">
               <div>
                 <span class="mb-1 block text-m font-semibold text-[#07074D]">
@@ -198,23 +202,31 @@
             @if ($docs_file_name)
             <div class="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8">
               <div class="flex items-center justify-between">
-                <img src="{{ $docs_file_name->temporaryUrl() }}" alt="" height="70" class="p-2 rounded-sm">
-              </div>
-              <div class="flex items-center justify-between bg-[#e7e8ea] p-3 rounded-md">
-                  <span class="truncate pr-3 text-base font-medium text-[#07074D]">
-                    {{ $docs_file_name->getClientOriginalName() }}
-                  </span>
-                  <button class="text-[#07074D]" wire:click="removeMedia">
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M0.279337 0.279338C0.651787 -0.0931121 1.25565 -0.0931121 1.6281 0.279338L9.72066 8.3719C10.0931 8.74435 10.0931 9.34821 9.72066 9.72066C9.34821 10.0931 8.74435 10.0931 8.3719 9.72066L0.279337 1.6281C-0.0931125 1.25565 -0.0931125 0.651788 0.279337 0.279338Z"
-                        fill="currentColor" />
-                      <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M0.279337 9.72066C-0.0931125 9.34821 -0.0931125 8.74435 0.279337 8.3719L8.3719 0.279338C8.74435 -0.0931127 9.34821 -0.0931123 9.72066 0.279338C10.0931 0.651787 10.0931 1.25565 9.72066 1.6281L1.6281 9.72066C1.25565 10.0931 0.651787 10.0931 0.279337 9.72066Z"
-                        fill="currentColor" />
-                    </svg>
-                 </button>
+                <div class="flex flex-wrap gap-2">
+              
+                  @foreach ($docs_file_name as $docs)
+                  <div class="p-1 w-full">
+                    <div class="flex items-center justify-between">
+                      
+                    </div>
+                    <div class="flex items-center justify-between bg-[#e7e8ea] p-3 rounded">
+                      <span class="truncate pr-3 text-base font-medium text-[#07074D]">
+                        {{ $docs->getClientOriginalName() }}
+                      </span>
+                      <button class="text-[#07074D]" wire:click="removeDoc('{{ $docs->getFilename() }}')">
+                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M0.279337 0.279338C0.651787 -0.0931121 1.25565 -0.0931121 1.6281 0.279338L9.72066 8.3719C10.0931 8.74435 10.0931 9.34821 9.72066 9.72066C9.34821 10.0931 8.74435 10.0931 8.37190 9.72066L0.279337 1.6281C-0.0931125 1.25565 -0.0931125 0.651788 0.279337 0.279338Z"
+                          fill="currentColor" />
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M0.279337 9.72066C-0.0931125 9.34821 -0.0931125 8.74435 0.279337 8.3719L8.3719 0.279338C8.74435 -0.0931127 9.34821 -0.0931123 9.72066 0.279338C10.0931 0.651787 10.0931 1.25565 9.72066 1.6281L1.6281 9.72066C1.25565 10.0931 0.651787 10.0931 0.279337 9.72066Z"
+                          fill="currentColor" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  @endforeach
+                </div>
               </div>
             </div>
             @endif
@@ -245,35 +257,49 @@
         header="Add key information" 
         description="Please provide further key information such as the price, number of rooms or availability. Remember, more precise the information - more qualified leads!" 
       />
-      
+      @if ($propertyType)
       {{-- Key Infomation --}}
       <div class="pb-4">
-
         <div class="flex flex-wrap gap-2">
-          {{-- Bedroom --}}
-          <div class="pb-4 grow">
-            @error('bedrooms')
-            <span class="m" role="alert">
-              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
-            </span>
-            @enderror
-            <x-label  for="bedrooms" value="{{ __('Bedrooms') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
-            <x-input  type="text"  name="bedrooms"  id="bedrooms" wire:model="bedrooms" class="block mt-1 w-full" />
-          </div>
-
+          @if ($propertyType === 'Condominium' || $propertyType === 'Apartment' || $propertyType === 'House')
           {{-- Bathroom --}}
-          <div class="pb-4 grow">
+          <div class="pb-4">
             @error('bathrooms')
             <span class="m" role="alert">
               <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
             </span>
             @enderror
-            <x-label  for="bathrooms" value="{{ __('Bathrooms') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
-            <x-input  type="text"  name="bathrooms"  id="bathrooms" wire:model="bathrooms" class="block mt-1 w-full" />
+            <x-label for="bathrooms" value="{{ __('Bathrooms') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500"/>
+            <select name="bathrooms"  id="bathrooms" wire:model="bathrooms" autocomplete="bathrooms" class="block mt-1 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+              <option selected disabled>Select No. of Bathrooms</option>
+              <?php for ($i=0; $i<=5; $i++) { ?>
+              <option value="<?php echo $i;?>"><?php echo $i;?></option>
+              <?php } ?>
+              <option value="more than 20 victims">more than 6 bathrooms</option>
+            </select>
           </div>
+          
+          {{-- Bedroom --}}
+          <div class="pb-4 ">
+            @error('bedrooms')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label for="bedrooms" value="{{ __('Bedrooms') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500"/>
+            <select name="bedrooms"  id="bedrooms" wire:model="bedrooms" autocomplete="bedrooms" class="block mt-1 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+              <option selected disabled>Select No. of Bedrooms</option>
+              <?php for ($i=0; $i<=5; $i++) { ?>
+              <option value="<?php echo $i;?>"><?php echo $i;?></option>
+              <?php } ?>
+              <option value="6">more than 6 Bedrooms</option>
+            </select>
+          </div>
+          @endif
 
           {{-- Floor Area --}}
-          <div class="pb-4 grow">
+          @if ($propertyType === 'Condominium' || $propertyType === 'Apartment' || $propertyType === 'House' || $propertyType === 'Commercial')
+          <div class="pb-4">
             @error('floor_area')
             <span class="m" role="alert">
               <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
@@ -282,7 +308,12 @@
             <x-label  for="floor_area" value="{{ __('Floor Area (m²)') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
             <x-input  type="text"  name="floor_area"  id="floor_area" wire:model="floor_area" class="block mt-1 w-full" />
           </div>
+          @endif
+        </div>
+    
           
+        @if ($propertyType === 'Condominium')
+        <div class="flex flex-wrap gap-2">
           {{-- Unit/Floor Number --}}
           <div class="pb-4 grow">
             @error('unit_floor_number')
@@ -294,69 +325,309 @@
             <x-input  type="text"  name="unit_floor_number"  id="unit_floor_number" wire:model="unit_floor_number" class="block mt-1 w-full" />
           </div>
 
-          
-          
-        </div>
-
-
-        {{-- price_availble_ online --}}
-        <div class="flex items-middle">
-          <div class="flex items-center">
-            <x-checkbox id="show_price_online" aria-describedby="show_price_online" wire:model="show_price_online" type="checkbox" value="1" />
-          </div>
-          <div class="text-sm ml-3">
-            <label for="show_price_online" class="font-medium">Show price online</label>
-          </div>
-        </div>
-
-        {{-- price php --}}
-        <div class="pt-4 flex gap-2">
+          {{-- Condominium Name --}}
           <div class="pb-4 grow">
-            @error('price_php')
+            @error('condominium_name')
             <span class="m" role="alert">
               <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
             </span>
             @enderror
-            <x-label 
-              for="price_php"
-              value="{{ __('Price (₱)') }}"
-              class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" 
-            />
-            <x-input 
-              type="text" 
-              name="price_php" 
-              id="price_php"
-              wire:model="price_php"
-              class="block mt-1 w-full" 
-            />
+            <x-label  for="condominium_name" value="{{ __('Condominium Name') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="condominium_name"  id="condominium_name" wire:model="condominium_name" class="block mt-1 w-full" />
           </div>
+
+          {{-- floor  --}}
           <div class="pb-4 grow">
-            @error('price_usd')
+            @error('floor')
             <span class="m" role="alert">
               <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
             </span>
             @enderror
-            <x-label 
-              for="price_usd"
-              value="{{ __('Price ($)') }}"
-              class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" 
-            />
-            <x-input 
-              type="text" 
-              name="price_usd" 
-              id="price_usd"
-              wire:model="price_usd"
-              class="block mt-1 w-full" 
-            />
+            <x-label  for="floor" value="{{ __('Floor') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="floor"  id="floor" wire:model="floor" class="block mt-1 w-full" />
+          </div>
+
+          {{-- tower_name/number  --}}
+          <div class="pb-4 grow">
+            @error('tower_name_number')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label  for="tower_name_number" value="{{ __('Tower Name/Number') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="tower_name_number"  id="tower_name_number" wire:model="tower_name_number" class="block mt-1 w-full" />
+          </div>
+        </div>
+        @endif
+
+        {{-- car_spaces --}}
+        <div class="pb-4">
+          @error('car_spaces')
+          <span class="m" role="alert">
+            <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+          </span>
+          @enderror
+          <x-label  for="car_spaces" value="{{ __('Car Spaces') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+          <x-input  type="text"  name="car_spaces"  id="car_spaces" wire:model="car_spaces" class="block mt-1 " />
+        </div>
+
+        {{-- Fully Furnished --}}
+        @if ($propertyType !== 'Land')
+        <div class="pb-4 grow">
+          @error('fully_furnished')
+          <span class="m" role="alert">
+            <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+          </span>
+          @enderror
+          <x-label  for="Yes" value="{{ __('Fully Furnished') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+          <div class="flex flex-wrap gap-4">
+            <div class="flex items-center pl-4 border-2 border-gray-400 rounded-md dark:border-gray-700 grow max-w-[200px]">
+              <x-radio id="yes" wire:model="fully_furnished" value="{{ __('Yes')}}" name="fully_furnished" />
+              <x-label value="{{ __('Yes')}}"  for="yes"  class="w-full py-2 ml-2 text-sm font-medium dark:text-gray-300 rounded-md" />
+            </div>
+            <div class="flex items-center pl-4 border-2 border-gray-400 rounded-md dark:border-gray-700 grow max-w-[200px]">
+              <x-radio id="no" wire:model="fully_furnished" value="{{ __('No')}}" name="fully_furnished" />
+              <x-label value="{{ __('No')}}"  for="no"  class="w-full py-2 ml-2 text-sm font-medium dark:text-gray-300 rounded-md" />
+            </div>
+            @if ($propertyType !== 'Apartment')    
+            <div class="flex items-center pl-4 border-2 border-gray-400 rounded-md dark:border-gray-700 grow max-w-[200px]">
+              <x-radio id="semi" wire:model="fully_furnished" value="{{ __('Semi')}}" name="fully_furnished" />
+              <x-label value="{{ __('Semi')}}"  for="semi"  class="w-full py-2 ml-2 text-sm font-medium dark:text-gray-300 rounded-md" />
+            </div>
+            @endif
+          </div>
+        </div>
+        @endif
+        
+        {{-- Classification --}}
+        <div class="pb-4 grow">
+          @error('classification')
+          <span class="m" role="alert">
+            <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+          </span>
+          @enderror
+          <x-label  for="Brand New" value="{{ __('Classification') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+          <div class="flex flex-wrap gap-4">
+            <div class="flex items-center pl-4 border-2 border-gray-400 rounded-md dark:border-gray-700 grow max-w-[200px]">
+              <x-radio id="brand_new" wire:model="classification" value="{{ __('Resale')}}" name="classification" />
+              <x-label value="{{ __('Resale')}}"  for="brand_new"  class="w-full py-2 ml-2 text-sm font-medium dark:text-gray-300 rounded-md" />
+            </div>
+            <div class="flex items-center pl-4 border-2 border-gray-400 rounded-md dark:border-gray-700 grow max-w-[200px]">
+              <x-radio id="resale" wire:model="classification" value="Resale" name="classification" />
+              <x-label value="Resale"  for="resale"  class="w-full py-2 ml-2 text-sm font-medium dark:text-gray-300 rounded-md" />
+            </div>
           </div>
         </div>
 
+        <div class="flex flex-wrap gap-4">
+          {{-- sqm_range --}}
+          <div class="pb-4 grow">
+            @error('sqm_range')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label  for="sqm_range" value="{{ __('Sqm Range') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="sqm_range"  id="sqm_range" wire:model="sqm_range" class="block mt-1 w-full" />
+          </div>
+
+          @if ($propertyType === 'Condominium' || $propertyType === 'Apartment' || $propertyType === 'Commercial')  
+          {{-- Total Floors --}}
+          <div class="pb-4 grow">
+            @error('total_floors')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label  for="total_floors" value="{{ __('Total Floors') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="total_floors"  id="total_floors" wire:model="total_floors" class="block mt-1 w-full" />
+          </div>
+          @endif
+
+          {{-- Price Range --}}
+          <div class="pb-4 grow">
+            @error('price_range')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label  for="price_range" value="{{ __('Price Range') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="price_range"  id="price_range" wire:model="price_range" class="block mt-1 w-full" />
+          </div>
+
+          {{-- Price Conditions --}}
+          <div class="pb-4 grow">
+            @error('price_conditions')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label  for="price_conditions" value="{{ __('Price Conditions') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="price_conditions"  id="price_conditions" wire:model="price_conditions" class="block mt-1 w-full" />
+          </div>
+
+          {{-- Build Year --}}
+          <div class="pb-4 grow">
+            @error('build_year')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label  for="build_year" value="{{ __('Build Year') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="date"  name="build_year"  id="build_year" wire:model="build_year" class="block mt-1 w-full " />
+          </div>
+
+          @if ($propertyType === 'Condominium' || $propertyType === 'Land' || $propertyType === 'House' || $propertyType === 'Commercial')
+          {{-- Deposit / Bond --}}
+          <div class="pb-4 ">
+            @error('deposit_bond')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label  for="deposit_bond" value="{{ __('Deposit / Bond') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="deposit_bond"  id="deposit_bond" wire:model="deposit_bond" class="block mt-1 " />
+          </div> 
+          @endif
+          
+          @if ($propertyType === 'Condominium' || $propertyType === 'Land' || $propertyType === 'House' || $propertyType === 'Commercial')
+          {{-- Rooms Total --}}
+          <div class="pb-4">
+            @error('rooms_total')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label  for="rooms_total" value="{{ __('Rooms Total') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="rooms_total"  id="rooms_total" wire:model="rooms_total" class="block mt-1 w-full" />
+          </div>
+          @endif
+
+          @if ($propertyType === 'Commercial' || $propertyType === 'house' || $propertyType === 'Land')
+          {{-- Land Size (m²) --}}
+          <div class="pb-4">
+            @error('land_size')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label  for="land_size" value="{{ __('Land Size (m²)') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="land_size"  id="land_size" wire:model="deposit_bond" class="block mt-1 w-full" />
+          </div>
+          @endif
+
+          @if ($propertyType === 'Commercial')  
+          {{-- Building name --}}
+          <div class="pb-4 grow">
+            @error('building_name')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label  for="building_name" value="{{ __('Building name') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="building_name"  id="building_name" wire:model="deposit_bond" class="block mt-1 w-full" />
+          </div>
+          @endif
+
+          @if ($propertyType === 'Commercial' || $propertyType === 'Apartment')
+          <div class="flex flex-wrap gap-4">
+            {{-- Block and Lot/Unit/Floor Number --}}
+            <div class="pb-4">
+              @error('block_lot_unit_floor')
+              <span class="m" role="alert">
+                <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+              </span>
+              @enderror
+              <x-label  for="block_lot_unit_floor" value="{{ __('Block and Lot/Unit/Floor Number') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+              <x-input  type="text"  name="block_lot_unit_floor"  id="block_lot_unit_floor" wire:model="block_lot_unit_floor" class="block mt-1 w-full" />
+            </div>
+          </div>
+          @endif
+        </div>
+
+        @if ($propertyType === 'Land' || $propertyType === 'House' || $propertyType === 'Apartment')
+        <div class="flex flex-wrap gap-4"> 
+        {{-- Deposit / Bond --}}
+          <div class="pb-4 grow">
+            @error('deposit_bond')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label  for="deposit_bond" value="{{ __('Deposit / Bond') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="deposit_bond"  id="deposit_bond" wire:model="deposit_bond" class="block mt-1 w-full" />
+          </div> 
+
+            {{-- Subdivision Name --}}
+          <div class="pb-4 grow">
+            @error('subdivision_name')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+            @enderror
+            <x-label  for="subdivision_name" value="{{ __('Subdivision Name') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
+            <x-input  type="text"  name="subdivision_name"  id="subdivision_name" wire:model="subdivision_name" class="block mt-1 w-full" />
+          </div> 
+        </div>
+        @endif
+      </div>
+      @endif
+
+      {{-- price_availble_ online --}}
+      <div class="flex items-middle">
+        <div class="flex items-center">
+          <x-checkbox id="show_price_online" aria-describedby="show_price_online" wire:model="show_price_online" type="checkbox" value="1" />
+        </div>
+        <div class="text-sm ml-3">
+          <label for="show_price_online" class="font-medium">Show price online</label>
+        </div>
+      </div>
+      {{-- price php --}}
+      <div class="pt-4 flex gap-2">
+        <div class="pb-4 grow">
+          @error('price_php')
+          <span class="m" role="alert">
+            <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+          </span>
+          @enderror
+          <x-label 
+            for="price_php"
+            value="{{ __('Price (₱)') }}"
+            class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" 
+          />
+          <x-input 
+            type="text" 
+            name="price_php" 
+            id="price_php"
+            wire:model="price_php"
+            class="block mt-1 w-full" 
+          />
+        </div>
+        <div class="pb-4 grow">
+          @error('price_usd')
+          <span class="m" role="alert">
+            <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+          </span>
+          @enderror
+          <x-label 
+            for="price_usd"
+            value="{{ __('Price ($)') }}"
+            class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" 
+          />
+          <x-input 
+            type="text" 
+            name="price_usd" 
+            id="price_usd"
+            wire:model="price_usd"
+            class="block mt-1 w-full" 
+          />
+        </div>
         <div class="pb-4 grow">
           @error('available_from')
             <span class="m" role="alert">
               <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
             </span>
-            @enderror
+          @enderror
           <x-label 
             for="available_from"
             value="{{ __('Available from') }}"
@@ -370,7 +641,7 @@
             class="block mt-1 w-full" 
           />
         </div>
-
+      </div>
         <div class="pb-4 grow">
           @error('object_id')
           <span class="m" role="alert">
@@ -390,93 +661,77 @@
             class="block mt-1 w-full" 
           />
         </div>
-      </div>
     </section>
     {{-- Key Information -End Section- --}}
 
-    {{-- Where the property is located -Section- --}}
+    {{-- Location-Section- --}}
     <section class="pb-5">
       <x-header-description 
         header="Where is your property located?" 
         description="For house hunters, location is everything! Give us as much information about the location of your property as you can so that users can find property easily." 
       />
 
-      {{-- Key Infomation --}}
-      <div wire:ignore class="pb-4">
+      <div wire:ignore>
         <div class="mt-4">
           <x-label for="region" value="{{ __('Region') }}" />
-          <input  type="hidden"  name="region" wire:model="region" />
-          <x-select  id="region" autocomplete="region" />
+          <input type="hidden" name="region" value="kitaotao" wire:model="region" autocomplete="region"/>
+          <x-select id="region" autocomplete="region"></x-select>
         </div>
 
         <div class="mt-4">
-          <x-label for="province"  value="{{ __('Province') }}" />
-          <input type="hidden" name="province" wire:model="province" />
-          <x-select id="province" autofocus />
-          </select>
+            <x-label for="province" value="{{ __('Province') }}" />
+            <input type="hidden" name="province" wire:model="province" />
+            <x-select id="province" autocomplete="province"></x-select>
         </div>
 
         <div class="mt-4">
-          <x-label  for="city" value="{{ __('City') }}" />
-          <input type="hidden" name="city" wire:model="city"/>
-          <x-select id="city" autofocus />
+            <x-label for="city" value="{{ __('City') }}" />
+            <input type="hidden" name="city" wire:model="city"/>
+            <x-select id="city" ></x-select>
         </div>
 
         <div class="mt-4">
-          <x-label  for="barangay" value="{{ __('Barangay') }}" />
-          <input  type="hidden"  name="barangay" wire:model="barangay"/>
-          <x-select id="barangay" autofocus />
-        </div>
-        
-        <div class="mt-4">
-          <x-label 
-            for="address" 
-            value="{{ __('Address') }}" 
-          />
-          <x-input 
-            type="text" 
-            name="address" 
-            id="address" 
-            wire:model="address" 
-            class="block mt-1 w-full" 
-            placeholder="Enter street name and number" 
-            autocomplete="address"
-          />
-        </div>
-      
-        <div class="flex gap-2">
-          <div class="mt-4 grow">
-              <x-label 
-                for="latitude" 
-                value="{{ __('Latitude') }}" 
-              />
-              <x-input 
-                type="text" 
-                name="latitude"
-                id="latitude"
-                wire:model="latitude" 
-                class="block mt-1 w-full" 
-                />
-          </div>
-          <div class="mt-4 grow">
-              <x-label 
-                for="longitude" 
-                value="{{ __('Longitude') }}" 
-              />
-              <x-input 
-                type="text" 
-                name="longitude" 
-                id="longitude"
-                wire:model="longitude" 
-                class="block mt-1 w-full" 
-             />
-          </div>
-        </div>
-  
-        <div wire:ignore class="mt-4">
-          <div id="map" style="width: 100%; height: 400px;"></div>
+            <x-label for="barangay" value="{{ __('Barangay') }}" />
+            <input type="hidden" name="barangay" wire:model="barangay"/>
+            <x-select id="barangay" autocomplete="barangay"></x-select>
         </div>
       </div>
+        
+      <div class="mt-4">
+        @error('address')
+          <span class="m" role="alert">
+            <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+          </span>
+        @enderror
+        <x-label for="address" value="{{ __('Address') }}" />
+        <x-input type="text"  name="address" id="address" wire:model="address" class="block mt-1 w-full" placeholder="Enter street name and number" autocomplete="address"/>
+      </div>
+    
+      <div class="flex gap-2">
+        <div class="mt-4 grow">
+          @error('latitude')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+          @enderror
+            <x-label for="latitude"   value="{{ __('Latitude') }}" />
+            <x-input type="text" name="latitude" id="latitude" wire:model="latitude" class="block mt-1 w-full" />
+        </div>
+        <div class="mt-4 grow">
+          @error('address')
+            <span class="m" role="alert">
+              <strong class="mt-4 text-sm text-red-600"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</strong>
+            </span>
+          @enderror
+            <x-label for="longitude" value="{{ __('Longitude') }}" />
+            <x-input type="text" name="longitude" id="longitude" wire:model="longitude" class="block mt-1 w-full" />
+        </div>
+      </div>
+
+      <div wire:ignore class="mt-4">
+        <div id="map" style="width: 100%; height: 400px;"></div>
+      </div>
+
     </section>
     {{-- Location -End Section- --}}
 
@@ -527,10 +782,10 @@
     {{-- Contact Details -Section- --}}
     {{-- Key Infomation --}}
     <section class="pb-5">
-        <x-header-description 
-          header="Please review your contact details" 
-          description="Make sure your details are updated so our users can easily contact you at the right channel." 
-        />
+      <x-header-description 
+        header="Please review your contact details" 
+        description="Make sure your details are updated so our users can easily contact you at the right channel." 
+      />
       <div class="p-4 border rounded">
         <div class="pb-4 flex items-center border-b">
           <div class="shrink-0  mr-3">
@@ -588,13 +843,25 @@
         </div>
       </div>
     </section>
+    @if(session()->has('message'))
+    <div class="bg-gray-800 text-sm text-white rounded-md shadow-lg dark:bg-gray-900 mt-3" id="output" role="alert">
+      <div class="flex p-4">
+        {{ session()->get('message') }}
+        <div class="ml-auto">
+          <button type="button" id="onClickOutput" class="inline-flex flex-shrink-0 justify-center items-center h-4 w-4 rounded-md text-white/[.5] hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-gray-600 transition-all text-sm dark:focus:ring-offset-gray-900 dark:focus:ring-gray-800">
+            <span class="sr-only">Close</span>
+            <svg class="w-3.5 h-3.5" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0.92524 0.687069C1.126 0.486219 1.39823 0.373377 1.68209 0.373377C1.96597 0.373377 2.2382 0.486219 2.43894 0.687069L8.10514 6.35813L13.7714 0.687069C13.8701 0.584748 13.9882 0.503105 14.1188 0.446962C14.2494 0.39082 14.3899 0.361248 14.5321 0.360026C14.6742 0.358783 14.8151 0.38589 14.9468 0.439762C15.0782 0.493633 15.1977 0.573197 15.2983 0.673783C15.3987 0.774389 15.4784 0.894026 15.5321 1.02568C15.5859 1.15736 15.6131 1.29845 15.6118 1.44071C15.6105 1.58297 15.5809 1.72357 15.5248 1.85428C15.4688 1.98499 15.3872 2.10324 15.2851 2.20206L9.61883 7.87312L15.2851 13.5441C15.4801 13.7462 15.588 14.0168 15.5854 14.2977C15.5831 14.5787 15.4705 14.8474 15.272 15.046C15.0735 15.2449 14.805 15.3574 14.5244 15.3599C14.2437 15.3623 13.9733 15.2543 13.7714 15.0591L8.10514 9.38812L2.43894 15.0591C2.23704 15.2543 1.96663 15.3623 1.68594 15.3599C1.40526 15.3574 1.13677 15.2449 0.938279 15.046C0.739807 14.8474 0.627232 14.5787 0.624791 14.2977C0.62235 14.0168 0.730236 13.7462 0.92524 13.5441L6.59144 7.87312L0.92524 2.20206C0.724562 2.00115 0.611816 1.72867 0.611816 1.44457C0.611816 1.16047 0.724562 0.887983 0.92524 0.687069Z" fill="currentColor"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    @endif
 
-    {{-- HERE map API -script-  --}}
     <div wire:ignore>
       <script type="text/javascript" src="{{ asset('js/here-map.js') }}"> </script>
-
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
       <script>
         // Initialize TinyMCE
         tinymce.init({
@@ -611,20 +878,10 @@
             }
         });
       </script>
-
-      {{-- <script>
-        $( "#onclickFile" ).click(function() {
-          $( "#output" ).slideUp();
-        });
-      </script> --}}
-
-
     </div>
-    {{-- HERE map API -script- -End- --}}
-
     {{-- Submit Button --}}
     <x-slot name="actions">
-      <x-button wire:loading.attr="disabled" onclick="return confirm('Confirm Report Incident?');">
+      <x-button wire:loading.attr="disabled" onclick="return confirm('Add Property?');">
         {{ __('add property') }}
       </x-button>   
     </x-slot>
