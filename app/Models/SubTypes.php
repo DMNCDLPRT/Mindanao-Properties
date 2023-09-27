@@ -25,4 +25,8 @@ class SubTypes extends Model
         return $this->hasOne(PropertyType::class, 'property_type_id');
     }
 
+    public function type () {
+        return $this->belongsTo(PropertyType::class);
+    }
+
 }

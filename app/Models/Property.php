@@ -20,6 +20,12 @@ class Property extends Model
     protected $fillable = [
         'title',
         'description',
+        'user_id',
+        'offer_type_id',
+        'property_classification_id',
+        'property_location_id',
+        'property_info_id',
+        'property_multimedia_assets_id',
     ];
 
     public function user()
@@ -48,9 +54,9 @@ class Property extends Model
     }
 
     public function multimediaAssets()
-    {
-        return $this->belongsTo(MultimediaAssets::class, 'property_multimedia_assets_id', 'id');
-    }
+{
+    return $this->belongsTo(MultimediaAssets::class, 'property_multimedia_assets_id', 'id');
+}
 
     public function features () {
         return $this->hasMany(PropertyFeature::class);

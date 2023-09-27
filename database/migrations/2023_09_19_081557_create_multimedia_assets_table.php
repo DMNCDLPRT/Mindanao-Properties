@@ -16,12 +16,10 @@ return new class extends Migration
             $table->uuid('id')->primary()->unique();
 
             $table->uuid('property_images_id', 36);
-            $table->foreign('property_images_id')->references('id')->on('property_images')->onDelete('cascade');
+            $table->foreign('property_images_id')->references('id')->on('property_images');
 
             $table->uuid('property_documents_id', 36);
-            $table->foreign('property_documents_id')->references('id')->on('property_documents')->onDelete('cascade');
-
-            
+            $table->foreign('property_documents_id')->references('id')->on('property_documents');
 
             $table->timestamps();
         });

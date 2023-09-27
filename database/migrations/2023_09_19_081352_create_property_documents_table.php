@@ -14,9 +14,7 @@ return new class extends Migration
     {
         Schema::create('property_documents', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique();
-
-            $table->string('docs_file_name', 255)->nullable(false);
-
+            $table->json('docs_file_name', 255)->nullable();
             $table->timestamps();
         });
     }

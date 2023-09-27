@@ -17,6 +17,8 @@ class MultimediaAssets extends Model
     public $incrementing = false; // This tells Laravel that the primary key is not auto-incrementing.
 
     protected $fillable = [
+        'property_images_id',
+        'property_documents_id',
         'yt_link', // youtube link
         'vt_link', // vitual tour link
     ];
@@ -27,6 +29,11 @@ class MultimediaAssets extends Model
 
     public function documents () {
         return $this->hasMany(PropertyDocuments::class, 'property_documents_id');
+    }
+
+    public function property()
+    {
+        return $this->belongsTo(Property::class);
     }
 
 }

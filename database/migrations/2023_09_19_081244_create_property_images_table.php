@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('property_images', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique();
-            $table->string('img_file_name', 255)->nullable(false);
+            $table->text('img_file_name');
             $table->timestamps();
         });
     }

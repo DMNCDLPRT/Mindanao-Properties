@@ -21,6 +21,6 @@ class PropertyImages extends Model
     ];
 
     public function multimedia_assets () {
-        return $this->belongsTo(MultimediaAssets::class, 'property_images_id');
+        return $this->belongsTo(MultimediaAssets::class);
     }
 }
