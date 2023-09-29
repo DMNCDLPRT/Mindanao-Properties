@@ -22,7 +22,7 @@
         
         <x-front.auth-nav />
         @livewire('components.search')
-        @livewire('components.properties')
+        @livewire('components.properties', ['propertieslivewirecontroller' => $allProperties])
     
         @livewire('components.footer')
         

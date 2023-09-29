@@ -3,9 +3,11 @@
     <div class="flex flex-wrap lg:space-x-12">
 
         <div class="lg:w-3/5">
-            <h1 class="mb-4 text-2xl font-medium text-center text-gray-900 lg:text-3xl">Lorem ipsum dolor
-                sit amet,
-                consectetur adipFriuli-Venezia Giulia</h1>
+
+         
+            Property ID: {{ $property->id }}
+            
+            <h1 class="mb-4 text-2xl font-medium text-center text-gray-900 lg:text-3xl">{{$property->title}}</h1>
 
             {{-- property image display div --}}
             <div class="img-display">
@@ -52,80 +54,80 @@
                 </div>
             </div>
             <div class="mt-4">
-                <h4 class="text-2xl font-bold">Description</h4>
-                <p class="my-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
-                    asperiores facere
-                    maxime libero alias enim recusandae quibusdam laborum. Fugiat aspernatur velit optio
-                    neque
-                    quos temporibus autem delectus fuga tempora unde! Lorem ipsum dolor sit amet
-                    consectetur
-                    adipisicing elit. Saepe asperiores facere
-                    maxime libero alias enim recusandae quibusdam laborum. Fugiat aspernatur velit optio
-                    neque
-                    quos temporibus autem delectus fuga tempora unde!.</p>
-                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
-                    asperiores facere
-                    maxime libero alias enim recusandae quibusdam laborum. Fugiat aspernatur velit optio
-                    neque
-                    quos temporibus autem delectus fuga tempora unde! Lorem ipsum dolor sit amet
-                    consectetur
-                    adipisicing elit. Saepe asperiores facere
-                    maxime libero alias enim recusandae quibusdam laborum. Fugiat aspernatur velit optio
-                    neque
-                    quos temporibus autem delectus fuga tempora unde!.</p>
+                <div>
+                    {{-- div for features --}}
 
-                <div class="flex flex-wrap ">
-                    <div class="w-full p-2 lg:w-1/2">
-                        <div class="flex items-center h-full p-4 bg-gray-100 rounded">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3 text-green-600" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                    d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                            </svg>
-                            <span class="font-medium">4 Beds</span>
+                    <div class="flex flex-wrap ">
+                        <div class="w-full p-2 lg:w-1/2">
+                            <div class="flex items-center h-full p-4 bg-gray-100 rounded">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3 text-green-600" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                                </svg>
+                                <span class="font-medium">4 Beds</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/2">
-                        <div class="flex items-center h-full p-4 bg-gray-100 rounded">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3 text-green-600" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                    d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                            </svg>
-                            <span class="font-medium">Area 550 sqft</span>
+                        <div class="w-full p-2 lg:w-1/2">
+                            <div class="flex items-center h-full p-4 bg-gray-100 rounded">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3 text-green-600" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                                </svg>
+                                <span class="font-medium">Area 550 sqft</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/2">
-                        <div class="flex items-center h-full p-4 bg-gray-100 rounded">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3 text-green-600" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                    d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                            </svg>
-                            <span class="font-medium">Bedroom 6</span>
+                        <div class="w-full p-2 lg:w-1/2">
+                            <div class="flex items-center h-full p-4 bg-gray-100 rounded">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3 text-green-600" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                                </svg>
+                                <span class="font-medium">Bedroom 6</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/2">
-                        <div class="flex items-center h-full p-4 bg-gray-100 rounded">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3 text-green-600" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                    d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                            </svg>
-                            <span class="font-medium">Kitchen 2</span>
+                        <div class="w-full p-2 lg:w-1/2">
+                            <div class="flex items-center h-full p-4 bg-gray-100 rounded">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3 text-green-600" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                                </svg>
+                                <span class="font-medium">Kitchen 2</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
-                    asperiores facere
-                    maxime libero alias enim recusandae quibusdam laborum. Fugiat aspernatur velit optio
-                    neque
-                    quos temporibus autem delectus fuga tempora unde! Lorem ipsum dolor sit amet
-                    consectetur
-                    adipisicing elit. Saepe asperiores facere
-                    maxime libero alias enim recusandae quibusdam laborum. Fugiat aspernatur velit optio
-                    neque
-                    quos temporibus autem delectus fuga tempora unde!.</p>
+
+                <div>
+                    {{-- div for description --}}
+                    <h4 class="text-2xl font-bold">Description</h4>
+                    <p class="my-4">{{$property->description}}</p>
+
+                </div>
+
+                <div>
+                    {{-- features --}}
+                    @foreach ($property->features as $propertyFeature)
+
+                    {{dd($propertyFeature)}}
+                        
+                        <div class="w-full p-2 lg:w-1/2">
+                            <div class="flex items-center h-full p-4 bg-gray-100 rounded">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3 text-green-600" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                                </svg>
+                                <span class="font-medium">Kitchen 2</span>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+
             </div>
         </div>
 
@@ -144,7 +146,7 @@
                     </div>
                     <!-- Lister Details -->
                     <div>
-                        <h5 class="pt-4 mb-2 text-lg font-normal">Lister Name</h5>
+                        <h5 class="pt-4 mb-2 text-lg font-normal">{{$property->user->name}}</h5>
                         <p class="font-light text-base">Contact Person</p>
                     </div>
 

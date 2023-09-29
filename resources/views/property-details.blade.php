@@ -29,8 +29,10 @@
 
 <body>
     <x-front.auth-nav />
-    {{-- @livewire('components.search') --}}
-    @livewire('components.property-details')
+    @livewire('components.property-details', ['property' => $property])
+    {{-- @livewire('components.property-details') --}}
+
+
     @livewire('components.footer')
 </body>
 
