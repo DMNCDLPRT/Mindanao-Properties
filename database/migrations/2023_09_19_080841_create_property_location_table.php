@@ -15,13 +15,13 @@ return new class extends Migration
         Schema::create('property_location', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique();
 
-            $table->string('region', 30)->nullable();
-            $table->string('province', 30)->nullable();        
-            $table->string('city', 40)->nullable();            
-            $table->string('barangay', 60)->nullable();   
-            $table->string('address', 255)->nullable();       
-            $table->decimal('longitude', 9, 6)->nullable();
-            $table->decimal('latitude', 9, 6)->nullable();
+            $table->string('display_name', 255);
+            $table->string('province', 30);        
+            $table->string('city', 40);            
+            $table->string('barangay', 60);   
+            $table->string('address', 255);       
+            $table->decimal('longitude', 3, 14);
+            $table->decimal('latitude', 4, 14);
             $table->timestamps();
         });
     }

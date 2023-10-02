@@ -13,6 +13,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0",
+        "mallardduck/blade-boxicons": "^2.4",
         "ramsey/uuid": "^4.7",
         "tinymce/tinymce": "^6.7"
     },

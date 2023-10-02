@@ -61,6 +61,7 @@ class AddProperty extends Component
     public $building_name;
     public $block_lot_unit_floor;
     public $size;
+    public $subdivision_name;
     public $show_price_online;
     public $price_php;
     public $price_usd;
@@ -68,16 +69,16 @@ class AddProperty extends Component
     public $object_id;
 
     /* Location */
-    public $region;
     public $province;
     public $city;
     public $barangay;
+    public $display_name;
     public $address;
     public $latitude;
     public $longitude;
 
+    /* Features */
     public $features_id = [];
-
 
     /**
      * Get the validation rules that apply to the request.
@@ -96,7 +97,7 @@ class AddProperty extends Component
 
             /* Multiedia */
             'img_file_name'     => 'nullable|sometimes|array',
-            'img_file_name.*'   => 'image|mimes:jpeg,png,jpg,gif,svg|max:3048',
+            'img_file_name.*'   => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:3048',
             'docs_file_name'    => 'nullable|',
             'yt_link'           => 'nullable|string',
             'vt_link'           => 'nullable|string',
@@ -124,20 +125,21 @@ class AddProperty extends Component
             'building_name'     => 'nullable|string',
             'block_lot_unit_floor' => 'nullable|string',
             'size'              => 'nullable|numeric',
-            'show_price_online' => '',
-            'price_php'         => '',
-            'price_usd'         => '',
-            'available_from'    => '',
-            'object_id'         => '',
+            'subdivision_name'  => 'nullable|string',
+            'show_price_online' => 'boolean',
+            'price_php'         => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            'price_usd'         => 'nullable|regex:/^\d+(\.\d{1,2})?$/',
+            'available_from'    => 'nullable',
+            'object_id'         => 'nullable',
 
             /* Location */
-            'region'            => '',
-            'province'          => '',
-            'city'              => '',
-            'barangay'          => '',
-            'address'           => 'required|string|',
-            'latitude'          => 'nullable|numeric|between:-90,90,',           
-            'longitude'         => 'nullable|numeric|between:-180,180', 
+            'province'          => 'nullable',
+            'city'              => 'nullable',
+            'display_name'      => 'nullable',
+            'latitude'          => 'nullable|numeric|between:-90,90',
+            'longitude'         => 'nullable|numeric|between:-180,180',
+            'barangay'          => 'nullable',
+            'address'           => 'nullable',
 
             /* Amenities */
             'features_id'       => '',
@@ -147,9 +149,6 @@ class AddProperty extends Component
     public function addProperty()
     {
         $validatedData = $this->validate();
-        // dd($validatedData);
-        // create property classification for a property
-        $userId = Auth()->user()->id;   // Get the authenticated user id
 
         $classification = PropertyClassification::create([
             'id' => Uuid::uuid4(),
@@ -161,7 +160,7 @@ class AddProperty extends Component
         $thisPropertyId = Uuid::uuid4();
 
         $images = [];
-        $uploadImagesPath = 'uploads/properties/' . $thisPropertyId . '/images';
+        $uploadImagesPath = 'uploads/properties/' . $thisPropertyId . '/' . 'images';
 
         foreach($validatedData['img_file_name'] as $image){
             $filename = time() . '-' . Str::random(8) . '-' . $image->getClientOriginalName();
@@ -176,7 +175,7 @@ class AddProperty extends Component
         ]);
 
         $documents = [];
-        $uploadDocsPath = 'uploads/properties/' . $thisPropertyId . 'docs';
+        $uploadDocsPath = 'uploads/properties/' . $thisPropertyId . '/' . 'docs';
 
         foreach($validatedData['docs_file_name'] as $docs) {
             $filename = time() . '-' . Str::random(8) . '-' . $docs->getClientOriginalName();
@@ -200,7 +199,7 @@ class AddProperty extends Component
 
         $location = PropertyLocation::create([
             'id'            => Uuid::uuid4(),
-            'region'        => $validatedData['region'],
+            'display_name'  => $validatedData['display_name'],
             'province'      => $validatedData['province'],
             'city'          => $validatedData['city'],
             'barangay'      => $validatedData['barangay'],
@@ -232,6 +231,7 @@ class AddProperty extends Component
             'building_name'     => $validatedData['building_name'],
             'block_lot_unit_floor' =>  $validatedData['block_lot_unit_floor'],
             'size'              => $validatedData['size'],
+            'subdivision_name'  => $validatedData['subdivision_name'],
             'show_price_online' =>  $validatedData['show_price_online'],
             'price_php'         =>  $validatedData['price_php'],
             'price_usd'         =>  $validatedData['price_usd'],
@@ -302,12 +302,8 @@ class AddProperty extends Component
         $type = PropertyType::where('id', $id)->get(); // get property type where id is $id
         $propertyType = $type[0]->name;
 
-        // dd($propertyType);
-
         $featuresArray = [];
         $featuresArray = Features::where('property_type', $type[0]->name)->get();
-        
-        // dd($featuresArray);
         
         foreach ($featuresArray as $feature){
             if ($feature->type === 'outdoor') {
@@ -330,12 +326,17 @@ class AddProperty extends Component
         $this->features = $featuresArray;
     }
 
-    public function removeImage ($imageFileName) {
-
+    public function removeImage ($image) {
+       
+        $this->img_file_name = array_filter($this->img_file_name, function ($fileName) use ($image) {
+            $fileName !== $image;
+        });
     }
 
     public function removeDoc ($docFileName) {
-
+        $this->docs_file_name = array_filter($this->docs_file_name, function ($fileName) use ($docFileName) {
+            $fileName !== $docFileName;
+        });
     }
 
     public function render()
