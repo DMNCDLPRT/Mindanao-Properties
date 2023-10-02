@@ -14,10 +14,10 @@ class Properties extends Controller
         $allProperties = Property::with([
             'user',
             'offerType',
-            'propertyClassification',
+            'propertyClassification.type',
             'propertyLocation',
             'propertyInfo',
-            // 'multimediaA ssets.image',
+            'multimediaAssets.images',
         ])->get();
 
       
@@ -43,7 +43,7 @@ class Properties extends Controller
             // 'multimediaAssets.image',
         ])->where('id', $id)->first();
 
-        dd($propertyById);
+        // dd($propertyById);
 
 
     

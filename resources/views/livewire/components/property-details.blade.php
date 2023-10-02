@@ -108,8 +108,9 @@
 
                 </div>
 
-                <div>
-                    {{-- features --}}
+                {{-- features --}}
+                {{-- note: this section is to be fixed in the backend to render data --}}
+                {{-- <div>
                     @foreach ($property->features as $propertyFeature)
 
                     {{dd($propertyFeature)}}
@@ -125,7 +126,7 @@
                             </div>
                         </div>
                     @endforeach
-                </div>
+                </div> --}}
 
 
             </div>
