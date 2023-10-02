@@ -17,7 +17,7 @@ class PropertyLocation extends Model
     public $incrementing = false; // This tells Laravel that the primary key is not auto-incrementing.
     
     protected $fillable = [
-        'region',
+        'display_name',
         'province',
         'city',
         'barangay',
