@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Livewire\Components;
-
 use App\Models\Property;
+
 use Livewire\Component;
 
-class PropertyDetails extends Component
+class InquiryModal extends Component
 {
-
     public $property;
 
     public function mount(Property $property)
@@ -18,7 +17,6 @@ class PropertyDetails extends Component
 
     public function render()
     {
-        return view('livewire.components.property-details');
+        return view('livewire.components.inquiry-modal');
     }
-
 }

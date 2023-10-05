@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Ramsey\Uuid\Uuid;
 use App\Models\PropertyType;
+use Database\Factories\PropertyTypeFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +15,8 @@ class PropertyTypeSeeder extends Seeder
      */
     public function run(): void
     {
+
+
         $property_types = [
             ['name' => 'Condominium'],
             ['name' => 'Commercial'],

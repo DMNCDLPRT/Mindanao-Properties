@@ -18,5 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PropertyTypeSeeder::class);
         $this->call(SubTypeSeeder::class);
         $this->call(FeaturesSeeder::class);
+        // $this->call(PropertyInfoSeeder::class);
+        // $this->call(PropertyLocationSeeder::class);
+        // $this->call(PropertyImagesSeeder::class);
     }
 }

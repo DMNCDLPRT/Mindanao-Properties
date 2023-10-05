@@ -8,7 +8,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real Estate | Home</title>
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <script type="text/javascript"
         src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=GcrOdWYQe6GA26bjW5QLGxLM85gxcRHGkeKiD_kLTGrNVHyCav388dqyb6rCpWhFZqySmV87Wi5bEiukorDlvKLQ-CBhQ9OGbqpsGDOsVmSMuT_KoIsKTl6qnKLuPX6t"
         charset="UTF-8"></script>
@@ -17,17 +16,16 @@
     <script defer src="https://unpkg.com/alpinejs@3.2.4/dist/cdn.min.js"></script>
 </head>
 
-<body>
+<x-app-layout>
     <div>
         
-        <x-front.auth-nav />
         @livewire('components.search')
-        @livewire('components.properties')
+        @livewire('components.properties', ['propertieslivewirecontroller' => $allProperties])
     
         @livewire('components.footer')
         
      
     </div>
-</body>
+</x-app-layout>
 
 </html>
