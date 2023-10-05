@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Features;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Ramsey\Uuid\Uuid;
 
 class FeaturesSeeder extends Seeder
 {
@@ -29,14 +31,14 @@ class FeaturesSeeder extends Seeder
             ['name' => 'Central Heating', 'type' => 'indoor', 'property_type' => 'House'],
             ['name' => 'Air Conditioning', 'type' => 'indoor', 'property_type' => 'House'],
             ['name' => 'Solar Panels', 'type' => 'outdoor', 'property_type' => 'House'],
-            ['name' => 'Pet Park', 'type' => 'outdoor', 'property_type' => 'Apartment'],
             ['name' => 'Tennis Court', 'type' => 'outdoor', 'property_type' => 'House'],
             ['name' => 'Movie Theater', 'type' => 'indoor', 'property_type' => 'House'],
             ['name' => 'Art Studio', 'type' => 'indoor', 'property_type' => 'House'],
             ['name' => 'Wine Cellar', 'type' => 'indoor', 'property_type' => 'House'],
             ['name' => 'Community Garden', 'type' => 'outdoor', 'property_type' => 'House'],
             ['name' => 'Security System', 'type' => 'indoor', 'property_type' => 'House'],
-
+            
+            ['name' => 'Pet Park', 'type' => 'outdoor', 'property_type' => 'Apartment'],
             ['name' => 'Balcony', 'type' => 'outdoor', 'property_type' => 'Apartment'],
             ['name' => 'High-Speed Internet', 'type' => 'indoor', 'property_type' => 'Apartment'],
             ['name' => 'Elevator', 'type' => 'indoor', 'property_type' => 'Apartment'],
@@ -62,7 +64,16 @@ class FeaturesSeeder extends Seeder
 
            
         ];
-        
-        DB::table('features')->insert($additionalFeatures);
+        foreach ($additionalFeatures as $features) {
+            Features::create([
+                'id' => Uuid::uuid4(),
+                'name' => $features['name'],
+                'type' => $features['type'],
+                'property_type' => $features['property_type'],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Ramsey\Uuid\Uuid;
 use App\Models\PropertySubType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -27,6 +28,7 @@ class SubTypeSeeder extends Seeder
 
             foreach ($subTypes as $subType) {
                 DB::table('subtype')->insert([
+                    'id' => Uuid::uuid4(),
                     'property_type_id' => $propertyTypeId,
                     'subtype' => $subType,
                 ]);
