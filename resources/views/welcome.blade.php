@@ -31,7 +31,6 @@
 </html> --}}
 <x-guest-layout>
     <div>
-        <h1>Unaunthenticated</h1>
        {{-- <x-front.guest-nav /> --}}
         @livewire('components.banner')
         @livewire('components.search')

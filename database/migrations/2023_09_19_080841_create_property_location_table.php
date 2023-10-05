@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('city', 40);            
             $table->string('barangay', 60);   
             $table->string('address', 255);       
-            $table->decimal('longitude', 3, 14);
-            $table->decimal('latitude', 4, 14);
+            $table->decimal('longitude', 10, 6);
+            $table->decimal('latitude', 10, 6);
             $table->timestamps();
         });
     }

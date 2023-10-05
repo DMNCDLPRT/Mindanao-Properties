@@ -6,13 +6,14 @@
     </div>
 
 
-    <div class="flex overflow-hidden bg-white dark:bg-gray-800">
-        <div id="main-content" class="h-full w-full overflow-y-auto lg:ml-64">
-            <main>
-                <div class="pt-6 px-4">
-                    @livewire('user-verified.add-property', ['offer_type' => $offer_type, 'property_type' => $property_type, 'subtypes' => $subtypes])
-                </div>
-            </main>
+    <div class="flex gap-4 overflow-hidde bg-white">
+        <div class="col-md-6 bg-gray-800">
+            <x-side-panel />
+        </div>
+        <div class="h-full w-full flex justify-center">
+            <div class="pt-6 px-4 overflow-y-auto lg:max-w-5xl">
+                @livewire('user-verified.add-property', ['offer_type' => $offer_type, 'property_type' => $property_type, 'subtypes' => $subtypes])
+            </div>
         </div>
     </div>
 </x-app-layout>
