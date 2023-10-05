@@ -14,27 +14,21 @@
         href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9kZW1vLmxhcmFpbmZvLmNvbS90YWlsd2luZC1jc3MvdGVtcGxhdGUvcmVhbCUyMHN0YXRlL3NpbmdsZS1wcm9wZXJ0eS5odG1s" />
     <script defer src="https://unpkg.com/alpinejs@3.2.4/dist/cdn.min.js"></script>
 
+    {{-- Image carousel script --}}
+    <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
+
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
 
     {{-- custom styling --}}
     <link rel="stylesheet" href="/css/image-gallery.css">
 </head>
-<!-- <style>
-        [x-cloak] {
-            display: none !important;
-        }
-    </style> -->
 
+<x-app-layout>
 
-<body>
-    <x-front.auth-nav />
     @livewire('components.property-details', ['property' => $property])
-    {{-- @livewire('components.property-details') --}}
-
-
     @livewire('components.footer')
-</body>
+</x-app-layout>
 
 {{-- custom script --}}
 <script src="/js/image-gallery.js"></script>
