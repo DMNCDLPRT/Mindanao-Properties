@@ -24,7 +24,7 @@ class MultimediaAssets extends Model
     ];
 
     public function images () {
-        return $this->hasMany(PropertyImages::class, 'id', 'property_images_id');
+        return $this->hasMany(PropertyImages::class, 'property_images_id');
     }
 
     public function documents () {
