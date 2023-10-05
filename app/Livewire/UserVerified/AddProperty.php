@@ -62,7 +62,7 @@ class AddProperty extends Component
     public $block_lot_unit_floor;
     public $size;
     public $subdivision_name;
-    public $show_price_online;
+    public $show_price_online = false;
     public $price_php;
     public $price_usd;
     public $available_from;
@@ -149,6 +149,7 @@ class AddProperty extends Component
     public function addProperty()
     {
         $validatedData = $this->validate();
+        dd($validatedData);
 
         $classification = PropertyClassification::create([
             'id' => Uuid::uuid4(),

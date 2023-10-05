@@ -23,8 +23,6 @@
         <style>
             #map {
                 position: relative;
-                top: 0;
-                bottom: 0;
                 width: 100%;
             }
         </style>
