@@ -19,22 +19,20 @@
 
     {{-- custom styling --}}
     <link rel="stylesheet" href="/css/image-gallery.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 </head>
-<!-- <style>
-        [x-cloak] {
-            display: none !important;
-        }
-    </style> -->
 
 
-<body>
-    <x-front.auth-nav />
+<x-app-layout>
+  
     @livewire('components.property-details', ['property' => $property])
     {{-- @livewire('components.property-details') --}}
 
 
     @livewire('components.footer')
-</body>
+</x-app-layout>
 
 {{-- custom script --}}
 <script src="/js/image-gallery.js"></script>

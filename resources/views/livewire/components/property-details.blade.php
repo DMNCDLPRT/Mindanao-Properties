@@ -71,7 +71,7 @@
                     </div>
                     <!-- Item 2 -->
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=773&q=80"
+                        <img src="https://images.unsplash.com/photo-1448630360428-65456885c650?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=867&q=80"
                             class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2"
                             alt="...">
                     </div>
@@ -334,7 +334,7 @@
                     </div>
                     <div class="mb-4">
                         <!-- <span class="text-lg font-bold mr-2">+63</span> -->
-                        <input class="border border-gray-300 rounded-lg w-full" id="phone" name="phone"
+                        <input class="border border-gray-300 w-full rounded-lg w-full py-2 px-4 focus:outline-none focus:border-blue-500" id="phone" name="phone"
                             type="tel" placeholder="Phone Number*">
                     </div>
                     <div class="flex justify-center mt-6">

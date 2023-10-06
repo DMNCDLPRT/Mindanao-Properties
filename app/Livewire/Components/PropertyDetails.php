@@ -21,10 +21,5 @@ class PropertyDetails extends Component
         return view('livewire.components.property-details');
     }
 
-    public function showProperty()
-    {
-        // Redirect to the controller function with the property ID
-        return redirect()->to("/property/{$this->id}");
-    }
 
 }
