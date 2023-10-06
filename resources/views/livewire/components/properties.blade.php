@@ -30,7 +30,7 @@
                                         @php
                                             $finalPath = str_replace('\\', '', $path);
                                         @endphp
-                                        {{ dd($finalPath) }}
+                                        {{-- {{ dd($finalPath) }} --}}
                                     @endforeach
                                 @endforeach
 

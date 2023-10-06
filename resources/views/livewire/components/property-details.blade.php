@@ -334,7 +334,7 @@
                     </div>
                     <div class="mb-4">
                         <!-- <span class="text-lg font-bold mr-2">+63</span> -->
-                        <input class="border border-gray-300 w-full rounded-lg w-full py-2 px-4 focus:outline-none focus:border-blue-500" id="phone" name="phone"
+                        <input class="border border-gray-300 w-full rounded-lg py-2 px-4 focus:outline-none focus:border-blue-500" id="phone" name="phone"
                             type="tel" placeholder="Phone Number*">
                     </div>
                     <div class="flex justify-center mt-6">
