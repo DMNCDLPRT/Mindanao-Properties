@@ -72,8 +72,6 @@
         <x-banner />
 
         <div class="min-h-screen bg-gray-100 dark:bg-slate-800">
-            {{-- @livewire('navigation-menu') --}}
-            <x-front.auth-nav />
 
             <!-- Page Heading -->
             @if (isset($header))
