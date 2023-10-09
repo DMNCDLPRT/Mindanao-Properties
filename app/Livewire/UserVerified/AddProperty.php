@@ -149,7 +149,6 @@ class AddProperty extends Component
     public function addProperty()
     {
         $validatedData = $this->validate();
-        dd($validatedData);
 
         $classification = PropertyClassification::create([
             'id' => Uuid::uuid4(),
