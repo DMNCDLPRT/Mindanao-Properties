@@ -8,7 +8,7 @@
         </div>
         <div class="mt-4 space-x-0 space-y-2 lg:flex lg:flex-nowrap lg:space-x-4 lg:space-y-0 lg:mt-20">
             <div class="p-4 bg-white rounded-lg">
-                <img src="https://images.unsplash.com/photo-1601760562234-9814eea6663a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmVhbGVzdGF0ZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="property">
+                <img src="{{ asset('storage\uploads\properties\20a8bba0-01b1-408e-a229-64d04f8f971d\images\1696508287-2RzXKv9h-3.jpg') }}" alt="property">
                 <div class="p-6">
                     <h4 class="text-2xl font-bold cursor-pointer">Modern Design villa</h4>
                     <!-- <div>

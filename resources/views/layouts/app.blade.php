@@ -11,29 +11,62 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        @if (Route::has('add.property'))
-        <script src="https://tiles.locationiq.com/v3/libs/maplibre-gl/1.15.2/maplibre-gl.js"></script>
-        <link href="https://tiles.locationiq.com/v3/libs/maplibre-gl/1.15.2/maplibre-gl.css" rel="stylesheet" />
-        <script src="https://tiles.locationiq.com/v3/libs/gl-geocoder/4.5.1/locationiq-gl-geocoder.min.js?v=0.2.3"></script>
-        <link rel="stylesheet" href="https://tiles.locationiq.com/v3/libs/gl-geocoder/4.5.1/locationiq-gl-geocoder.css?v=0.2.3" type="text/css" />
+        <!-- Scripts -->
+        
+        @vite(['resources/css/app.css', 'resources/js/app.js',])
 
-        <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
-                
+        <!-- Styles -->
+        @livewireStyles
+
+        @if (Route::has('add.property'))
+        <link href="https://tiles.locationiq.com/v3/libs/maplibre-gl/1.15.2/maplibre-gl.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://tiles.locationiq.com/v3/libs/gl-geocoder/4.5.1/locationiq-gl-geocoder.css?v=0.2.3" type="text/css" />
+        
+        
         <style>
             #map {
                 position: relative;
                 width: 100%;
             }
         </style>
+
+
+        <link rel="stylesheet" href="{{ asset('css/filepond.css') }}">
+        <link
+            href="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css"
+            rel="stylesheet"
+        />
+    
+        <link
+            href="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css"
+            rel="stylesheet"
+        />
+        <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+        <link href="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css" rel="stylesheet" />
+        <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
         @endif
-        <!-- Scripts -->
-        
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-        
-        <!-- Styles -->
-        @livewireStyles
+
+
         @livewireScripts
+
+        @if (Route::has('add.property'))
+        <script src="https://tiles.locationiq.com/v3/libs/maplibre-gl/1.15.2/maplibre-gl.js"></script>
+        <script src="https://tiles.locationiq.com/v3/libs/gl-geocoder/4.5.1/locationiq-gl-geocoder.min.js?v=0.2.3"></script>
+
+        <script src="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+
+        <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+        
+        <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+        @endif
+
     </head>
     <body class="font-sans antialiased dark:bg-slate-800">
         <x-banner />
