@@ -72,7 +72,8 @@
         <x-banner />
 
         <div class="min-h-screen bg-gray-100 dark:bg-slate-800">
-
+            @livewire('navigation-menu')
+            
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white shadow dark:bg-slate-500">
