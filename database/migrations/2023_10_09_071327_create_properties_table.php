@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -36,6 +35,9 @@ return new class extends Migration
             $table->uuid('property_multimedia_assets_id', 36);
             $table->foreign('property_multimedia_assets_id')->references('id')->on('multimedia_assets');
             
+            $table->uuid('property_features_id')->nullable();
+            $table->foreign('property_features_id')->references('id')->on('property_features');
+
             $table->timestamps();
         });
     }

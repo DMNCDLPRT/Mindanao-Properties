@@ -91,9 +91,8 @@
         @enderror
         <div wire:ignore class="pb-4">
           <x-label for="text_area" value="{{ __('Description') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
-
           <textarea wire:model="description" id="text_area" class="static text_area"></textarea>
-      </div>
+        </div>
       </section>
     
       
@@ -105,138 +104,39 @@
             header="Upload photos, videos and other media" 
             description="Users looking for property ignore properties without photos. Make your property stand out by uploading photos or, even better, a video!" 
         />
-    
-        {{-- Images --}}
-        <div class="pb-4 static">
-          @error('img_file_name')
-          <div class="mt-4">
-              <span class="text-red-600 mt-5" role="alert">
-                  <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
-              </span>
-          </div>
-          @enderror
-          <div class="mb-6 pt-4">
-            <x-header-label value=" {{ __('Upload Images Here') }} " />
-            <input id="images" type="file" name="images" wire:model="img_file_name" id="img_file_name" class="sr-only" multiple>
-            <label for="images" class="flex min-h-[100px] items-center justify-center rounded-md border border-dashed border-[#464646] p-5 text-center">
-              <div class="block">
-                <div>
-                  <span class="mb-1 block text-m font-semibold  dark:text-white">
-                    Drop your images here
-                  </span>
-                  <span class="mb-1 block text-m font-medium  dark:text-white">
-                    or
-                  </span>
-                  <span class="mb-2 inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium  dark:text-white">
-                    Browse files
-                  </span>
-                  <span class="mb-1 block text-sm font-medium  dark:text-white">
-                    Upload photos as jpg or png.
-                  </span>
-                </div>
-                @if ($img_file_name)
-                <div class="mb-5 rounded-md py-4 px-8 ">
-                  <div class="flex flex-wrap gap-2">
-                    @foreach ($img_file_name as $image)
-                    <div class="p-1 max-w-[300px]">
-                      <div class="flex">
-                        <img src="{{ $image->temporaryUrl() }}" alt="" height="70" class="p-2 max-h-[270px] rounded-md">
-  
-                        <button type="button" class=" dark:text-white flex" wire:click="removeImage('{{ $image->getFilename() }}')">
-                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M0.279337 0.279338C0.651787 -0.0931121 1.25565 -0.0931121 1.6281 0.279338L9.72066 8.3719C10.0931 8.74435 10.0931 9.34821 9.72066 9.72066C9.34821 10.0931 8.74435 10.0931 8.37190 9.72066L0.279337 1.6281C-0.0931125 1.25565 -0.0931125 0.651788 0.279337 0.279338Z"
-                            fill="currentColor" />
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M0.279337 9.72066C-0.0931125 9.34821 -0.0931125 8.74435 0.279337 8.3719L8.3719 0.279338C8.74435 -0.0931127 9.34821 -0.0931123 9.72066 0.279338C10.0931 0.651787 10.0931 1.25565 9.72066 1.6281L1.6281 9.72066C1.25565 10.0931 0.651787 10.0931 0.279337 9.72066Z"
-                            fill="currentColor" />
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                    @endforeach
-                  </div>
-                </div>
-                @endif
-                
-              </div>
-            </label>
-           
-          </div>
-        </div>
-        {{-- Image Upload - End Input - --}}
-    
-        {{-- Media --}}
-        <div class="pb-4 ">
-            @error('docs_file_name')
+        <div wire:ignore>
+          {{-- Images --}}
+          <div class="pb-4 static">
+            @error('img_file_name')
             <div class="mt-4">
                 <span class="text-red-600 mt-5" role="alert">
                     <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
                 </span>
             </div>
             @enderror
-            <div class="mb-6">
-              <x-header-label value=" {{ __('Upload other media') }} " />
-              <input id="media" type="file" name="docs_file_name" wire:model="docs_file_name" id="docs_file_name" class="sr-only" multiple>
-              <label for="media" class="flex min-h-[100px] items-center justify-center rounded-md border border-dashed border-[#464646] p-5 text-center">
-                <div>
-                  <span class="mb-1 block text-m font-semibold  dark:text-white">
-                    Drop your files here
-                  </span>
-                  <span class="mb-1 block text-m font-medium  dark:text-white">
-                    or
-                  </span>
-                  <span class="mb-2 inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium dark:text-white">
-                    Browse files
-                  </span>
-                  <span class="mb-1 block text-sm font-medium  dark:text-white">
-                    Upload pdf files.
-                  </span>
-                
-                @if ($docs_file_name)
-                <div class="mb-5 rounded-md py-4 px-8 ">
-                      @foreach ($docs_file_name as $docs)
-                      <div class="p-1 w-full">
-                        <div class="flex items-center justify-between border-[#464646] border p-3 rounded">
-                          <div class="flex flex-col items-start">
-                            <span class="truncate pr-3 text-base font-medium  dark:text-white">
-                              {{ $docs->getClientOriginalName() }}
-                            </span>
-                            <span class="truncate pr-3 text-sm font-medium  dark:text-white">
-                              @php
-                                  $sizeInBytes = $docs->getSize();
-
-                                  if ($sizeInBytes >= 1048576) {
-                                      $sizeFormatted = number_format($sizeInBytes / 1048576, 2) . ' MB';
-                                  } else {
-                                      $sizeFormatted = number_format($sizeInBytes / 1024, 2) . ' KB';
-                                  }
-                              @endphp
-                              {{ $sizeFormatted }}
-                            </span>
-                          </div>
-                          
-                          <button type="button" class=" dark:text-white" wire:click="removeDoc('{{ $docs->getFilename() }}')">
-                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M0.279337 0.279338C0.651787 -0.0931121 1.25565 -0.0931121 1.6281 0.279338L9.72066 8.3719C10.0931 8.74435 10.0931 9.34821 9.72066 9.72066C9.34821 10.0931 8.74435 10.0931 8.37190 9.72066L0.279337 1.6281C-0.0931125 1.25565 -0.0931125 0.651788 0.279337 0.279338Z"
-                              fill="currentColor" />
-                              <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M0.279337 9.72066C-0.0931125 9.34821 -0.0931125 8.74435 0.279337 8.3719L8.3719 0.279338C8.74435 -0.0931127 9.34821 -0.0931123 9.72066 0.279338C10.0931 0.651787 10.0931 1.25565 9.72066 1.6281L1.6281 9.72066C1.25565 10.0931 0.651787 10.0931 0.279337 9.72066Z"
-                              fill="currentColor" />
-                            </svg>
-                          </button>
-                        </div>
-                      </div>
-                      @endforeach
-                  </div>
-                  @endif
-                </div>
-              </label>
-
+            <div class="mb-6 pt-4">
+              <x-header-label value=" {{ __('Upload Images Here') }} " />
+              <input type="file" wire:model="img_file_name" id="img_file_name" class="filepond" name="filepond" data-max-files="5" data-allow-reorder="true" data-max-file-size="5MB" multiple>
             </div>
+          </div>
+          {{-- Image Upload - End Input - --}}
+      
+          {{-- Media --}}
+          <div class="pb-4 ">
+              @error('docs_file_name')
+              <div class="mt-4">
+                  <span class="text-red-600 mt-5" role="alert">
+                      <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+                  </span>
+              </div>
+              @enderror
+              <div class="mb-6">
+                <x-header-label value=" {{ __('Upload other media') }} " />
+                <input type="file" wire:model="docs_file_name" id="docs_file_name" class="filepond" data-max-files="3" data-allow-reorder="true" data-max-file-size="5MB" multiple>
+              </div>
+          </div>
+          {{-- Media Upload - End Input - --}}
         </div>
-        {{-- Media Upload - End Input - --}}
     
         {{-- YouTube Link --}}
         <div class="pb-4 grow">
@@ -690,7 +590,6 @@
           description="For house hunters, location is everything! Give us as much information about the location of your property as you can so that users can find property easily." 
         />
 
-        
         <div wire:ignore class="mt-4">
           <div style="height: 400px;" id="map"></div>
           <pre id="coordinates" class="coordinates"></pre>
@@ -755,7 +654,6 @@
                   <input type="text" id="longitudeInput" wire:model="longitude" class="mt-1 w-full hidden" />
               </div>
             </div>
-            
           </div>
       
           <div class="mt-4">
@@ -852,9 +750,7 @@
                   <div class="shrink-0 mr-3">
                     <x-heroicon-s-home class="h-8 w-8 rounded-full object-cover"/>
                   </div>
-                  <div class="pl-3 font-bold text-xl ">
-                    0
-                  </div>
+                  <span class="pl-3 font-bold text-xl "> 0  </span>
                 </div>
                 Ads Quota
               </div>
@@ -864,9 +760,7 @@
                   <div class="shrink-0 mr-3">
                     <x-heroicon-s-star class="h-8 w-8 rounded-full object-cover"/>
                   </div>
-                  <div class="pl-3 font-bold text-xl">
-                    0
-                  </div>
+                  <span class="pl-3 font-bold text-xl"> 0 </span>
                 </div>
                 Highlights
               </div>  
@@ -907,40 +801,6 @@
       <x-validation-errors />
     </div>
 
-    <div wire:ignore>
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script>
-        // Initialize TinyMCE
-        tinymce.init({
-            selector: 'textarea#text_area',
-            // Add TinyMCE configuration options as needed
-            setup: function (editor) {
-                // Listen for changes in the editor content
-                editor.on('input', function () {
-                    // Get the content from TinyMCE
-                    var content = editor.getContent();
-                    // Update the Livewire component property
-                    @this.set('description', content);
-                });
-            }
-        });
-      </script>
-    </div>
-
-    <script src="{{ asset('js/locationiq.js') }}"></script>
-      <script>
-        marker.on('dragend', function (e) {
-          @this.set('latitude', e.target._lngLat.lat);
-          @this.set('longitude', e.target._lngLat.lng);
-        });
-  
-        geocoder.on('result', function (e) {
-          @this.set('province', e.result.address.state);
-          @this.set('city', e.result.address.name);
-          @this.set('display_name', e.result.display_name);
-        });
-      </script>
-
     {{-- Submit Button --}}
     <x-slot name="actions">
       <x-button wire:loading.attr="disabled" onclick="return confirm('Add Property?');" class="w-2/5 justify-center">
@@ -954,16 +814,73 @@
       </x-loading>
     </div>
 
-    <div wire:loading 
-      wire:target="property_type_id"
-      wire:target="img_file_name"
-      wire:target="docs_file_name"
-    >
+    <div wire:loading   wire:target="property_type_id" wire:target="img_file_name"  wire:target="docs_file_name">
       <x-loading >
         <x-slot name="slot">{{__('Loading Please wait...')}}</x-slot>
       </x-loading>
     </div>
+
   </x-slot>
 </x-form-section>
 
- 
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+  // Initialize TinyMCE
+  tinymce.init({
+    selector: 'textarea#text_area',
+    // Add TinyMCE configuration options as needed
+    setup: function (editor) {
+      // Listen for changes in the editor content
+      editor.on('input', function () {
+        // Get the content from TinyMCE
+        var content = editor.getContent();
+        // Update the Livewire component property
+        @this.set('description', content);
+      });
+    }
+  });
+</script>
+
+<script>
+  FilePond.registerPlugin(
+    FilePondPluginFileEncode,           // encodes the file as base64 data     
+    FilePondPluginImagePreview,         // previews dropped images
+    FilePondPluginImageExifOrientation, // corrects mobile image orientation
+    FilePondPluginFileValidateSize,     // validates the size of the file
+    FilePondPluginImageEdit,
+    FilePondPluginFileValidateType,
+  );
+
+  var inputImageElement = document.getElementById('img_file_name');
+  var pondImage = FilePond.create(inputImageElement, {
+    allowMultiple: true,            // Allow multiple file uploads
+    acceptedFileTypes: ['image/*'], // Specify accepted file types (images)
+    maxFileSize: '5MB'
+  });
+
+
+  var inputDocsElement = document.getElementById('docs_file_name');
+  var pondDocs = FilePond.create(inputDocsElement, {
+    allowMultiple: true,                 // Allow multiple file uploads
+    acceptedFileTypes: ['application/pdf'], // Specify accepted file types (PDF)
+    maxFileSize: '5MB'
+  });
+
+</script>
+
+<script src="{{ asset('js/locationiq.js') }}"></script>
+
+<script>
+  marker.on('dragend', function (e) {
+    @this.set('latitude', e.target._lngLat.lat);
+    @this.set('longitude', e.target._lngLat.lng);
+  });
+
+  geocoder.on('result', function (e) {
+    @this.set('province', e.result.address.state);
+    @this.set('city', e.result.address.name);
+    @this.set('display_name', e.result.display_name);
+  });
+</script>

@@ -80,6 +80,9 @@ class AddProperty extends Component
     /* Features */
     public $features_id = [];
 
+
+    protected $listeners = ['updateImgFileName' => 'setImageFileName', 'updateDocsFileName' => 'setDocsFileName'];
+    
     /**
      * Get the validation rules that apply to the request.
      *
@@ -149,6 +152,7 @@ class AddProperty extends Component
     public function addProperty()
     {
         $validatedData = $this->validate();
+
         dd($validatedData);
 
         $classification = PropertyClassification::create([
@@ -165,7 +169,7 @@ class AddProperty extends Component
 
         foreach($validatedData['img_file_name'] as $image){
             $filename = time() . '-' . Str::random(8) . '-' . $image->getClientOriginalName();
-            $image->storeAs($uploadImagesPath,$filename);
+            $image->storeAs('public/', $uploadImagesPath, $filename);
             $finalImagePathName = $uploadImagesPath . $filename;
             $images[] = $finalImagePathName;
         }
@@ -180,7 +184,7 @@ class AddProperty extends Component
 
         foreach($validatedData['docs_file_name'] as $docs) {
             $filename = time() . '-' . Str::random(8) . '-' . $docs->getClientOriginalName();
-            $docs->storeAs($uploadDocsPath,$filename);
+            $docs->storeAs('public/', $uploadDocsPath,$filename);
             $finalDocPathName = $uploadDocsPath . $filename;
             $documents[] = $finalDocPathName;
         }
