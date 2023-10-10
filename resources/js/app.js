@@ -1,3 +1,3 @@
 import './bootstrap';
 import './alpinejs';    
-import './tinymce'
+import './tinymce';
