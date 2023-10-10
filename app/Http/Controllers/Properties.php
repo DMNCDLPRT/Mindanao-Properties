@@ -20,7 +20,6 @@ class Properties extends Controller
             'multimediaAssets.images',
         ])->get();
 
-      
         return view('properties', [
             'allProperties' => $allProperties,
             // 'properitesImg' => $allPropertiesImg,

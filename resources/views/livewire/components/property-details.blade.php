@@ -55,69 +55,47 @@
 
                 </div>
             </div> --}}
+            <div x-data="{ isOpen: false }" >
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2">
+                    <div class=" overflow-hidden rounded-xl col-span-3 max-h-[14rem]">
+                        <img  @click="isOpen = true" class="h-full w-full object-cover cursor-pointer"
+                            src="https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
+                            alt="">
+                    </div>
+                    <div class=" overflow-hidden rounded-xl col-span-3 max-h-[14rem]">
+                        <img @click="isOpen = true" class="h-full w-full object-cover  cursor-pointer"
+                            src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1399&q=80"
+                            alt="">
+                    </div>
+                    <div class=" overflow-hidden rounded-xl col-span-2 max-h-[10rem]">
+                        <img  @click="isOpen = true" class="h-full w-full object-cover cursor-pointer"
+                            src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+                            alt="">
+                    </div>
+                    <div class=" overflow-hidden rounded-xl col-span-2 max-h-[10rem]">
+                        <img  @click="isOpen = true" class="h-full w-full object-cover cursor-pointer"
+                            src="https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                            alt="">
+                    </div>
+                    <div class="relative overflow-hidden rounded-xl col-span-2 max-h-[10rem]">
+                        {{-- image modal --}}
+
+                        <button @click="isOpen = true"
+                            class="text-white text-xl absolute inset-0  bg-slate-900/80 flex justify-center flex-col items-center cursor-pointer">
+                            <x-fas-image class="h-10"/>
+                            <span class="mt-2">More Photos</span>
+                        </button>
+
+                        @livewire('components.image-modal')
+                   
+                     
 
 
-            <div id="default-carousel" class="relative z-40" data-carousel="static">
-                <!-- Carousel wrapper -->
-                <div class="overflow-hidden relative h-56 rounded-lg sm:h-64 xl:h-80 2xl:h-96">
-                    <!-- Item 1 -->
-                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <span
-                            class="absolute top-1/2 left-1/2 text-2xl font-semibold text-white -translate-x-1/2 -translate-y-1/2 sm:text-3xl dark:text-gray-800">First
-                            Slide</span>
-                        <img src="https://images.unsplash.com/photo-1601760562234-9814eea6663a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmVhbGVzdGF0ZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                            class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2"
-                            alt="...">
-                    </div>
-                    <!-- Item 2 -->
-                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="https://images.unsplash.com/photo-1448630360428-65456885c650?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=867&q=80"
-                            class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2"
-                            alt="...">
-                    </div>
-                    <!-- Item 3 -->
-                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="https://images.unsplash.com/flagged/photo-1564767609342-620cb19b2357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=773&q=80"
-                            class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2"
-                            alt="...">
+                        <img class="h-full w-full object-cover "
+                            src="https://images.unsplash.com/photo-1560393464-5c69a73c5770?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80"
+                            alt="">
                     </div>
                 </div>
-                <!-- Slider indicators -->
-                <div class="flex absolute bottom-5 left-1/2 z-30 space-x-3 -translate-x-1/2">
-                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1"
-                        data-carousel-slide-to="0"></button>
-                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2"
-                        data-carousel-slide-to="1"></button>
-                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3"
-                        data-carousel-slide-to="2"></button>
-                </div>
-                <!-- Slider controls -->
-                <button type="button"
-                    class="flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
-                    data-carousel-prev>
-                    <span
-                        class="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                        <svg class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
-                            </path>
-                        </svg>
-                        <span class="hidden">Previous</span>
-                    </span>
-                </button>
-                <button type="button"
-                    class="flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
-                    data-carousel-next>
-                    <span
-                        class="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                        <svg class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
-                            </path>
-                        </svg>
-                        <span class="hidden">Next</span>
-                    </span>
-                </button>
             </div>
 
 
@@ -127,91 +105,97 @@
 
 
 
-            <div class="mt-10">
-                <div>
-                    <!--div for description-->
-                    <h2 class="mb-4 text-2xl font-bold">Description</h2>
-                    <p class="my-4">{{ $property->description }}</p>
 
+            <div class="mt-10">
+                <!-- div for description -->
+                <div>
+                    <div id="description-container"
+                        class="description-content overflow-hidden max-h-20 transition duration-300 ease-in-out">
+                        <div id="content"></div>
+                        <script>
+                            // Get the content div
+                            const contentDiv = document.getElementById('content');
+
+                            // Your HTML string with tags (assuming $property->description contains the HTML content)
+                            const htmlString = `{!! $property->description !!}`;
+
+                            // Set the innerHTML of the contentDiv to your HTML string
+                            contentDiv.innerHTML = htmlString;
+                        </script>
+                    </div>
+                    <button id="read-more-btn"
+                        class="flex justify-center w-full text-blue-500 hover:underline focus:outline-none">Read
+                        More...</button>
                 </div>
+
+                <script>
+                    const descriptionContainer = document.getElementById('description-container');
+                    const readMoreBtn = document.getElementById('read-more-btn');
+
+                    readMoreBtn.addEventListener('click', function() {
+                        descriptionContainer.classList.toggle('max-h-20'); // Adjust the class based on your design
+                        if (descriptionContainer.classList.contains('max-h-20')) {
+                            readMoreBtn.textContent = 'Read More...';
+                        } else {
+                            readMoreBtn.textContent = 'Read Less';
+                        }
+                    });
+                </script>
 
                 {{-- add property details here --}}
 
+
                 <div class="mt-10">
                     <h2 class="mb-4 text-2xl font-bold">Property Details</h2>
+                    <!-- property details wrapper -->
+                    @if ($property)
+                        <div class="">
+                            <!-- loop through labels and data -->
+
+                            @foreach ([
+        'Subdivision Name' => ['value' => $property->propertyInfo->subdivision_name],
+        'Address' => ['value' => $property->propertyLocation->display_name],
+        'Block and Lot/Unit Number' => ['value' => $property->block_lot_number],
+        'Build year' => ['value' => $property->propertyInfo->build_year],
+        'Car spaces' => ['value' => $property->propertyInfo->car_spaces],
+        'Classification' => ['value' => $property->propertyInfo->classification],
+        'Fully furnished' => ['value' => $property->propertyInfo->fully_furnished],
+        'Beedrooms' => ['value' => $property->propertyInfo->bedrooms],
+        'Bathrooms' => ['value' => $property->propertyInfo->bathrooms],
+        'Floor area (m2)' => ['value' => $property->propertyInfo->floor_area],
+        'Land size (m2)' => ['value' => $property->propertyInfo->land_size],
+    ] as $label => $data)
+                                @if ($data['value'])
+                                    <div class="py-3 grid grid-cols-2 gap-5 border-t border-solid border-gray-300">
+                                        <!-- Listing label -->
+                                        <div class="flex items-center gap-8 min-w-0 text-sm">
+                                            <!-- icons span -->
+                                            {{-- @if ($label)
+                                                <span class="icon">
+                                                    <x-dynamic-component  :component="$data['icon']" />
+                                                </span>
+                                            @endif                                  --}}
+
+
+                                            <span class="whitespace-no-wrap overflow-hidden overflow-ellipsis">
+                                                {{ $label }}
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center text-sm font-bold">
+                                            {{ $data['value'] }}
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    @else
+                        <div>No data available.</div>
+                    @endif
                 </div>
 
-                {{-- <div>
-                    <!--div for features-->
-
-                    <div class="flex flex-wrap ">
-                        <div class="w-full p-2 lg:w-1/2">
-                            <div class="flex items-center h-full p-4 bg-gray-100 rounded">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3 text-green-600"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                                </svg>
-                                <span class="font-medium">4 Beds</span>
-                            </div>
-                        </div>
-                        <div class="w-full p-2 lg:w-1/2">
-                            <div class="flex items-center h-full p-4 bg-gray-100 rounded">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3 text-green-600"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                                </svg>
-                                <span class="font-medium">Area 550 sqft</span>
-                            </div>
-                        </div>
-                        <div class="w-full p-2 lg:w-1/2">
-                            <div class="flex items-center h-full p-4 bg-gray-100 rounded">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3 text-green-600"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                                </svg>
-                                <span class="font-medium">Bedroom 6</span>
-                            </div>
-                        </div>
-                        <div class="w-full p-2 lg:w-1/2">
-                            <div class="flex items-center h-full p-4 bg-gray-100 rounded">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3 text-green-600"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                                </svg>
-                                <span class="font-medium">Kitchen 2</span>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-
-
-
-                {{-- <!-- features -->
-                <!-- note: this section is to be fixed in the backend to render data -->
-                <!-- <div>
-                    @foreach ($property->features as $propertyFeature)
-
-                    {{dd($propertyFeature)}}
-                        
-                        <div class="w-full p-2 lg:w-1/2">
-                            <div class="flex items-center h-full p-4 bg-gray-100 rounded">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3 text-green-600" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                                </svg>
-                                <span class="font-medium">Kitchen 2</span>
-                            </div>
-                        </div>
-                    @endforeach
-                </div> --> --}}
 
                 {{-- features cards or aminities --}}
-                <div class="flex flex-col">
+                {{-- <div class="flex flex-col">
                     <h2 class="mb-4 text-2xl font-bold">Property Features</h2>
 
                     <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -277,8 +261,22 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
+                {{-- features cards or aminities --}}
+                {{-- {{dd($property)}} --}}
+
+                <div class="rounded-lg bg-white p-8 shadow-md mt-10">
+                    <h3 class="uppercase font-semibold text-base text-gray-800 mb-6">Property Features</h3>
+                    <div class="grid grid-cols-6 gap-y-8">
+                        <div class="flex items-center flex-col">
+                            <!-- feature icon -->
+                            <span></span>
+                            <span class="text-gray-700 text-sm capitalize mt-2 text-center"></span>
+                        </div>
+                    </div>
+
+                </div>
 
             </div>
         </div>
@@ -308,7 +306,7 @@
                         class="mr-12 text-lg font-medium text-transparent bg-clip-text bg-gradient-to-r from-gray-700 to-white">+63975</span>
 
                     <!-- inquiry modal -->
-                    <div x-data="{ isOpen: false }" class="z-50">
+                    <div x-data="{ isOpen: false }" class="z-40">
                         <!-- Inquire Button -->
                         <button @click="isOpen = true"
                             class="text-lg text-orange-500 hover:text-white font-bold cursor-pointer border border-solid border-orange-500 hover:bg-orange-500 px-8 py-2 rounded-md">
@@ -334,8 +332,9 @@
                     </div>
                     <div class="mb-4">
                         <!-- <span class="text-lg font-bold mr-2">+63</span> -->
-                        <input class="border border-gray-300 w-full rounded-lg py-2 px-4 focus:outline-none focus:border-blue-500" id="phone" name="phone"
-                            type="tel" placeholder="Phone Number*">
+                        <input
+                            class="border border-gray-300 w-full rounded-lg py-2 px-4 focus:outline-none focus:border-blue-500"
+                            id="phone" name="phone" type="tel" placeholder="Phone Number*">
                     </div>
                     <div class="flex justify-center mt-6">
                         <button type="submit"

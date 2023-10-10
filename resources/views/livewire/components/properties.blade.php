@@ -30,7 +30,7 @@
                                         @php
                                             $finalPath = str_replace('\\', '', $path);
                                         @endphp
-                                        {{-- {{ dd($finalPath) }} --}}
+                                    
                                     @endforeach
                                 @endforeach
 
@@ -205,51 +205,14 @@
                             </p>
                         </div>
                     </div>
-                    {{-- <div class="">
-                          <a href="{{ route('property-details', ['id' => $allProperties->id]) }}"
-                              class="flex justify-center items-center w-1/2 text-base font-bold cursor-pointer border-2 border-solid border-blue-600 rounded-md px-4 py-3 text-orange-500">More
-                              Details</a>
-                      </div> --}}
+               
                 </div>
             </a>
         </div>
-        {{-- {{ dd($allProperties->multimediaAssets->images->img_file_name) }} --}}
 
-        {{-- {{dd($allProperties)}} --}}
+        
+
     @endforeach
-
-
-    @php
-        $imagePaths = [];
-        // Initialize an empty array to store image paths
-    @endphp
-
-    @foreach ($allProperties->multimediaAssets->images as $image)
-        @php
-            $imgPathsString = $image->img_file_name;
-            $imagePaths[] = $imgPathsString; // Add image path to the array
-        @endphp
-
-
-        @php
-            $imgPath = explode('","', substr($imgPathsString, 2, -2));
-        @endphp
-
-        @foreach ($imgPath as $path)
-            @php
-                $finalPath = str_replace('\\', '', $path);
-            @endphp
-            {{-- {{ dd($finalPath) }} --}}
-        @endforeach
-    @endforeach
-
-    @php
-        $basePath = 'app/';
-        $propertyImgPath = $basePath . $finalPath;
-        //    dd($propertyImgPath)
-    @endphp
-
-    {{-- <img src="{{ asset( 'app/' . $finalPath ) }}" alt="property-image"
-      class="w-full h-full object-cover"> --}}
 
 </div>
+

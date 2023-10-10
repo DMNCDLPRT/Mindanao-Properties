@@ -6,15 +6,25 @@
     width: 100%;
     transition: all 0.5s ease;
 }
+
 .img-showcase img{
     min-width: 100%;
 }
+
+
+
 .img-select{
     display: flex;
 }
 .img-item{
     margin: 0.3rem;
 }
+
+.img-select .img-item img{
+    width: 100%;
+    display: block;
+}
+
 .img-item:nth-child(1),
 .img-item:nth-child(2),
 .img-item:nth-child(3){
@@ -22,4 +32,14 @@
 }
 .img-item:hover{
     opacity: 0.8;
+}
+
+@media screen and (min-width: 992px){
+
+    .property-imgs{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
 }
