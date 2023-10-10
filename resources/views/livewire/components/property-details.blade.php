@@ -1,5 +1,5 @@
 <!-- Single Property -->
-<section class="px-4 py-4 bg-gray-200 lg:px-20 lg:py-8">
+<section class="px-4 py-4 bg-gray-100 lg:px-20 lg:py-8">
 
     <div class="flex flex-wrap lg:space-x-12">
 
@@ -10,51 +10,6 @@
                 {{ $property->title }}</h1>
 
 
-            {{--             
-            <!-- property image display div -->
-            <div class="img-display">
-                <div class="img-showcase">
-                   <!-- main image display -->
-                    <img src="https://images.unsplash.com/photo-1601760562234-9814eea6663a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmVhbGVzdGF0ZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                        alt="property" class="w-full">
-                    <img src="https://images.unsplash.com/photo-1448630360428-65456885c650?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=867&q=80"
-                        alt="property" class="w-full">
-                    <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=773&q=80"
-                        alt="property" class="w-full">
-                    <img src="https://images.unsplash.com/flagged/photo-1564767609342-620cb19b2357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=773&q=80"
-                        alt="property" class="w-full">
-
-
-                </div>
-
-                <div class="flex mt-4 space-x-4 img-select">
-                    <div class="img-item">
-                        <a href="" data-id="1">
-                            <img src="https://images.unsplash.com/photo-1601760562234-9814eea6663a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmVhbGVzdGF0ZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                                alt="property" class="w-12 lg:w-52">
-                        </a>
-                    </div>
-                    <div class="img-item">
-                        <a href="" data-id="2">
-                            <img src="https://images.unsplash.com/photo-1448630360428-65456885c650?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=867&q=80"
-                                alt="property" class="w-12 lg:w-52">
-                        </a>
-                    </div>
-                    <div class="img-item">
-                        <a href="" data-id="3">
-                            <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=773&q=80"
-                                alt="property" class="w-12 lg:w-52">
-                        </a>
-                    </div>
-                    <div class="img-item">
-                        <a href="" data-id="4">
-                            <img src="https://images.unsplash.com/flagged/photo-1564767609342-620cb19b2357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=773&q=80"
-                                alt="property" class="w-12 lg:w-52">
-                        </a>
-                    </div>
-
-                </div>
-            </div> --}}
             <div x-data="{ isOpen: false }" >
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2">
                     <div class=" overflow-hidden rounded-xl col-span-3 max-h-[14rem]">
@@ -195,94 +150,57 @@
 
 
                 {{-- features cards or aminities --}}
-                {{-- <div class="flex flex-col">
-                    <h2 class="mb-4 text-2xl font-bold">Property Features</h2>
-
-                    <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                        <div class="flex items-start rounded-xl bg-white p-4 shadow-lg">
-                            <div
-                                class="flex h-12 w-12 items-center justify-center rounded-full border border-blue-100 bg-blue-50">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-                                </svg>
-                            </div>
-
-                            <div class="ml-4">
-                                <h2 class="font-semibold">574 Messages</h2>
-                                <p class="mt-2 text-sm text-gray-500">Last opened 4 days ago</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start rounded-xl bg-white p-4 shadow-lg">
-                            <div
-                                class="flex h-12 w-12 items-center justify-center rounded-full border border-orange-100 bg-orange-50">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-400" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                </svg>
-                            </div>
-
-                            <div class="ml-4">
-                                <h2 class="font-semibold">1823 Users</h2>
-                                <p class="mt-2 text-sm text-gray-500">Last checked 3 days ago</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start rounded-xl bg-white p-4 shadow-lg">
-                            <div
-                                class="flex h-12 w-12 items-center justify-center rounded-full border border-red-100 bg-red-50">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-400" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                </svg>
-                            </div>
-
-                            <div class="ml-4">
-                                <h2 class="font-semibold">548 Posts</h2>
-                                <p class="mt-2 text-sm text-gray-500">Last authored 1 day ago</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start rounded-xl bg-white p-4 shadow-lg">
-                            <div
-                                class="flex h-12 w-12 items-center justify-center rounded-full border border-indigo-100 bg-indigo-50">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-                                </svg>
-                            </div>
-
-                            <div class="ml-4">
-                                <h2 class="font-semibold">129 Comments</h2>
-                                <p class="mt-2 text-sm text-gray-500">Last commented 8 days ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-
+               
                 {{-- features cards or aminities --}}
                 {{-- {{dd($property)}} --}}
 
                 <div class="rounded-lg bg-white p-8 shadow-md mt-10">
                     <h3 class="uppercase font-semibold text-base text-gray-800 mb-6">Property Features</h3>
-                    <div class="grid grid-cols-6 gap-y-8">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-y-8">
                         <div class="flex items-center flex-col">
                             <!-- feature icon -->
                             <span></span>
-                            <span class="text-gray-700 text-sm capitalize mt-2 text-center"></span>
+                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
+                        </div>
+                        
+                        <div class="flex items-center flex-col">
+                            <!-- feature icon -->
+                            <span></span>
+                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
+                        </div>
+                        <div class="flex items-center flex-col">
+                            <!-- feature icon -->
+                            <span></span>
+                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
+                        </div>
+                        <div class="flex items-center flex-col">
+                            <!-- feature icon -->
+                            <span></span>
+                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
+                        </div>
+                        <div class="flex items-center flex-col">
+                            <!-- feature icon -->
+                            <span></span>
+                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
+                        </div>
+                        <div class="flex items-center flex-col">
+                            <!-- feature icon -->
+                            <span></span>
+                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
+                        </div>
+                        <div class="flex items-center flex-col">
+                            <!-- feature icon -->
+                            <span></span>
+                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
                         </div>
                     </div>
-
                 </div>
 
             </div>
         </div>
 
         <!-- Inquire section -->
-        <div class="lg:w-1/3 lg:mt-4 lg:mb-10 mx-auto sm:w-full">
+        <div class="lg:w-1/3 lg:mt-4 lg:mb-10 sm:w-full sm:mt-10 mt-10 mx-auto">
             <div class="bg-white min-h-302 top-20 shadow-md rounded-md px-8 py-10 sticky">
                 <div class="text-center mb-8 text-lg font-bold">
                     <h5>Ask About the Property?</h5>

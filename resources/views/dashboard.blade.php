@@ -10,7 +10,7 @@
             @auth
                 @livewire('home')
             @else
-                @livewire('guest')
+                @livewire('welcome')
                 @if (Route::has('register'))
                     @livewire('home')
                 @endif

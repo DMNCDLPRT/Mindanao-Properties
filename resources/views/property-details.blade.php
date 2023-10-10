@@ -41,9 +41,8 @@
                 .then(data => callback(data.country_code))
                 .catch(() => callback("us"));
         },
-        utilsScript: "/intl-tel-input/js/utils.js?1690975972744"
+        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js"
         // just for formatting/placeholders etc
     });
 </script>
-
-               
+</html>
