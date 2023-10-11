@@ -78,7 +78,7 @@ class AddProperty extends Component
     public $longitude;
 
     /* Features */
-    public $features = [];
+    public $feature_names = [];
 
 
     protected $listeners = ['updateImgFileName' => 'setImageFileName', 'updateDocsFileName' => 'setDocsFileName'];
@@ -145,7 +145,7 @@ class AddProperty extends Component
             'address'           => 'nullable',
 
             /* Amenities */
-            'features'       => '',
+            'feature_names'       => '',
         ];
     }
 
@@ -283,7 +283,7 @@ class AddProperty extends Component
     public $hasIndoor;
 
     public $subtypes;
-    public $feature;
+    public $features;
     public $propertyType;
 
     public function wirePropertyClick($id)
@@ -293,7 +293,7 @@ class AddProperty extends Component
         $hasOutdoor = false;
 
         $this->reset('subtype_id'); 
-        $this->reset('features');
+        $this->reset('feature_names');
 
         $subtypes = SubTypes::where('property_type_id', $id)->get();
 
@@ -325,7 +325,7 @@ class AddProperty extends Component
 
         $this->propertyType = $propertyType;
         $this->subtypes = $subtypesArray;
-        $this->feature = $featuresArray;
+        $this->features = $featuresArray;
     }
 
     public function removeImage ($image) {

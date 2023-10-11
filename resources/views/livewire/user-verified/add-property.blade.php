@@ -699,7 +699,7 @@
             @foreach ($features as $feat)
             @if ($feat->type == 'indoor')
             <div class="flex items-center pl-4 border-2 bg-slate-800 border-gray-800 rounded-md dark:border-gray-700 grow max-w-[180px]">
-              <x-checkbox id="{{ $feat->id }}" wire:model="features_id" value="{{ $feat->name }}" name="offer_type" />
+              <x-checkbox id="{{ $feat->id }}" wire:model="feature_names" value="{{ $feat->name }}" name="offer_type" />
               <x-label value="{{ $feat->name }}" for="{{ $feat->id }}" class="w-full py-2 mx-2 text-sm text-white font-medium dark:text-gray-300 rounded-md" />
             </div>
             @endif
@@ -715,7 +715,7 @@
             @foreach ($features as $feat)
             @if ($feat->type == 'outdoor')
             <div class="flex items-center pl-4 border-2 bg-slate-800 border-gray-800 rounded-md dark:border-gray-700 grow max-w-[180px]">
-              <x-checkbox id="{{ $feat->id }}" wire:model="features" value="{{ $feat->name }}" name="offer_type" />
+              <x-checkbox id="{{ $feat->id }}" wire:model="feature_names" value="{{ $feat->name }}" name="offer_type" />
               <x-label value="{{ $feat->name }}" for="{{ $feat->id }}" class="w-full py-2 mx-2 text-sm text-white font-medium dark:text-gray-300 rounded-md" />
             </div>
             @endif
