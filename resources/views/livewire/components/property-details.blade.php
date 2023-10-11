@@ -42,23 +42,13 @@
                         </button>
 
                         @livewire('components.image-modal')
-                   
-                     
-
-
+                        
                         <img class="h-full w-full object-cover "
                             src="https://images.unsplash.com/photo-1560393464-5c69a73c5770?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80"
                             alt="">
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
 
 
             <div class="mt-10">
@@ -108,18 +98,18 @@
                             <!-- loop through labels and data -->
 
                             @foreach ([
-        'Subdivision Name' => ['value' => $property->propertyInfo->subdivision_name],
-        'Address' => ['value' => $property->propertyLocation->display_name],
-        'Block and Lot/Unit Number' => ['value' => $property->block_lot_number],
-        'Build year' => ['value' => $property->propertyInfo->build_year],
-        'Car spaces' => ['value' => $property->propertyInfo->car_spaces],
-        'Classification' => ['value' => $property->propertyInfo->classification],
-        'Fully furnished' => ['value' => $property->propertyInfo->fully_furnished],
-        'Beedrooms' => ['value' => $property->propertyInfo->bedrooms],
-        'Bathrooms' => ['value' => $property->propertyInfo->bathrooms],
-        'Floor area (m2)' => ['value' => $property->propertyInfo->floor_area],
-        'Land size (m2)' => ['value' => $property->propertyInfo->land_size],
-    ] as $label => $data)
+                                'Subdivision Name' => ['value' => $property->propertyInfo->subdivision_name],
+                                'Address' => ['value' => $property->propertyLocation->display_name],
+                                'Block and Lot/Unit Number' => ['value' => $property->block_lot_number],
+                                'Build year' => ['value' => $property->propertyInfo->build_year],
+                                'Car spaces' => ['value' => $property->propertyInfo->car_spaces],
+                                'Classification' => ['value' => $property->propertyInfo->classification],
+                                'Fully furnished' => ['value' => $property->propertyInfo->fully_furnished],
+                                'Beedrooms' => ['value' => $property->propertyInfo->bedrooms],
+                                'Bathrooms' => ['value' => $property->propertyInfo->bathrooms],
+                                'Floor area (m2)' => ['value' => $property->propertyInfo->floor_area],
+                                'Land size (m2)' => ['value' => $property->propertyInfo->land_size],
+                            ] as $label => $data)
                                 @if ($data['value'])
                                     <div class="py-3 grid grid-cols-2 gap-5 border-t border-solid border-gray-300">
                                         <!-- Listing label -->
@@ -149,8 +139,6 @@
                 </div>
 
 
-                {{-- features cards or aminities --}}
-               
                 {{-- features cards or aminities --}}
                 {{-- {{dd($property)}} --}}
 

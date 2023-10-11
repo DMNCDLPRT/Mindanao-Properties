@@ -21,8 +21,25 @@
         @if (Route::has('add.property'))
         <link href="https://tiles.locationiq.com/v3/libs/maplibre-gl/1.15.2/maplibre-gl.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://tiles.locationiq.com/v3/libs/gl-geocoder/4.5.1/locationiq-gl-geocoder.css?v=0.2.3" type="text/css" />
-        
-        
+
+        <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+
+        <!-- importe css -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/swiper-bundle.min.css" />
+
+        <!-- custom css -->
+        <link rel="stylesheet" href="css/style.css" />
+      
+
+        {{-- import scripts --}}
+        <script src="js/swiper-bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+
+        {{-- custom scripts --}}
+        <script src="js/script.js"></script>
+
         <style>
             #map {
                 position: relative;
