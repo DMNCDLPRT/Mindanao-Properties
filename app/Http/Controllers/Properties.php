@@ -51,6 +51,25 @@ class Properties extends Controller
         ]);
         
     }
+
+    public function featuredProperties()
+    {
+        // Retrieve all properties with their associated data
+        $featuredProperty = Property::with([
+            'user',
+            'offerType',
+            'propertyClassification.type',
+            'propertyLocation',
+            'propertyInfo',
+            'multimediaAssets.images',
+        ])->get();
+
+        return view('properties', [
+            'featuredProperty' => $featuredProperty,
+         
+        ]);
+    }
+
    
     
 }

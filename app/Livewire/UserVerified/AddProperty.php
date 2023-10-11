@@ -256,7 +256,6 @@ class AddProperty extends Component
         foreach($validatedData['features_id'] as $feature) {
             PropertyFeature::create([
                 'id' => Uuid::uuid4(),
-                'properties_id' => $property->id,
                 'feature_id' => $feature,
             ]);
         }

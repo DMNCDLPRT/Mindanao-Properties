@@ -19,7 +19,22 @@
 
         <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
-                
+
+        <!-- importe css -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/swiper-bundle.min.css" />
+
+        <!-- custom css -->
+        <link rel="stylesheet" href="css/style.css" />
+      
+
+        {{-- import scripts --}}
+        <script src="js/swiper-bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+
+        {{-- custom scripts --}}
+        <script src="js/script.js"></script>
+
         <style>
             #map {
                 position: relative;
