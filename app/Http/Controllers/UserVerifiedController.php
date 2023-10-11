@@ -15,6 +15,8 @@ class UserVerifiedController extends Controller
         $offer_types    = OfferType::all();
         $property_types = PropertyType::all();
         $subtypes       = SubTypes::all();
+
+        // dd($offer_types,  $property_types, $subtypes);
     
         return view('user-verified.add-property', [
             'offer_type'    => $offer_types,

@@ -12,21 +12,80 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
         
+        @vite(['resources/css/app.css', 'resources/js/app.js',])
+
         <!-- Styles -->
         @livewireStyles
+
+        @if (Route::has('add.property'))
+        <link href="https://tiles.locationiq.com/v3/libs/maplibre-gl/1.15.2/maplibre-gl.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://tiles.locationiq.com/v3/libs/gl-geocoder/4.5.1/locationiq-gl-geocoder.css?v=0.2.3" type="text/css" />
+        
+        
+        <style>
+            #map {
+                position: relative;
+                width: 100%;
+            }
+        </style>
+
+
+        <link rel="stylesheet" href="{{ asset('css/filepond.css') }}">
+        <link
+            href="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css"
+            rel="stylesheet"
+        />
+    
+        <link
+            href="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css"
+            rel="stylesheet"
+        />
+        <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+        <link href="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css" rel="stylesheet" />
+        <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
+        @endif
+
+
+        @livewireScripts
+
+        @if (Route::has('add.property'))
+        <script src="https://tiles.locationiq.com/v3/libs/maplibre-gl/1.15.2/maplibre-gl.js"></script>
+        <script src="https://tiles.locationiq.com/v3/libs/gl-geocoder/4.5.1/locationiq-gl-geocoder.min.js?v=0.2.3"></script>
+
+        <script src="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+
+        <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+        
+        <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+
+        <script>
+            FilePond.registerPlugin(
+                FilePondPluginFileEncode,           // encodes the file as base64 data     
+                FilePondPluginImagePreview,         // previews dropped images
+                FilePondPluginImageExifOrientation, // corrects mobile image orientation
+                FilePondPluginFileValidateSize,     // validates the size of the file
+                FilePondPluginFileValidateType,
+            );
+        </script>
+        @endif
+
     </head>
     <body class="font-sans antialiased dark:bg-slate-800">
         <x-banner />
 
-        <div class="min-h-screen bg-gray-100">
-            {{-- @livewire('navigation-menu') --}}
-            <x-front.auth-nav />
-
+        <div class="min-h-screen bg-gray-100 dark:bg-slate-800">
+            @livewire('navigation-menu')
+            
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white shadow">
+                <header class="bg-white shadow dark:bg-slate-500">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
@@ -40,7 +99,5 @@
         </div>
 
         @stack('modals')
-
-        @livewireScripts
     </body>
 </html>

@@ -3,6 +3,9 @@
         <x-slot name="logo">
             <x-authentication-card-logo />
         </x-slot>
+        <x-slot name="name">
+            <x-header-label value="{{__('Register')}}" class="text-xl text-center"/>
+        </x-slot>
 
         <x-validation-errors class="mb-4" />
 

@@ -1,0 +1,30 @@
+/**
+ * FilePond Custom Styles
+ */
+ .filepond--drop-label {
+	color: #ffffff;
+    border: #595e68;
+    background-color: aliceblue;
+    border-style: dashed;
+    border-width: 1cm;
+    border: #595e68;
+}
+
+.filepond--label-action {
+	text-decoration-color: #000000;
+}
+
+.filepond--panel-root {
+	border-radius: 2em;
+	background-color: #edf0f4;
+	height: 1em;
+}
+
+.filepond--item-panel {
+	background-color: #595e68;
+}
+
+.filepond--drip-blob {
+	background-color: #7f8a9a;
+}
+
