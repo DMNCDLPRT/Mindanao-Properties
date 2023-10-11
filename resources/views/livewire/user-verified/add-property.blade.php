@@ -91,7 +91,7 @@
         @enderror
         <div wire:ignore class="pb-4">
           <x-label for="text_area" value="{{ __('Description') }}" class="block mb-2 mt-2 text-sm font-medium dark:text-gray-500" />
-          <textarea wire:model="description" id="text_area" class="static text_area"></textarea>
+          <textarea wire:model="description" id="text_area" class="static text_area hidden"></textarea>
         </div>
       </section>
     
