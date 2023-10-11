@@ -18,8 +18,7 @@ class PropertyFeature extends Model
 
     protected $fillable = [
         'id',
-        'properties_id',
-        'feature_id',
+        'features',
     ];
 
     public function property () {

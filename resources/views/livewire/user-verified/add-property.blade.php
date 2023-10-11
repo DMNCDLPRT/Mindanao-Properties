@@ -104,7 +104,6 @@
             header="Upload photos, videos and other media" 
             description="Users looking for property ignore properties without photos. Make your property stand out by uploading photos or, even better, a video!" 
         />
-        <div wire:ignore>
           {{-- Images --}}
           <div class="pb-4 static">
             @error('img_file_name')
@@ -114,29 +113,35 @@
                 </span>
             </div>
             @enderror
-            <div class="mb-6 pt-4">
-              <x-header-label value=" {{ __('Upload Images Here') }} " />
-              <input type="file" wire:model="img_file_name" id="img_file_name" class="filepond" name="filepond" data-max-files="5" data-allow-reorder="true" data-max-file-size="5MB" multiple>
-            </div>
+            <x-form.image-form wire:model="img_file_name"
+              multiple
+              allowImagePreview
+              allowFileTypeValidation
+              acceptedFileTypes="['image/png', 'image/jpg', 'image/jpeg']"
+              allowFileSizeValidation
+              maxFileSize="4mb"
+            />
           </div>
           {{-- Image Upload - End Input - --}}
       
           {{-- Media --}}
           <div class="pb-4 ">
-              @error('docs_file_name')
-              <div class="mt-4">
-                  <span class="text-red-600 mt-5" role="alert">
-                      <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
-                  </span>
-              </div>
-              @enderror
-              <div class="mb-6">
-                <x-header-label value=" {{ __('Upload other media') }} " />
-                <input type="file" wire:model="docs_file_name" id="docs_file_name" class="filepond" data-max-files="3" data-allow-reorder="true" data-max-file-size="5MB" multiple>
-              </div>
+            @error('docs_file_name')
+            <div class="mt-4" >
+              <span class="text-red-600 mt-5" role="alert">
+                  <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+              </span>
+            </div>
+            @enderror
+            <x-form.pdf-form wire:model="docs_file_name"
+              multiple
+              allowFileTypeValidation
+              acceptedFileTypes="['application/pdf']"
+              allowFileSizeValidation
+              maxFileSize="4mb"
+            />
           </div>
           {{-- Media Upload - End Input - --}}
-        </div>
     
         {{-- YouTube Link --}}
         <div class="pb-4 grow">
@@ -694,7 +699,7 @@
             @foreach ($features as $feat)
             @if ($feat->type == 'indoor')
             <div class="flex items-center pl-4 border-2 bg-slate-800 border-gray-800 rounded-md dark:border-gray-700 grow max-w-[180px]">
-              <x-checkbox id="{{ $feat->id }}" wire:model="features_id" value="{{ $feat->id }}" name="offer_type" />
+              <x-checkbox id="{{ $feat->id }}" wire:model="feature_names" value="{{ $feat->name }}" name="offer_type" />
               <x-label value="{{ $feat->name }}" for="{{ $feat->id }}" class="w-full py-2 mx-2 text-sm text-white font-medium dark:text-gray-300 rounded-md" />
             </div>
             @endif
@@ -710,7 +715,7 @@
             @foreach ($features as $feat)
             @if ($feat->type == 'outdoor')
             <div class="flex items-center pl-4 border-2 bg-slate-800 border-gray-800 rounded-md dark:border-gray-700 grow max-w-[180px]">
-              <x-checkbox id="{{ $feat->id }}" wire:model="features_id" value="{{ $feat->id }}" name="offer_type" />
+              <x-checkbox id="{{ $feat->id }}" wire:model="feature_names" value="{{ $feat->name }}" name="offer_type" />
               <x-label value="{{ $feat->name }}" for="{{ $feat->id }}" class="w-full py-2 mx-2 text-sm text-white font-medium dark:text-gray-300 rounded-md" />
             </div>
             @endif
@@ -823,7 +828,6 @@
   </x-slot>
 </x-form-section>
 
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
@@ -841,33 +845,6 @@
       });
     }
   });
-</script>
-
-<script>
-  FilePond.registerPlugin(
-    FilePondPluginFileEncode,           // encodes the file as base64 data     
-    FilePondPluginImagePreview,         // previews dropped images
-    FilePondPluginImageExifOrientation, // corrects mobile image orientation
-    FilePondPluginFileValidateSize,     // validates the size of the file
-    FilePondPluginImageEdit,
-    FilePondPluginFileValidateType,
-  );
-
-  var inputImageElement = document.getElementById('img_file_name');
-  var pondImage = FilePond.create(inputImageElement, {
-    allowMultiple: true,            // Allow multiple file uploads
-    acceptedFileTypes: ['image/*'], // Specify accepted file types (images)
-    maxFileSize: '5MB'
-  });
-
-
-  var inputDocsElement = document.getElementById('docs_file_name');
-  var pondDocs = FilePond.create(inputDocsElement, {
-    allowMultiple: true,                 // Allow multiple file uploads
-    acceptedFileTypes: ['application/pdf'], // Specify accepted file types (PDF)
-    maxFileSize: '5MB'
-  });
-
 </script>
 
 <script src="{{ asset('js/locationiq.js') }}"></script>
