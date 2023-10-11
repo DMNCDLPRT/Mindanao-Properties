@@ -136,13 +136,13 @@ class AddProperty extends Component
             'object_id'         => 'nullable',
 
             /* Location */
-            'province'          => 'nullable',
-            'city'              => 'nullable',
-            'display_name'      => 'nullable',
-            'latitude'          => 'nullable|numeric|between:-90,90',
-            'longitude'         => 'nullable|numeric|between:-180,180',
-            'barangay'          => 'nullable',
-            'address'           => 'nullable',
+            'province'          => 'required',
+            'city'              => 'required',
+            'display_name'      => 'required',
+            'latitude'          => 'required|numeric|between:-90,90',
+            'longitude'         => 'required|numeric|between:-180,180',
+            'barangay'          => 'required',
+            'address'           => 'required',
 
             /* Amenities */
             'feature_names'       => '',
@@ -163,7 +163,7 @@ class AddProperty extends Component
         $thisPropertyId = Uuid::uuid4();
 
         $images = [];
-        $uploadImagesPath = 'public/uploads/properties/' . $thisPropertyId . '/' . 'images/';
+        $uploadImagesPath = 'uploads/properties/' . $thisPropertyId . '/' . 'images/';
 
         foreach($validatedData['img_file_name'] as $image){
             $filename = time() . '-' . Str::random(8) . '-' . $image->getClientOriginalName();
@@ -178,7 +178,7 @@ class AddProperty extends Component
         ]);
 
         $documents = [];
-        $uploadDocsPath = 'public/uploads/properties/' . $thisPropertyId . '/' . 'docs';
+        $uploadDocsPath = 'uploads/properties/' . $thisPropertyId . '/' . 'docs';
 
         foreach($validatedData['docs_file_name'] as $docs) {
             $filename = time() . '-' . Str::random(8) . '-' . $docs->getClientOriginalName();
@@ -245,7 +245,7 @@ class AddProperty extends Component
         
         PropertyFeature::create([
             'id' => Uuid::uuid4(),
-            'features' => json_encode($validatedData['features']),
+            'features' => json_encode($validatedData['feature_names']),
         ]);
 
         Property::create([
