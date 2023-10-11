@@ -26,7 +26,7 @@ class PropertyClassification extends Model
     }
 
     public function type () {
-        return $this->hasOne(PropertyType::class, 'property_type_id');
+        return $this->hasOne(PropertyType::class, 'id', 'property_type_id');
     }
 
     public function subtype () {

@@ -30,7 +30,7 @@
                                         @php
                                             $finalPath = str_replace('\\', '', $path);
                                         @endphp
-                                        {{-- {{ dd($finalPath) }} --}}
+                                    
                                     @endforeach
                                 @endforeach
 
@@ -205,14 +205,11 @@
                             </p>
                         </div>
                     </div>
-                    {{-- <div class="">
-                          <a href="{{ route('property-details', ['id' => $allProperties->id]) }}"
-                              class="flex justify-center items-center w-1/2 text-base font-bold cursor-pointer border-2 border-solid border-blue-600 rounded-md px-4 py-3 text-orange-500">More
-                              Details</a>
-                      </div> --}}
+               
                 </div>
             </a>
         </div>
     @endforeach
 
 </div>
+
