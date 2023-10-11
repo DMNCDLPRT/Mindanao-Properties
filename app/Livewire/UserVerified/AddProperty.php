@@ -78,7 +78,7 @@ class AddProperty extends Component
     public $longitude;
 
     /* Features */
-    public $features_id = [];
+    public $features = [];
 
 
     protected $listeners = ['updateImgFileName' => 'setImageFileName', 'updateDocsFileName' => 'setDocsFileName'];
@@ -92,15 +92,15 @@ class AddProperty extends Component
     {
         return [
             /* Property */
-            'title'             => 'required',
-            'description'       => 'required',
+            'title'             => 'required|string',
+            'description'       => 'required|string',
             'offer_type_id'     => 'required',
             'property_type_id'  => 'required',
             'subtype_id'        => 'required',
 
             /* Multiedia */
             'img_file_name'     => 'nullable|sometimes|array',
-            'img_file_name.*'   => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:3048',
+            'img_file_name.*'   => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5048',
             'docs_file_name'    => 'nullable|',
             'yt_link'           => 'nullable|string',
             'vt_link'           => 'nullable|string',
@@ -145,7 +145,7 @@ class AddProperty extends Component
             'address'           => 'nullable',
 
             /* Amenities */
-            'features_id'       => '',
+            'features'       => '',
         ];
     }
 
@@ -163,11 +163,11 @@ class AddProperty extends Component
         $thisPropertyId = Uuid::uuid4();
 
         $images = [];
-        $uploadImagesPath = 'uploads/properties/' . $thisPropertyId . '/' . 'images';
+        $uploadImagesPath = 'public/uploads/properties/' . $thisPropertyId . '/' . 'images/';
 
         foreach($validatedData['img_file_name'] as $image){
             $filename = time() . '-' . Str::random(8) . '-' . $image->getClientOriginalName();
-            $image->storeAs('public/', $uploadImagesPath, $filename);
+            $image->storeAs($uploadImagesPath, $filename, 'public');
             $finalImagePathName = $uploadImagesPath . $filename;
             $images[] = $finalImagePathName;
         }
@@ -178,11 +178,11 @@ class AddProperty extends Component
         ]);
 
         $documents = [];
-        $uploadDocsPath = 'uploads/properties/' . $thisPropertyId . '/' . 'docs';
+        $uploadDocsPath = 'public/uploads/properties/' . $thisPropertyId . '/' . 'docs';
 
         foreach($validatedData['docs_file_name'] as $docs) {
             $filename = time() . '-' . Str::random(8) . '-' . $docs->getClientOriginalName();
-            $docs->storeAs('public/', $uploadDocsPath,$filename);
+            $docs->storeAs($uploadDocsPath,$filename, 'public');
             $finalDocPathName = $uploadDocsPath . $filename;
             $documents[] = $finalDocPathName;
         }
@@ -242,8 +242,13 @@ class AddProperty extends Component
             'object_id'         =>  $validatedData['object_id'],
         ]);
 
+        
+        PropertyFeature::create([
+            'id' => Uuid::uuid4(),
+            'features' => json_encode($validatedData['features']),
+        ]);
 
-        $property = Property::create([
+        Property::create([
             'id'                            => $thisPropertyId,
             'title'                         => $validatedData['title'],
             'description'                   => $validatedData['description'],
@@ -256,13 +261,7 @@ class AddProperty extends Component
         ]);
 
 
-        foreach($validatedData['features_id'] as $feature) {
-            PropertyFeature::create([
-                'id' => Uuid::uuid4(),
-                'properties_id' => $property->id,
-                'feature_id' => $feature,
-            ]);
-        }
+        
         $this->reset($validatedData);
         session()->flash('message', 'Congratulations! Your property listing has been successfully posted on our website. 🏡 Thank you for choosing us to showcase your property. It\'s now visible to potential buyers or renters. Good luck with your property sale or rental journey! If you have any updates or need assistance, feel free to reach out to our support team.');
     }
@@ -284,7 +283,7 @@ class AddProperty extends Component
     public $hasIndoor;
 
     public $subtypes;
-    public $features;
+    public $feature;
     public $propertyType;
 
     public function wirePropertyClick($id)
@@ -294,7 +293,7 @@ class AddProperty extends Component
         $hasOutdoor = false;
 
         $this->reset('subtype_id'); 
-        $this->reset('features_id');
+        $this->reset('features');
 
         $subtypes = SubTypes::where('property_type_id', $id)->get();
 
@@ -326,7 +325,7 @@ class AddProperty extends Component
 
         $this->propertyType = $propertyType;
         $this->subtypes = $subtypesArray;
-        $this->features = $featuresArray;
+        $this->feature = $featuresArray;
     }
 
     public function removeImage ($image) {

@@ -61,10 +61,19 @@
         <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
         <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
         <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
-        <script src="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js"></script>
         <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
         
         <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+
+        <script>
+            FilePond.registerPlugin(
+                FilePondPluginFileEncode,           // encodes the file as base64 data     
+                FilePondPluginImagePreview,         // previews dropped images
+                FilePondPluginImageExifOrientation, // corrects mobile image orientation
+                FilePondPluginFileValidateSize,     // validates the size of the file
+                FilePondPluginFileValidateType,
+            );
+        </script>
         @endif
 
     </head>
