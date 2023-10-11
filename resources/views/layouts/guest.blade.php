@@ -9,26 +9,14 @@
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
-        
-        <!-- importe css -->
-        <link rel="stylesheet" href="css/swiper-bundle.min.css" />
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
-
-        <!-- custom css -->
-        <link rel="stylesheet" href="/css/style.css" />
-
-        {{-- import scripts --}}
-        <script src="/js/swiper-bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
-
-        {{-- custom scripts --}}
-        <script src="/js/script.js"></script>
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <!-- Styles -->
         @livewireStyles
+        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
@@ -37,5 +25,7 @@
         </div>
 
         @livewireScripts
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+        <script src="https://cdn.tailwindcss.com"></script>  
     </body>
 </html>
