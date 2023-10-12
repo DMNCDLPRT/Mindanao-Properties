@@ -178,7 +178,7 @@ class AddProperty extends Component
         ]);
 
         $documents = [];
-        $uploadDocsPath = 'uploads/properties/' . $thisPropertyId . '/' . 'docs';
+        $uploadDocsPath = 'uploads/properties/' . $thisPropertyId . '/' . 'docs/';
 
         foreach($validatedData['docs_file_name'] as $docs) {
             $filename = time() . '-' . Str::random(8) . '-' . $docs->getClientOriginalName();

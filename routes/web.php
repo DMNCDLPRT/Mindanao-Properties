@@ -48,6 +48,11 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',
             Route::get('properties/add-property', 'addproperty')
                 ->name('add.property');
         }); */
+
+        // pdf download route          
+        Route::controller(App\Http\Controllers\DownloadPDFController::class)->group(function () {
+            Route::get('/download-pdf/{id}', 'downloadPDF')->name('download.pdf');
+        });
 });
 
 
