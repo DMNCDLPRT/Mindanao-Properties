@@ -11,25 +11,44 @@
 
 
             <div x-data="{ isOpen: false }" >
+                    @php
+                        $cleanedPaths = [];
+                    @endphp
+
+                    @foreach ($property->multimediaAssets->images as $image)
+                    
+                        @php
+                            $imagePath = $image->img_file_name;
+                            
+                            $cleanedPath = explode('","', substr($imagePath, 2, -2));
+                            // dd($cleanedPath);
+                            $finalPath = str_replace('/', '', $cleanedPath);
+                            // dd($finalPath); 
+
+                        
+                        @endphp
+                        
+                    @endforeach
+
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2">
                     <div class=" overflow-hidden rounded-xl col-span-3 max-h-[14rem]">
                         <img  @click="isOpen = true" class="h-full w-full object-cover cursor-pointer"
-                            src="https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
+                            src="{{ asset('storage\\' . $finalPath[0]) }}"
                             alt="">
                     </div>
                     <div class=" overflow-hidden rounded-xl col-span-3 max-h-[14rem]">
                         <img @click="isOpen = true" class="h-full w-full object-cover  cursor-pointer"
-                            src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1399&q=80"
+                            src="{{ asset('storage\\' . $finalPath[1]) }}"
                             alt="">
                     </div>
                     <div class=" overflow-hidden rounded-xl col-span-2 max-h-[10rem]">
                         <img  @click="isOpen = true" class="h-full w-full object-cover cursor-pointer"
-                            src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+                            src="{{ asset('storage\\' . $finalPath[2]) }}"
                             alt="">
                     </div>
                     <div class=" overflow-hidden rounded-xl col-span-2 max-h-[10rem]">
                         <img  @click="isOpen = true" class="h-full w-full object-cover cursor-pointer"
-                            src="https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                            src="{{ asset('storage\\' . $finalPath[3]) }}"
                             alt="">
                     </div>
                     <div class="relative overflow-hidden rounded-xl col-span-2 max-h-[10rem]">
@@ -41,10 +60,10 @@
                             <span class="mt-2">More Photos</span>
                         </button>
 
-                        @livewire('components.image-modal')
+                        @livewire('components.image-modal', ['property' => $property])
                         
                         <img class="h-full w-full object-cover "
-                            src="https://images.unsplash.com/photo-1560393464-5c69a73c5770?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80"
+                            src="{{ asset('storage\\' . $finalPath[4]) }}"
                             alt="">
                     </div>
                 </div>
