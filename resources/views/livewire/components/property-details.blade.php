@@ -69,7 +69,6 @@
                 </div>
             </div>
 
-
             <div class="mt-10">
                 <!-- div for description -->
                 <div>
@@ -87,9 +86,11 @@
                             contentDiv.innerHTML = htmlString;
                         </script>
                     </div>
-                    <button id="read-more-btn"
+                    @if (strlen($property->description) > 100)
+                        <button id="read-more-btn"
                         class="flex justify-center w-full text-blue-500 hover:underline focus:outline-none">Read
                         More...</button>
+                    @endif
                 </div>
 
                 <script>
@@ -107,7 +108,6 @@
                 </script>
 
                 {{-- add property details here --}}
-
 
                 <div class="mt-10">
                     <h2 class="mb-4 text-2xl font-bold">Property Details</h2>
@@ -159,47 +159,29 @@
 
 
                 {{-- features cards or aminities --}}
-                {{-- {{dd($property)}} --}}
+                {{-- {{dd($property->features->features)}} --}}
 
                 <div class="rounded-lg bg-white p-8 shadow-md mt-10">
                     <h3 class="uppercase font-semibold text-base text-gray-800 mb-6">Property Features</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-y-8">
-                        <div class="flex items-center flex-col">
-                            <!-- feature icon -->
-                            <span></span>
-                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
-                        </div>
                         
-                        <div class="flex items-center flex-col">
-                            <!-- feature icon -->
-                            <span></span>
-                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
-                        </div>
-                        <div class="flex items-center flex-col">
-                            <!-- feature icon -->
-                            <span></span>
-                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
-                        </div>
-                        <div class="flex items-center flex-col">
-                            <!-- feature icon -->
-                            <span></span>
-                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
-                        </div>
-                        <div class="flex items-center flex-col">
-                            <!-- feature icon -->
-                            <span></span>
-                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
-                        </div>
-                        <div class="flex items-center flex-col">
-                            <!-- feature icon -->
-                            <span></span>
-                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
-                        </div>
-                        <div class="flex items-center flex-col">
-                            <!-- feature icon -->
-                            <span></span>
-                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
-                        </div>
+                        @php
+                            $input = $property->features->features; 
+                            $inputWithoutQuotes = str_replace(['[', ']', '"'], '', $input);
+                            
+                            $separatedItems  = explode(',', $inputWithoutQuotes);
+                            // dd($separatedItems);
+                        @endphp
+
+                        @foreach ($separatedItems as $propertyFeatures)
+                            
+                            <div class="flex items-center flex-col">
+                                <!-- feature icon -->
+                                <span></span>
+                                <span class="text-gray-700 text-sm capitalize mt-2 text-center">{{ $propertyFeatures }}</span>
+                            </div>
+                        @endforeach
+
                     </div>
                 </div>
 

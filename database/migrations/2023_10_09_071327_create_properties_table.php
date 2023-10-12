@@ -35,7 +35,7 @@ return new class extends Migration
             $table->uuid('property_multimedia_assets_id', 36);
             $table->foreign('property_multimedia_assets_id')->references('id')->on('multimedia_assets');
             
-            $table->uuid('property_features_id')->nullable();
+            $table->uuid('property_features_id', 36)->nullable();
             $table->foreign('property_features_id')->references('id')->on('property_features');
 
             $table->timestamps();
