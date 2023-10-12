@@ -26,6 +26,7 @@ class Property extends Model
         'property_location_id',
         'property_info_id',
         'property_multimedia_assets_id',
+        'property_features_id'
     ];
 
     public function user()
@@ -59,7 +60,7 @@ class Property extends Model
 }
 
     public function features () {
-        return $this->hasMany(PropertyFeature::class);
+        return $this->belongsTo(PropertyFeature::class, 'property_features_id', 'id');
     }
 
 }

@@ -243,7 +243,7 @@ class AddProperty extends Component
         ]);
 
         
-        PropertyFeature::create([
+        $properrtyFeature = PropertyFeature::create([
             'id' => Uuid::uuid4(),
             'features' => json_encode($validatedData['feature_names']),
         ]);
@@ -258,6 +258,7 @@ class AddProperty extends Component
             'property_location_id'          => $location->id,
             'property_info_id'              => $PropertyKeyInfo->id,
             'property_multimedia_assets_id' => $assets->id,
+            'property_features_id'          => $properrtyFeature->id,
         ]);
 
 
