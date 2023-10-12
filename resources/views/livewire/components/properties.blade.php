@@ -7,41 +7,30 @@
                 <div class="shadow p-4 rounded-lg bg-white">
                     <div class="flex justify-center relative rounded-lg overflow-hidden h-52">
                         <div class="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
-                            <div class="absolute inset-0 bg-black opacity-10">
+                            <div class="absolute inset-0">
+                                
                                 @php
-                                    $imagePaths = [];
-                                    // Initialize an empty array to store image paths
+                                    $cleanedPaths = [];
                                 @endphp
 
                                 @foreach ($allProperties->multimediaAssets->images as $image)
+                                   
                                     @php
-                                        $imgPathsString = $image->img_file_name;
-                                        $imagePaths[] = $imgPathsString; // Add image path to the array
-
-                                    
+                                        $imagePath = $image->img_file_name;
+                                        
+                                        $cleanedPath = explode('","', substr($imagePath, 2, -2));
+                                        // dd($cleanedPath);
+                                        $finalPath = str_replace('/', '', $cleanedPath);
+                                        // dd($finalPath); 
+            
+                                       
                                     @endphp
-
-
-                                    @php
-                                        $imgPath = explode('","', substr($imgPathsString, 2, -2));
-                                    @endphp
-
-                                    @foreach ($imgPath as $path)
-                                        @php
-                                            $finalPath = str_replace('\\', '', $path);
-                                        @endphp
                                     
-                                    @endforeach
                                 @endforeach
 
-                                @php
-                                    $basePath = './app/';
-                                    $propertyImgPath = $basePath . $finalPath;
-                                    //    dd($propertyImgPath)
-                                @endphp
                              
 
-                                <img src="{{ asset($propertyImgPath) }}" alt="property-image"
+                                <img src="{{ asset('storage\\' . $finalPath[0]) }}" alt="property-image"
                                     class="w-full h-full object-cover">
                             </div>
                         </div>
@@ -110,7 +99,7 @@
                             </span>
                         @endif
 
-
+                    
                     </div>
 
                     <div class="mt-4">
@@ -209,9 +198,6 @@
                 </div>
             </a>
         </div>
-
-        
-
     @endforeach
 
 </div>

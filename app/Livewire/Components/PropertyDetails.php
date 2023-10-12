@@ -7,7 +7,6 @@ use Livewire\Component;
 
 class PropertyDetails extends Component
 {
-
     public $property;
 
     public function mount(Property $property)
@@ -20,6 +19,4 @@ class PropertyDetails extends Component
     {
         return view('livewire.components.property-details');
     }
-
-
 }

@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Livewire\Components;
-use App\Models\Property;
 
 use Livewire\Component;
+use App\Models\Property;
 
 class InquiryModal extends Component
 {
+
     public $property;
 
     public function mount(Property $property)

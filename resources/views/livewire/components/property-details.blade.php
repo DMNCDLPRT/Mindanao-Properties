@@ -1,5 +1,5 @@
 <!-- Single Property -->
-<section class="px-4 py-4 bg-gray-200 lg:px-20 lg:py-8">
+<section class="px-4 py-4 bg-gray-100 lg:px-20 lg:py-8">
 
     <div class="flex flex-wrap lg:space-x-12">
 
@@ -10,71 +10,45 @@
                 {{ $property->title }}</h1>
 
 
-            {{--             
-            <!-- property image display div -->
-            <div class="img-display">
-                <div class="img-showcase">
-                   <!-- main image display -->
-                    <img src="https://images.unsplash.com/photo-1601760562234-9814eea6663a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmVhbGVzdGF0ZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                        alt="property" class="w-full">
-                    <img src="https://images.unsplash.com/photo-1448630360428-65456885c650?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=867&q=80"
-                        alt="property" class="w-full">
-                    <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=773&q=80"
-                        alt="property" class="w-full">
-                    <img src="https://images.unsplash.com/flagged/photo-1564767609342-620cb19b2357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=773&q=80"
-                        alt="property" class="w-full">
-
-
-                </div>
-
-                <div class="flex mt-4 space-x-4 img-select">
-                    <div class="img-item">
-                        <a href="" data-id="1">
-                            <img src="https://images.unsplash.com/photo-1601760562234-9814eea6663a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmVhbGVzdGF0ZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                                alt="property" class="w-12 lg:w-52">
-                        </a>
-                    </div>
-                    <div class="img-item">
-                        <a href="" data-id="2">
-                            <img src="https://images.unsplash.com/photo-1448630360428-65456885c650?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=867&q=80"
-                                alt="property" class="w-12 lg:w-52">
-                        </a>
-                    </div>
-                    <div class="img-item">
-                        <a href="" data-id="3">
-                            <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=773&q=80"
-                                alt="property" class="w-12 lg:w-52">
-                        </a>
-                    </div>
-                    <div class="img-item">
-                        <a href="" data-id="4">
-                            <img src="https://images.unsplash.com/flagged/photo-1564767609342-620cb19b2357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=773&q=80"
-                                alt="property" class="w-12 lg:w-52">
-                        </a>
-                    </div>
-
-                </div>
-            </div> --}}
             <div x-data="{ isOpen: false }" >
+                    @php
+                        $cleanedPaths = [];
+                    @endphp
+
+                    @foreach ($property->multimediaAssets->images as $image)
+                    
+                        @php
+                            $imagePath = $image->img_file_name;
+                            
+                            $cleanedPath = explode('","', substr($imagePath, 2, -2));
+                            // dd($cleanedPath);
+                            $finalPath = str_replace('/', '', $cleanedPath);
+                            // dd($finalPath); 
+
+                        
+                        @endphp
+                        
+                    @endforeach
+
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2">
                     <div class=" overflow-hidden rounded-xl col-span-3 max-h-[14rem]">
                         <img  @click="isOpen = true" class="h-full w-full object-cover cursor-pointer"
-                            src="https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
+                            src="{{ asset('storage\\' . $finalPath[0]) }}"
                             alt="">
                     </div>
                     <div class=" overflow-hidden rounded-xl col-span-3 max-h-[14rem]">
                         <img @click="isOpen = true" class="h-full w-full object-cover  cursor-pointer"
-                            src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1399&q=80"
+                            src="{{ asset('storage\\' . $finalPath[1]) }}"
                             alt="">
                     </div>
                     <div class=" overflow-hidden rounded-xl col-span-2 max-h-[10rem]">
                         <img  @click="isOpen = true" class="h-full w-full object-cover cursor-pointer"
-                            src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+                            src="{{ asset('storage\\' . $finalPath[2]) }}"
                             alt="">
                     </div>
                     <div class=" overflow-hidden rounded-xl col-span-2 max-h-[10rem]">
                         <img  @click="isOpen = true" class="h-full w-full object-cover cursor-pointer"
-                            src="https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                            src="{{ asset('storage\\' . $finalPath[3]) }}"
                             alt="">
                     </div>
                     <div class="relative overflow-hidden rounded-xl col-span-2 max-h-[10rem]">
@@ -86,15 +60,24 @@
                             <span class="mt-2">More Photos</span>
                         </button>
 
-                        @livewire('components.image-modal')
+                        @livewire('components.image-modal', ['property' => $property])
                         
                         <img class="h-full w-full object-cover "
-                            src="https://images.unsplash.com/photo-1560393464-5c69a73c5770?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80"
+                            src="{{ asset('storage\\' . $finalPath[4]) }}"
                             alt="">
                     </div>
                 </div>
             </div>
 
+               
+                
+            <!-- download pdf button -->
+            <div class="mt-4">
+                <a href="{{ route('download.pdf', ['id' => $property->id]) }}"class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                    <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="white"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
+                    <span>Download PDF</span>
+                </a>
+            </div>
 
             <div class="mt-10">
                 <!-- div for description -->
@@ -113,9 +96,11 @@
                             contentDiv.innerHTML = htmlString;
                         </script>
                     </div>
-                    <button id="read-more-btn"
+                    @if (strlen($property->description) > 100)
+                        <button id="read-more-btn"
                         class="flex justify-center w-full text-blue-500 hover:underline focus:outline-none">Read
                         More...</button>
+                    @endif
                 </div>
 
                 <script>
@@ -133,7 +118,6 @@
                 </script>
 
                 {{-- add property details here --}}
-
 
                 <div class="mt-10">
                     <h2 class="mb-4 text-2xl font-bold">Property Details</h2>
@@ -189,14 +173,44 @@
 
                 <div class="rounded-lg bg-white p-8 shadow-md mt-10">
                     <h3 class="uppercase font-semibold text-base text-gray-800 mb-6">Property Features</h3>
-                    <div class="grid grid-cols-6 gap-y-8">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-y-8">
                         <div class="flex items-center flex-col">
                             <!-- feature icon -->
                             <span></span>
-                            <span class="text-gray-700 text-sm capitalize mt-2 text-center"></span>
+                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
+                        </div>
+                        
+                        <div class="flex items-center flex-col">
+                            <!-- feature icon -->
+                            <span></span>
+                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
+                        </div>
+                        <div class="flex items-center flex-col">
+                            <!-- feature icon -->
+                            <span></span>
+                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
+                        </div>
+                        <div class="flex items-center flex-col">
+                            <!-- feature icon -->
+                            <span></span>
+                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
+                        </div>
+                        <div class="flex items-center flex-col">
+                            <!-- feature icon -->
+                            <span></span>
+                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
+                        </div>
+                        <div class="flex items-center flex-col">
+                            <!-- feature icon -->
+                            <span></span>
+                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
+                        </div>
+                        <div class="flex items-center flex-col">
+                            <!-- feature icon -->
+                            <span></span>
+                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
                         </div>
                     </div>
-
                 </div>
 
             </div>
