@@ -2,8 +2,7 @@
 
 namespace App\Livewire\UserVerified;
 
-
-use App\Models\Features;
+use App\Models\Amenities;
 use App\Models\MultimediaAssets;
 use App\Models\Property;
 use App\Models\PropertyClassification;
@@ -306,7 +305,7 @@ class AddProperty extends Component
         $propertyType = $type[0]->name;
 
         $featuresArray = [];
-        $featuresArray = Features::where('property_type', $type[0]->name)->get();
+        $featuresArray = Amenities::where('property_type', $type[0]->name)->get();
         
         foreach ($featuresArray as $feature){
             if ($feature->type === 'outdoor') {
