@@ -69,16 +69,6 @@
                 </div>
             </div>
 
-               
-                
-            <!-- download pdf button -->
-            <div class="mt-4">
-                <a href="{{ route('download.pdf', ['id' => $property->id]) }}"class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded inline-flex items-center">
-                    <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="white"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
-                    <span>Download PDF</span>
-                </a>
-            </div>
-
             <div class="mt-10">
                 <!-- div for description -->
                 <div>
@@ -169,47 +159,29 @@
 
 
                 {{-- features cards or aminities --}}
-                {{-- {{dd($property)}} --}}
+                {{-- {{dd($property->features->features)}} --}}
 
                 <div class="rounded-lg bg-white p-8 shadow-md mt-10">
                     <h3 class="uppercase font-semibold text-base text-gray-800 mb-6">Property Features</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-y-8">
-                        <div class="flex items-center flex-col">
-                            <!-- feature icon -->
-                            <span></span>
-                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
-                        </div>
                         
-                        <div class="flex items-center flex-col">
-                            <!-- feature icon -->
-                            <span></span>
-                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
-                        </div>
-                        <div class="flex items-center flex-col">
-                            <!-- feature icon -->
-                            <span></span>
-                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
-                        </div>
-                        <div class="flex items-center flex-col">
-                            <!-- feature icon -->
-                            <span></span>
-                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
-                        </div>
-                        <div class="flex items-center flex-col">
-                            <!-- feature icon -->
-                            <span></span>
-                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
-                        </div>
-                        <div class="flex items-center flex-col">
-                            <!-- feature icon -->
-                            <span></span>
-                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
-                        </div>
-                        <div class="flex items-center flex-col">
-                            <!-- feature icon -->
-                            <span></span>
-                            <span class="text-gray-700 text-sm capitalize mt-2 text-center">Swimming Pool</span>
-                        </div>
+                        @php
+                            $input = $property->features->features; 
+                            $inputWithoutQuotes = str_replace(['[', ']', '"'], '', $input);
+                            
+                            $separatedItems  = explode(',', $inputWithoutQuotes);
+                            // dd($separatedItems);
+                        @endphp
+
+                        @foreach ($separatedItems as $propertyFeatures)
+                            
+                            <div class="flex items-center flex-col">
+                                <!-- feature icon -->
+                                <span></span>
+                                <span class="text-gray-700 text-sm capitalize mt-2 text-center">{{ $propertyFeatures }}</span>
+                            </div>
+                        @endforeach
+
                     </div>
                 </div>
 

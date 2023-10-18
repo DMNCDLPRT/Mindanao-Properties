@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('features', function (Blueprint $table) {
+        Schema::table('amenities', function (Blueprint $table) {
             $table->enum('property_type', ['Condominium', 'Commercial', 'Apartment', 'House', 'Land'])
             ->nullable()
             ->default(null)
@@ -24,7 +24,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('features', function (Blueprint $table) {
+        Schema::table('amenities', function (Blueprint $table) {
             $table->dropColumn('property_type');
         });
     }
