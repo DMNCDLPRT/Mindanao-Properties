@@ -10,60 +10,51 @@
                 {{ $property->title }}</h1>
 
 
-            <div x-data="{ isOpen: false }" >
+            <div x-data="{ isOpen: false }">
+                @php
+                    $cleanedPaths = [];
+                @endphp
+
+                @foreach ($property->multimediaAssets->images as $image)
                     @php
-                        $cleanedPaths = [];
+                        $imagePath = $image->img_file_name;
+
+                        $cleanedPath = explode('","', substr($imagePath, 2, -2));
+                        // dd($cleanedPath);
+                        $finalPath = str_replace('/', '', $cleanedPath);
+                        // dd($finalPath);
                     @endphp
-
-                    @foreach ($property->multimediaAssets->images as $image)
-                    
-                        @php
-                            $imagePath = $image->img_file_name;
-                            
-                            $cleanedPath = explode('","', substr($imagePath, 2, -2));
-                            // dd($cleanedPath);
-                            $finalPath = str_replace('/', '', $cleanedPath);
-                            // dd($finalPath); 
-
-                        
-                        @endphp
-                        
-                    @endforeach
+                @endforeach
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2">
                     <div class=" overflow-hidden rounded-xl col-span-3 max-h-[14rem]">
-                        <img  @click="isOpen = true" class="h-full w-full object-cover cursor-pointer"
-                            src="{{ asset('storage\\' . $finalPath[0]) }}"
-                            alt="">
+                        <img @click="isOpen = true" class="h-full w-full object-cover cursor-pointer"
+                            src="{{ asset('storage\\' . $finalPath[0]) }}" alt="">
                     </div>
                     <div class=" overflow-hidden rounded-xl col-span-3 max-h-[14rem]">
                         <img @click="isOpen = true" class="h-full w-full object-cover  cursor-pointer"
-                            src="{{ asset('storage\\' . $finalPath[1]) }}"
-                            alt="">
+                            src="{{ asset('storage\\' . $finalPath[1]) }}" alt="">
                     </div>
                     <div class=" overflow-hidden rounded-xl col-span-2 max-h-[10rem]">
-                        <img  @click="isOpen = true" class="h-full w-full object-cover cursor-pointer"
-                            src="{{ asset('storage\\' . $finalPath[2]) }}"
-                            alt="">
+                        <img @click="isOpen = true" class="h-full w-full object-cover cursor-pointer"
+                            src="{{ asset('storage\\' . $finalPath[2]) }}" alt="">
                     </div>
                     <div class=" overflow-hidden rounded-xl col-span-2 max-h-[10rem]">
-                        <img  @click="isOpen = true" class="h-full w-full object-cover cursor-pointer"
-                            src="{{ asset('storage\\' . $finalPath[3]) }}"
-                            alt="">
+                        <img @click="isOpen = true" class="h-full w-full object-cover cursor-pointer"
+                            src="{{ asset('storage\\' . $finalPath[3]) }}" alt="">
                     </div>
                     <div class="relative overflow-hidden rounded-xl col-span-2 max-h-[10rem]">
                         {{-- image modal --}}
 
                         <button @click="isOpen = true"
                             class="text-white text-xl absolute inset-0  bg-slate-900/80 flex justify-center flex-col items-center cursor-pointer">
-                            <x-fas-image class="h-10"/>
+                            <x-fas-image class="h-10" />
                             <span class="mt-2">More Photos</span>
                         </button>
 
                         @livewire('components.image-modal', ['property' => $property])
-                        
-                        <img class="h-full w-full object-cover "
-                            src="{{ asset('storage\\' . $finalPath[4]) }}"
+
+                        <img class="h-full w-full object-cover " src="{{ asset('storage\\' . $finalPath[4]) }}"
                             alt="">
                     </div>
                 </div>
@@ -88,8 +79,8 @@
                     </div>
                     @if (strlen($property->description) > 100)
                         <button id="read-more-btn"
-                        class="flex justify-center w-full text-blue-500 hover:underline focus:outline-none">Read
-                        More...</button>
+                            class="flex justify-center w-full text-blue-500 hover:text-blue-700 focus:outline-none">Read
+                            More <span class="px-2"><i class="fa-solid fa-chevron-down"></i></span></button>
                     @endif
                 </div>
 
@@ -100,13 +91,17 @@
                     readMoreBtn.addEventListener('click', function() {
                         descriptionContainer.classList.toggle('max-h-20'); // Adjust the class based on your design
                         if (descriptionContainer.classList.contains('max-h-20')) {
-                            readMoreBtn.textContent = 'Read More...';
+                            readMoreBtn.textContent = 'Read More ';
+                            readMoreBtn.innerHTML += '<span class="px-2"><i class="fa-solid fa-chevron-down"></i></span>';
                         } else {
-                            readMoreBtn.textContent = 'Read Less';
+                            readMoreBtn.textContent = 'Read Less ';
+                            readMoreBtn.innerHTML +=
+                                '<span class="px-2"><i class="fa-solid fa-chevron-down fa-rotate-180"></i><span>';
                         }
                     });
                 </script>
 
+                <hr class="border-t border-solid border-gray-300 mt-4">
                 {{-- add property details here --}}
 
                 <div class="mt-10">
@@ -117,35 +112,75 @@
                             <!-- loop through labels and data -->
 
                             @foreach ([
-                                'Subdivision Name' => ['value' => $property->propertyInfo->subdivision_name],
-                                'Address' => ['value' => $property->propertyLocation->display_name],
-                                'Block and Lot/Unit Number' => ['value' => $property->block_lot_number],
-                                'Build year' => ['value' => $property->propertyInfo->build_year],
-                                'Car spaces' => ['value' => $property->propertyInfo->car_spaces],
-                                'Classification' => ['value' => $property->propertyInfo->classification],
-                                'Fully furnished' => ['value' => $property->propertyInfo->fully_furnished],
-                                'Beedrooms' => ['value' => $property->propertyInfo->bedrooms],
-                                'Bathrooms' => ['value' => $property->propertyInfo->bathrooms],
-                                'Floor area (m2)' => ['value' => $property->propertyInfo->floor_area],
-                                'Land size (m2)' => ['value' => $property->propertyInfo->land_size],
-                            ] as $label => $data)
+        'Subdivision Name' => ['value' => $property->propertyInfo->subdivision_name],
+        'Address' => ['value' => $property->propertyLocation->display_name],
+        'Block and Lot/Unit Number' => ['value' => $property->block_lot_number],
+        'Build year' => ['value' => $property->propertyInfo->build_year],
+        'Car spaces' => ['value' => $property->propertyInfo->car_spaces],
+        'Classification' => ['value' => $property->propertyInfo->classification],
+        'Fully furnished' => ['value' => $property->propertyInfo->fully_furnished],
+        'Beedrooms' => ['value' => $property->propertyInfo->bedrooms],
+        'Bathrooms' => ['value' => $property->propertyInfo->bathrooms],
+        'Floor area (m2)' => ['value' => $property->propertyInfo->floor_area],
+        'Land size (m2)' => ['value' => $property->propertyInfo->land_size],
+    ] as $label => $data)
                                 @if ($data['value'])
-                                    <div class="py-3 grid grid-cols-2 gap-5 border-t border-solid border-gray-300">
+                                    <div class="py-3 grid grid-cols-2 gap-5">
                                         <!-- Listing label -->
                                         <div class="flex items-center gap-8 min-w-0 text-sm">
                                             <!-- icons span -->
-                                            {{-- @if ($label)
+                                            @if ($label === 'Subdivision Name')
                                                 <span class="icon">
-                                                    <x-dynamic-component  :component="$data['icon']" />
+                                                    <i class="fa-solid fa-house"></i>
                                                 </span>
-                                            @endif                                  --}}
+                                            @elseif ($label === 'Address')
+                                                <span class="icon">
+                                                    <i class="fa-solid fa-map-location-dot"></i>
+                                                </span>
+                                            @elseif($label === 'Block and Lot/Unit Number')
+                                                <span class="icon">
+                                                    <i class="fa-solid fa-house"></i>
+                                                </span>
+                                            @elseif($label === 'Build year')
+                                                <span class="icon">
+                                                    <i class="fa-solid fa-calendar-days"></i>
+                                                </span>
+                                            @elseif ($label === 'Car spaces')
+                                                <span class="icon">
+                                                    <i class="fa-solid fa-car-side"></i>
+                                                </span>
+                                            @elseif ($label === 'Classification')
+                                                <span class="icon">
+                                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                                </span>
+                                            @elseif ($label === 'Fully furnished')
+                                                <span class="icon">
+                                                    <i class="fa-solid fa-couch"></i>
+                                                </span>
+                                            @elseif ($label === 'Beedrooms')
+                                                <span class="icon">
+                                                    <i class="fa-solid fa-bed"></i>
+                                                </span>
+                                            @elseif ($label === 'Bathrooms')
+                                                <span class="icon">
+                                                    <i class="fa-solid fa-bath"></i>
+                                                </span>
+                                            @elseif ($label === 'Floor area (m2)')
+                                                <span class="icon">
+                                                    <i class="fa-solid fa-ruler"></i>
+                                                </span>
+                                            @elseif ($label === 'Land size (m2)')
+                                                <span class="icon">
+                                                    <i class="fa-solid fa-ruler-combined"></i>
+                                                </span>
+                                            @endif
 
 
                                             <span class="whitespace-no-wrap overflow-hidden overflow-ellipsis">
                                                 {{ $label }}
                                             </span>
                                         </div>
-                                        <div class="flex items-center text-sm font-bold">
+                                        <div class="flex items-center text-sm font-medium">
                                             {{ $data['value'] }}
                                         </div>
                                     </div>
@@ -153,37 +188,124 @@
                             @endforeach
                         </div>
                     @else
-                        <div>No data available.</div>
+                        <div class="rounded-lg bg-white p-8 shadow-md mt-10">
+                            <p class="text-gray-700 text-sm mt-2 text-center">No data available.</p>
+                        </div>
+
                     @endif
                 </div>
+
+                <hr class="border-t border-solid border-gray-300 mt-4">
 
 
                 {{-- features cards or aminities --}}
                 {{-- {{dd($property->features->features)}} --}}
 
-                <div class="rounded-lg bg-white p-8 shadow-md mt-10">
-                    <h3 class="uppercase font-semibold text-base text-gray-800 mb-6">Property Features</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-y-8">
-                        
-                        @php
-                            $input = $property->features->features; 
-                            $inputWithoutQuotes = str_replace(['[', ']', '"'], '', $input);
-                            
-                            $separatedItems  = explode(',', $inputWithoutQuotes);
-                            // dd($separatedItems);
-                        @endphp
 
-                        @foreach ($separatedItems as $propertyFeatures)
-                            
-                            <div class="flex items-center flex-col">
-                                <!-- feature icon -->
-                                <span></span>
-                                <span class="text-gray-700 text-sm capitalize mt-2 text-center">{{ $propertyFeatures }}</span>
-                            </div>
-                        @endforeach
+                @if ($property->features->features != '[]')
 
+                    <div class="rounded-lg bg-white p-8 shadow-md mt-10">
+                        <h3 class="uppercase font-semibold text-base text-gray-800 mb-6">Property Features</h3>
+                        <div
+                            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-y-8">
+
+                            @php
+                                $input = $property->features->features;
+                                $inputWithoutQuotes = str_replace(['[', ']', '"'], '', $input);
+
+                                $separatedItems = explode(',', $inputWithoutQuotes);
+                                // dd($separatedItems);
+                            @endphp
+
+                            {{-- @foreach ($separatedItems as $propertyFeatures)
+                   
+                                <div class="flex items-center flex-col">
+                                    <!-- feature icon -->
+                                    <span></span>
+                                    <span
+                                        class="text-gray-700 text-sm capitalize mt-2 text-center">{{ $propertyFeatures }}</span>
+                                </div>
+                            @endforeach --}}
+
+                            @php
+                                // Define an associative array of features and their corresponding icons
+                                $featureIcons = [
+                                    'Covered Patio' => 'fa-solid fa-person-shelter',
+                                    'Central Heating' => 'fa-solid fa-temperature-arrow-up',
+                                    'Carport' => 'fa-solid fa-square-parking',
+                                    'Guest Parking' => 'fa-solid fa-p',
+                                    'Dining Room' => 'fa-solid fa-utensils',
+                                    'Fenced Yard' => 'fa-solid fa-xmarks-lines',
+                                    'Balcony' => '',
+                                    'Movie Theater' => 'fa-solid fa-ticket',
+                                    'Fitness Center' => 'fa-solid fa-heart-pulse',
+                                    'Bike Storage' => 'fa-solid fa-person-biking',
+                                    'Fireplace' => 'fa-solid fa-fire-burner',
+                                    'Wooden Deck' => '',
+                                    'Conference Room' => 'fa-solid fa-people-roof',
+                                    'Gym' => 'fa-solid fa-dumbbell',
+                                    'Home Office' => 'fa-solid fa-house-laptop',
+                                    'Washer/Dryer Hookup' => 'fa-solid fa-sink',
+                                    'Outdoor Seating' => 'fa-solid fa-chair',
+                                    'Pet Park' => 'fa-solid fa-paw',
+                                    'Solar Panels' => 'fa-solid fa-solar-panel',
+                                    'Break Room' => '',
+                                    'Garage' => 'fa-solid fa-warehouse',
+                                    'Reception Area' => 'fa-solid fa-couch',
+                                    'Community Garden' => 'fa-solid fa-group-arrows-rotate',
+                                    'Security System' => 'fa-solid fa-fingerprint',
+                                    'Swimming Pool' => 'fa-solid fa-water-ladder',
+                                    'Walk-in Closet' => 'fa-solid fa-door-closed',
+                                    'Tennis Court' => '',
+                                    'Art Studio' => 'fa-solid fa-palette',
+                                    'Wine Cellar' => 'fa-solid fa-wine-bottle',
+                                    'High-Speed Internet' => 'fa-solid fa-wifi',
+                                    'Elevator' => 'fa-solid fa-elevator',
+                                    'Dishwasher' => 'fa-solid fa-hands-bubbles',
+                                    'Rooftop Garden' => 'fa-solid fa-tree-city',
+                                    'Office Space' => 'fa-solid fa-briefcase',
+                                    'Parking Lot' => 'fa-solid fa-square-parking',
+                                    'Central Courtyard' => '',
+                                    'Kitchenette' => 'fa-solid fa-kitchen-set',
+                                    'Air Conditioning' => 'fa-solid fa-wind',
+                                    'Laundry Room' => 'fa-solid fa-jug-detergent',
+                                    'Patio' => 'fa-solid fa-person-shelter',
+                                    'Garden' => 'fa-solid fa-tree',
+                                ];
+                            @endphp
+
+
+                            @foreach ($separatedItems as $propertyFeatures)
+                                @if (array_key_exists(trim($propertyFeatures), $featureIcons))
+                                    <div class="flex items-center flex-col">
+                                        <!-- feature icon -->
+                                        <span class="text-gray-700 text-2xl mb-1">
+                                            <i class="{{ $featureIcons[trim($propertyFeatures)] }}"></i>
+                                        </span>
+                                        <span
+                                            class="text-gray-700 text-sm capitalize mt-1 text-center">{{ $propertyFeatures }}</span>
+                                    </div>
+                                @else
+                                    <div class="flex items-center flex-col">
+                                        <!-- If feature doesn't have a specific icon, show a generic icon or text -->
+                                        <span class="text-gray-700 text-2xl mb-1">🌟</span>
+                                        <!-- Generic star icon as an example -->
+                                        <span
+                                            class="text-gray-700 text-sm capitalize mt-1 text-center">{{ $propertyFeatures }}</span>
+                                    </div>
+                                @endif
+                            @endforeach
+
+                        </div>
                     </div>
-                </div>
+                @else
+                    <div class="rounded-lg bg-white p-8 shadow-md mt-10">
+                        {{-- <h3 class="uppercase font-semibold text-base text-gray-800 mb-6">No Features Available</h3> --}}
+                        <p class="text-gray-700 text-sm mt-2 text-center">Sorry, there are no features available for
+                            this property.</p>
+                    </div>
+
+                @endif
 
             </div>
         </div>
