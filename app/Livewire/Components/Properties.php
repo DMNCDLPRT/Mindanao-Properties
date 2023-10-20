@@ -2,20 +2,23 @@
 
 namespace App\Livewire\Components;
 
+use App\Models\Property;
 use Livewire\Component;
+use Livewire\WithPagination;
+
 
 class Properties extends Component
 {
-    public $properties;
- 
 
-    public function mount($propertieslivewirecontroller)
-    {
-        $this->properties = $propertieslivewirecontroller;
-    }
-
+    use WithPagination;
+    
     public function render()
     {
-        return view('livewire.components.properties');
+
+        $properties = Property::paginate(10);
+        return view('livewire.components.properties', [
+            'properties' => $properties,
+          
+        ]);
     }
 }
