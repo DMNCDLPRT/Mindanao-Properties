@@ -16,6 +16,11 @@
     <!-- Styles -->
     @livewireStyles
 
+    @if (Route::currentRouteName() == 'welcome' || Route::currentRouteName() == 'dashboard') 
+    <link rel="stylesheet" href="{{ asset('css/swiper.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    @endif
+
     @if (Route::has('add.property'))
     <link href="https://tiles.locationiq.com/v3/libs/maplibre-gl/1.15.2/maplibre-gl.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://tiles.locationiq.com/v3/libs/gl-geocoder/4.5.1/locationiq-gl-geocoder.css?v=0.2.3" type="text/css" />
@@ -54,9 +59,14 @@
     
     @livewireScripts
 
-       <!-- Scripts -->
-       @vite(['resources/css/app.css', 'resources/js/app.js',])
-        
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js',])
+
+    @if (Route::currentRouteName() == 'welcome' || Route::currentRouteName() == 'dashboard') 
+    <script defer src="{{ asset('js/swiper.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    @endif
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
     <script src="https://kit.fontawesome.com/bade4642b5.js" crossorigin="anonymous"></script>
 
