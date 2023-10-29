@@ -3,11 +3,13 @@
 namespace App\Livewire\Components;
 
 use Livewire\Component;
+use App\Models\Property;
 
 class FeatureProperty extends Component
 {
     public function render()
     {
-        return view('livewire.components.feature-property');
+        $properties = Property::all();
+        return view('livewire.components.feature-property', compact('properties'));
     }
 }
